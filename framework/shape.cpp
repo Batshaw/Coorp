@@ -1,5 +1,6 @@
 #include "shape.hpp"
 #include "glm/vec3.hpp"
+#include <ostream>
 
 // Konstruktor
 Shape::Shape():
@@ -17,4 +18,12 @@ std::string Shape::getName() const{
 }
 Color Shape::getColor() const{
     return color_;
+}
+
+std::ostream& Shape::print(std::ostream& os) const{
+    os<< "The Shape: "<< name_ << " has color: "<< color_<< ".\n";
+    return os;
+}
+std::ostream& operator<<(std::ostream& os, Shape const& s){
+    return s.print(os);
 }

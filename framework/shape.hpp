@@ -3,6 +3,7 @@
 
 #include <string>
 #include "color.hpp"
+#include <ostream>
 
 class Shape{
     public:
@@ -17,11 +18,14 @@ class Shape{
         virtual float area() const = 0;
         virtual float volumen() const = 0;
         
+        virtual std::ostream& print(std::ostream& os) const;
 
     protected:
         std::string name_;
         Color color_;
 
 };
+
+std::ostream& operator<<(std::ostream&os, Shape const& s);
 
 #endif  //SHAPE_HPP

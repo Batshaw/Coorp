@@ -20,10 +20,15 @@ class Box : public Shape{
         glm::vec3 getMax() const;
         glm::vec3 getMin() const;
 
+        std::ostream& print(std::ostream& os) const override;
+
     private:
         glm::vec3 min_;
         glm::vec3 max_;
 
 };
+
+std::ostream& operator<<(std::ostream& os, Box const& b);
+
 
 #endif  //BOX_HPP

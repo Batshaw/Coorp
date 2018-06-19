@@ -18,23 +18,36 @@ Box::Box(glm::vec3 const min, glm::vec3 const& max, std::string const& name, Col
     min_{min}, max_{max}, Shape{name, color}   {}
 
 // get-Methode
-glm::vec3 getMin() const{
+glm::vec3 Box::getMin() const{
     return min_;
 }
-glm::vec3 getMax() const{
+glm::vec3 Box::getMax() const{
     return max_;
 }
 
 // area und volumen
 float Box::area() const{
-    float x = abs(max_.x - min_.x);
-    float y = abs(max_.y - min_.y);
-    float z = abs(max_.z - min_.z);
-    return 2*(x*y + x*z + y*z);
+    float a = fabs(max_.x - min_.x);
+    float b = fabs(max_.y - min_.y);
+    float c = fabs(max_.z - min_.z);
+    return 2*(a*b + a*c + b*c);
 }
 float Box::volumen() const{
-    float x = abs(max_.x - min_.x);
-    float y = abs(max_.y - min_.y);
-    float z = abs(max_.z - min_.z);
+    float x = fabs(max_.x - min_.x);
+    float y = fabs(max_.y - min_.y);
+    float z = fabs(max_.z - min_.z);
     return x*y*z;
+}
+
+// print-Methode
+std::ostream& Box::print(std::ostream& os) const{
+    Shape::print(os);
+    os<< "MaxPoint of the Box is: ("<< max_.x<< ", "<< max_.y<< ", "<<
+    max_.z<< ").\n";
+    os<< "MinPoint of the Box is: ("<< min_.x<< ", "<< min_.y<< ", "<<
+    min_.z<< ")."<< std::endl;
+    return os;
+}
+std::ostream& operator<<(std::ostream& os, Box const& b){
+    return b.print(os);
 }
