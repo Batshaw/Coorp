@@ -1,5 +1,7 @@
 #include "sphere.hpp"
 #include <cmath>
+#include <glm/glm.hpp>
+#include <glm/gtx/intersect.hpp>
 
 // Konstruktor
 Sphere::Sphere():
@@ -44,4 +46,13 @@ std::ostream& Sphere::print(std::ostream& os) const{
 }
 std::ostream& operator<<(std::ostream& os, Sphere const& s){
     return s.print(os);
+}
+
+// intersect-Methode
+bool Sphere::intersect(Ray const& r){
+    float distance; // from the ray_origin to the intersectPosition
+    glm::vec3 v = glm::normalize(r.direction);   //convert to the unit vector with same direction
+    auto squaredRadius = std::pow(radius_, 2);
+    bool result = glm::intersectRaySphere(r.origin, v, mittel_, squaredRadius, distance);
+    return result;
 }

@@ -21,7 +21,7 @@ Color Shape::getColor() const{
 }
 
 std::ostream& Shape::print(std::ostream& os) const{
-    os<< "The Shape: "<< name_ << " has color: "<< color_<< ".\n";
+    os<< "The Shape: "<< name_ << " has color: "<< color_<< "\n";
     return os;
 }
 std::ostream& operator<<(std::ostream& os, Shape const& s){
