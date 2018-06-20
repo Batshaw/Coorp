@@ -17,7 +17,13 @@ Sphere::Sphere(glm::vec3 const& m, float const& r, Color const& color):
     mittel_{m}, radius_{r}, Shape{color} {}
 
 Sphere::Sphere(glm::vec3 const& m, float const& r, std::string const& name, Color const& color):
-    mittel_{m}, radius_{r}, Shape{name, color} {}
+    mittel_{m}, radius_{r}, Shape{name, color} {
+        std::cout<< "Constuctor of Sphere!"<< std::endl;
+    }
+
+Sphere::~Sphere()   {
+    std::cout<< "Destructor of Sphere!"<< std::endl;
+}
 
 // get-Methode
 glm::vec3 Sphere::getMittel() const{

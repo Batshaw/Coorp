@@ -11,6 +11,7 @@ class Shape{
         Shape(std::string const& name);
         Shape(Color const& color);
         Shape(std::string const& name, Color const& color);
+        virtual ~Shape();
 
         std::string getName() const;
         Color getColor() const;

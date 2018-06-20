@@ -14,6 +14,9 @@ class Sphere : public Shape{
         Sphere(glm::vec3 const& m, float const& r, Color const& color);
         Sphere(glm::vec3 const& m, float const& r, std::string const& name, Color const& color);
 
+        //Destruktor (Aufgabe8):
+        ~Sphere();        
+
         // Methode
         float area() const override;
         float volumen() const override;
