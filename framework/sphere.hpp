@@ -22,6 +22,8 @@ class Sphere : public Shape{
         float volumen() const override;
         glm::vec3 getMittel() const;
         float getRadius() const;
+        // std::string getName() const override;
+        // Color getColor() const override;
 
         std::ostream& print(std::ostream& os) const override;
 

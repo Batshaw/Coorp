@@ -19,6 +19,8 @@ class Box : public Shape{
         float volumen() const override;
         glm::vec3 getMax() const;
         glm::vec3 getMin() const;
+        // std::string getName() const override;
+        // Color getColor() const override;
 
         std::ostream& print(std::ostream& os) const override;
 

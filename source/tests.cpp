@@ -13,6 +13,8 @@ TEST_CASE("get-Methode for Box", "[get]"){
   Color c{0.0f, 0.0f, 0.5f};
   Box b(min, max, "Box-1", c);
   REQUIRE(b.getMax().x == 30.0f);
+  REQUIRE(b.getName() == "Box-1");
+  REQUIRE(b.getColor().r == 0.0f);
 }
 
 TEST_CASE("get-Methode for Sphere", "[get]"){
@@ -21,6 +23,7 @@ TEST_CASE("get-Methode for Sphere", "[get]"){
   Color c{0.0f, 0.7f, 0.0f};
   Sphere s(mittel, radius, c);
   REQUIRE(s.getMittel().y == 15.5f);
+  REQUIRE(s.getName() == "unknown");
 }
 
 TEST_CASE("calculate area of the Box", "[calculate]"){
