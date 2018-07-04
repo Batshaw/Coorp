@@ -21,6 +21,7 @@ class Box : public Shape{
         glm::vec3 getMin() const;
         // std::string getName() const override;
         // Color getColor() const override;
+        bool intersect(Ray const& r, float& t) override;
 
         std::ostream& print(std::ostream& os) const override;
 

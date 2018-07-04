@@ -55,10 +55,10 @@ std::ostream& operator<<(std::ostream& os, Sphere const& s){
 }
 
 // intersect-Methode
-bool Sphere::intersect(Ray const& r){
-    float distance; // from the ray_origin to the intersectPosition
+bool Sphere::intersect(Ray const& r, float& t){
+     // from the ray_origin to the intersectPosition
     glm::vec3 v = glm::normalize(r.direction);   //convert to the unit vector with same direction
     auto squaredRadius = std::pow(radius_, 2);
-    bool result = glm::intersectRaySphere(r.origin, v, mittel_, squaredRadius, distance);
+    bool result = glm::intersectRaySphere(r.origin, v, mittel_, squaredRadius, t);
     return result;
 }

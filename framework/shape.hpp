@@ -9,21 +9,24 @@ class Shape{
     public:
         Shape();
         Shape(std::string const& name);
-        Shape(Color const& color);
-        Shape(std::string const& name, Color const& color);
-        virtual ~Shape();
+        Shape(std::shared_ptr<Material> material);
+        Shape(std::string const& name, std::shared_ptr<Material> material);
+         ~Shape();
 
         std::string getName() const;
         Color getColor() const;
+        std::shared_ptr<Material> getMaterial() const;
 
         virtual float area() const = 0;
         virtual float volumen() const = 0;
+        
+        virtual bool intersect(Ray const& r, float& t) = 0;
         
         virtual std::ostream& print(std::ostream& os) const;
 
     protected:
         std::string name_;
-        Color color_;
+        std::shared_ptr<Material> material_;
 
 };
 
