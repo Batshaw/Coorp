@@ -3,6 +3,7 @@
 
 #include <ostream>
 #include "color.hpp"
+#include <string>
 
 struct Material{
 

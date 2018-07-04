@@ -1,5 +1,8 @@
 #include "box.hpp"
 #include <cmath>
+#include <memory>
+#include "material.hpp"
+#include "shape.hpp"
 
 // Konstruktor
 Box::Box():

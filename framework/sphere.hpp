@@ -10,9 +10,9 @@ class Sphere : public Shape{
         // Konstruktor
         Sphere();
         Sphere(glm::vec3 const& m, float const& r);
-        Sphere(glm::vec3 const& m, float const& r, std::string const& name);
-        Sphere(glm::vec3 const& m, float const& r, Color const& color);
-        Sphere(glm::vec3 const& m, float const& r, std::string const& name, Color const& color);
+        /*Sphere(glm::vec3 const& m, float const& r, std::string const& name);
+        Sphere(glm::vec3 const& m, float const& r, Color const& color);*/
+        Sphere(glm::vec3 const& m, float const& r, std::string const& name, std::shared_ptr<Material> const& material);
 
         //Destruktor (Aufgabe8):
         ~Sphere();        

@@ -10,14 +10,14 @@ Sphere::Sphere():
 Sphere::Sphere(glm::vec3 const& m, float const& r):
     mittel_{m}, radius_{r}, Shape{} {}
 
-Sphere::Sphere(glm::vec3 const& m, float const& r, std::string const& name):
+/*Sphere::Sphere(glm::vec3 const& m, float const& r, std::string const& name):
     mittel_{m}, radius_{r}, Shape{name} {}
 
 Sphere::Sphere(glm::vec3 const& m, float const& r, Color const& color):
-    mittel_{m}, radius_{r}, Shape{color} {}
+    mittel_{m}, radius_{r}, Shape{color} {}*/
 
-Sphere::Sphere(glm::vec3 const& m, float const& r, std::string const& name, Color const& color):
-    mittel_{m}, radius_{r}, Shape{name, color} {
+Sphere::Sphere(glm::vec3 const& m, float const& r, std::string const& name, std::shared_ptr<Material> const& material):
+    mittel_{m}, radius_{r}, Shape{name, material} {
         std::cout<< "Constuctor of Sphere!"<< std::endl;
     }
 

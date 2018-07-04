@@ -3,6 +3,9 @@
 
 #include "shape.hpp"
 #include <glm/vec3.hpp>
+#include <memory>
+#include "material.hpp"
+#include "ray.hpp"
 
 
 class Box : public Shape{
@@ -10,9 +13,9 @@ class Box : public Shape{
         // Konstruktor
         Box();
         Box(glm::vec3 const& min, glm::vec3 const& max);
-        Box(glm::vec3 const min, glm::vec3 const& max, std::string const& name);
-        Box(glm::vec3 const& min, glm::vec3 const& max, Color const& color);
-        Box(glm::vec3 const min, glm::vec3 const& max, std::string const& name, Color const& color);
+        /*Box(glm::vec3 const min, glm::vec3 const& max, std::string const& name);
+        Box(glm::vec3 const& min, glm::vec3 const& max, Color const& color);*/
+        Box(glm::vec3 const min, glm::vec3 const& max, std::string const& name, std::shared_ptr<Material> const& material);
 
         // Methode
         float area() const override;

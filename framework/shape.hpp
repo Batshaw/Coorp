@@ -4,14 +4,18 @@
 #include <string>
 #include "color.hpp"
 #include <ostream>
+#include "material.hpp"
+#include "ray.hpp"
+#include "glm/vec3.hpp"
+#include <memory>
 
 class Shape{
     public:
         Shape();
-        Shape(std::string const& name);
-        Shape(std::shared_ptr<Material> material);
-        Shape(std::string const& name, std::shared_ptr<Material> material);
-         ~Shape();
+        /*Shape(std::string const& name);
+        Shape(std::shared_ptr<Material> material);*/
+        Shape(std::string const& name, std::shared_ptr<Material> const& material);
+        virtual ~Shape();
 
         std::string getName() const;
         Color getColor() const;
