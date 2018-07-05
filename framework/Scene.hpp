@@ -10,9 +10,9 @@ struct Scene
     vector<std::shared_ptr<Material>> material_vector;
 };
 
-void load_sdf(string filename, Scene scene)
+void load_sdf(string filename, Scene* scene)
 {
-    std::ifstream ifs("scene1.sdf");
+    std::ifstream ifs(filename);
 
     std::string line_buffer;
 
@@ -36,13 +36,6 @@ void load_sdf(string filename, Scene scene)
                 std::string mat_name;
                 current_line_stream >> mat_name;
 
-                float ka_r, ka_g, ka_b;
-                float kd_r, kd_g, kd_b;
-                float ks_r, ks_g, ks_b;
-
-                float m_;
-
-
                 float material_koof[10];
 
                 
@@ -52,9 +45,9 @@ void load_sdf(string filename, Scene scene)
                 }
                 
 
-                std::shared_ptr<Material> neu_material = std::make_shared<Material>(mat_name, Color{material_koof, ka_g, ka_b}, Color{kd_r, kd_g, kd_b}, Color{ks_r, ks_g, ks_b}, m_);
+                std::shared_ptr<Material> neu_material = std::make_shared<Material>(mat_name, Color{material_koof[0], material_koof[1], material_koof[2]}, Color{material_koof[3], material_koof[4], material_koof[5]}, Color{material_koof[6], material_koof[7], material_koof[8]}, material_koof[9]);
 
-                scene.material_vector.push_back(neu_material);
+                scene->material_vector.push_back(neu_material);
             }
         }
     }
