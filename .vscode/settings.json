@@ -1,0 +1,12 @@
+{
+    "C_Cpp.dimInactiveRegions": true,
+    "files.associations": {
+        "cmath": "cpp",
+        "ostream": "cpp",
+        "cstdlib": "cpp",
+        "functional": "cpp",
+        "chrono": "cpp",
+        "limits": "cpp",
+        "algorithm": "cpp"
+    }
+}
