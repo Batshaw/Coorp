@@ -42,8 +42,60 @@ float Box::volumen() const{
     return x*y*z;
 }
 
+// in Box???
+bool Box::is_inBox(glm::vec3 const& punkt){
+    if(min_.x <= punkt.x && punkt.x <= max_.x && min_.y <= punkt.y && punkt.y <= max_.y && min_.z <= punkt.z && punkt.z <= max_.z){
+        return true;
+    }
+    else return false;
+}
+
 bool Box::intersect(Ray const& r, float& t){
-    
+    bool result = false;
+    glm::vec3 schnittPunkt;
+    if(r.direction.x != 0){
+        if(r.direction.x > 0){
+            t = (min_.x - r.origin.x)/r.direction.x;
+        }
+        else t = (max_.x - r.origin.x)/r.direction.x;
+        if(t > 0){
+            schnittPunkt = r.origin + t*r.direction;
+            std::cout<<schnittPunkt.x<< " "<< schnittPunkt.y<< " "<< schnittPunkt.z<< " \n";
+            if(is_inBox(schnittPunkt)){
+                result = true;
+                std::cout<< "t = "<< t<< "\n";
+            }
+        }
+    }
+    if(r.direction.y != 0){
+        if(r.direction.y > 0){
+            t = (min_.y - r.origin.y)/r.direction.y;
+        }
+        else t = (max_.y - r.origin.y)/r.direction.y;
+        if(t > 0){
+            schnittPunkt = r.origin + t*r.direction;
+            std::cout<<schnittPunkt.x<< " "<< schnittPunkt.y<< " "<< schnittPunkt.z<< " \n";
+            if(is_inBox(schnittPunkt)){
+                result = true;
+                std::cout<< "t = "<< t<< "\n";
+            }
+        }
+    }
+    if(r.direction.z != 0){
+        if(r.direction.z > 0){
+            t = (min_.z - r.origin.z)/r.direction.z;
+        }
+        else t = (max_.z - r.origin.z)/r.direction.z;
+        if(t > 0){
+            schnittPunkt = r.origin + t*r.direction;
+            std::cout<<schnittPunkt.x<< " "<< schnittPunkt.y<< " "<< schnittPunkt.z<< " \n";
+            if(is_inBox(schnittPunkt)){
+                result = true;
+                std::cout<< "t = "<< t<< "\n";
+            }
+        }
+    }
+    return result;
 }
 
 // print-Methode

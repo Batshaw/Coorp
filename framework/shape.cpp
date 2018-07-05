@@ -17,7 +17,7 @@ Shape::Shape(std::string const& name, std::shared_ptr<Material> const& material)
 
 // Destruktor (Aufgabe8):
 Shape::~Shape() {
-    std::cout<< "Destuction of Shape!"<< std::endl;
+    std::cout<< "Destruction of Shape!"<< std::endl;
 }
 
 // get-Methode

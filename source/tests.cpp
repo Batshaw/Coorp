@@ -6,6 +6,8 @@
 #include "shape.hpp"
 #include <glm/glm.hpp>
 #include <glm/gtx/intersect.hpp>
+#include "ray.hpp"
+#include "material.hpp"
 
 
 /*TEST_CASE("get-Methode for Box", "[get]"){
@@ -118,6 +120,56 @@ TEST_CASE("test for destruction and konstruction"){
   delete s1;
   delete s2;
 }*/
+
+// Aufgabe6.3::
+TEST_CASE("test ray_tracer mit Box 1.0", "[intersect]"){
+  glm::vec3 origin{0, 0, 0};
+  glm::vec3 direction{0, 0, 1};
+  Ray r{origin, direction};
+  glm::vec3 min{2.0f, 3.5f, 4.0f};
+  glm::vec3 max{3.0f, 5.0f, 6.5f};
+  Box b(min, max);
+  float t;
+  REQUIRE(b.intersect(r, t) == false);
+  std::cout<< "End!";
+}
+
+TEST_CASE("test ray_tracer mit Box 2.0", "[intersect]"){
+  glm::vec3 origin{0, 0, 0};
+  glm::vec3 direction{1, 0, 0};
+  Ray r{origin, direction};
+  glm::vec3 min{2.0f, -3.5f, -4.0f};
+  glm::vec3 max{3.0f, 5.0f, 6.5f};
+  Box b(min, max);
+  float t;
+  REQUIRE(b.intersect(r, t) == true);
+  std::cout<< "End!";
+}
+
+TEST_CASE("test ray_tracer mit Box 3.0", "[intersect]"){
+  glm::vec3 origin{0, 0, 8.0};
+  glm::vec3 direction{0, 0, 1};
+  Ray r{origin, direction};
+  glm::vec3 min{-1.5f, -7.6f, -7.0f};
+  glm::vec3 max{4.5f, 6.7f, -1.5f};
+  Box b(min, max);
+  float t;
+  REQUIRE(b.intersect(r, t) == false);
+  std::cout<< "End!";
+}
+
+TEST_CASE("test ray_tracer mit Box 4.0", "[intersect]"){
+  glm::vec3 origin{0, 0, 0};
+  glm::vec3 direction{3, 0, -1};
+  Ray r{origin, direction};
+  glm::vec3 min{11.0f, -9.0f, -9.0f};
+  glm::vec3 max{18.0f, 8.0f, -2.0f};
+  Box b(min, max);
+  float t;
+  REQUIRE(b.intersect(r, t) == true);
+  std::cout<< "End!";
+}
+
 
 int main(int argc, char *argv[])
 {
