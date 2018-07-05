@@ -15,11 +15,11 @@ Box::Box(vec3 const &_p1, vec3 const &_p2) : Shape(),
 {
 }
 
-Box::Box(string const &n, Color const &col) : Shape(n, col),
+Box::Box(string const &n, std::shared_ptr<Material> const& material) : Shape(n, material),
                                               _minimum{vec3(0.0, 0.0, 0.0)},
                                               _maximum{vec3(1.0, 1.0, 1.0)} {};
 
-Box::Box(vec3 const &_p1, vec3 const &_p2, string const &n, Color const &col) : Shape(n, col),
+Box::Box(vec3 const &_p1, vec3 const &_p2, string const &n, std::shared_ptr<Material> const& material) : Shape(n, material),
                                                                                 _minimum{set_min(_p1.x, _p2.x), set_min(_p1.y, _p2.y), set_min(_p1.z, _p2.z)},
                                                                                 _maximum{set_max(_p1.x, _p2.x), set_max(_p1.y, _p2.y), set_max(_p1.z, _p2.z)}
 {

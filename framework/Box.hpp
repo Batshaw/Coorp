@@ -3,6 +3,7 @@
 
 #include "Shape.hpp"
 #include <glm/vec3.hpp>
+#include "material.hpp"
 
 class Box : public Shape
 {
@@ -14,8 +15,8 @@ public:
   Box();
   Box(glm::vec3 const &_pmin, glm::vec3 const &_pmax);
 
-  Box(string const &n, Color const &col);
-  Box(glm::vec3 const &_pmin, glm::vec3 const &_pmax, string const &n, Color const &col);
+  Box(string const &n, std::shared_ptr<Material> const& material);
+  Box(glm::vec3 const &_pmin, glm::vec3 const &_pmax, string const &n, std::shared_ptr<Material> const& material);
   ~Box();
 
   float length() const;

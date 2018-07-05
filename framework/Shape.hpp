@@ -9,6 +9,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtx/intersect.hpp>
 #include <memory>
+#include "material.hpp"
 
 using namespace std;
 using namespace glm;
@@ -18,7 +19,7 @@ class Shape
   private:
   public:
     Shape();
-    Shape(string const &n, Color const &col);
+    Shape(string const &n, shared_ptr<Material> const& material);
     //ohne virtual wird der Destruktor die abgeleitene Klasse nicht aufgerufen
     ~Shape();
 
@@ -29,11 +30,12 @@ class Shape
     virtual bool intersect(Ray const& _r, float& _t) const = 0;
 
     string name();
-    Color color();
+    // Color color();
 
   protected:
     string name_;
-    Color color_;
+    // Color color_;
+    shared_ptr<Material> material_;
 };
 
 ostream &operator<<(ostream &os, Shape const &s);

@@ -3,6 +3,7 @@
 #include "Scene.hpp"
 #include "Shape.hpp"
 #include "Box.hpp"
+#include "material.hpp"
 
 TEST_CASE("aufgabe3", "[interect]")
 {
@@ -25,10 +26,10 @@ TEST_CASE("aufgabe3", "[interect]")
 
 TEST_CASE("aufgabe5", "[scene]")
 {
-
     Scene scene1;
-
-    load_sdf("scene1.sdf", &scene1);
+    vector<std::shared_ptr<Material>> material_vector;
+    load_sdf("example.sdf", &scene1);
+    findMaterial("green", material_vector);
     
 }
 

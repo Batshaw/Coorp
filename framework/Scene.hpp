@@ -2,6 +2,8 @@
 #include "Shape.hpp"
 #include <fstream>
 #include "material.hpp"
+#include <algorithm>
+#include <string>
 
 using namespace std;
 
@@ -53,9 +55,24 @@ void load_sdf(string filename, Scene* scene)
     }
 }
 
-std::shared_ptr<Material> findMaterial(std::string const& name, Scene& scene){
-    
-};
-bool operator<(std::shared_ptr<Material> const& lhs, std::shared_ptr<Material> const& rhs){
+/*bool operator<(std::shared_ptr<Material> const& lhs, std::shared_ptr<Material> const& rhs){
         return lhs->name_ < rhs->name_;
+};*/
+std::shared_ptr<Material> findMaterial(std::string const& findName, vector<std::shared_ptr<Material>> material_vector){
+    // find_if with a lambda that capture the needed name
+    auto lambda = find_if(material_vector.begin(), material_vector.end(),[&findName](std::shared_ptr<Material> const& material){    //capture findName by reference
+        return material->name_ == findName;
+    });
+
+    // scope to show the material that was founded
+    if(lambda == material_vector.end()){
+        cout<< "Do not exist!!!!!!!"<< endl;
+        return nullptr;
+    }
+    else{
+        cout<< "Here's what u need: \n";
+        cout<< *(*lambda)<< endl;   // show the value of the value of the lambda that is the material.
+        return *lambda;
+    }
 };
+

@@ -11,7 +11,7 @@ Sphere::Sphere(glm::vec3 const &_p, float _r) : _mpunkt{_p},
 Sphere::Sphere(float _x, float _y, float _z, float _r) : _mpunkt{glm::vec3(_x, _y, _z)},
                                                          _radius{_r} {};
 
-Sphere::Sphere(glm::vec3 const &_p, float _r, Color const &_col, string const &_n) : Shape(_n, _col),
+Sphere::Sphere(glm::vec3 const &_p, float _r, std::shared_ptr<Material> const& material, string const &_n) : Shape(_n, material),
                                                                                      _mpunkt{_p},
                                                                                      _radius{_r} 
 {

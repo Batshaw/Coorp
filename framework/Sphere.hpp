@@ -3,6 +3,7 @@
 
 #include "Shape.hpp"
 #include <glm/vec3.hpp>
+#include "material.hpp"
 
 
 class Sphere : public Shape
@@ -16,7 +17,7 @@ public:
 
   Sphere(glm::vec3 const &_p, float _r = 1.0);
   Sphere(float _x, float _y, float _z, float _r = 1.0);
-  Sphere(glm::vec3 const &_p, float _r, Color const &_col, string const &_n);
+  Sphere(glm::vec3 const &_p, float _r, std::shared_ptr<Material> const& material, string const &_n);
 
   ~Sphere();
 

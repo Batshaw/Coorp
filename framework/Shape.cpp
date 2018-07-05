@@ -1,11 +1,9 @@
 #include "Shape.hpp"
 
-Shape::Shape() : name_{"default name"}, color_{1.0f, 1.0f, 1.0f} {};
+Shape::Shape() : name_{"default name"} {};
 
-Shape::Shape(string const &n, Color const &col) : name_{n},
-                                                  color_{col}
-{
-}
+Shape::Shape(string const &n, shared_ptr<Material> const& material) : 
+    name_{n}, material_{material}   {};
 
 Shape::~Shape()
 {
@@ -16,14 +14,14 @@ string Shape::name()
     return name_;
 }
 
-Color Shape::color()
+/* Color Shape::color()
 {
     return color_;
-}
+}*/
 
 ostream &Shape::print(ostream &os) const
 {
-    os << name_ << " " << color_.r << "; " << color_.g << "; " << color_.b << endl;
+    os << name_ << " " << material_<< endl;
     return os;
 };
 
