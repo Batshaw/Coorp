@@ -22,6 +22,7 @@ Sphere::~Sphere()
 {
 };
 
+float const M_PI = atan(1.0f)*4;
 float Sphere::radius() const
 {
     return _radius;

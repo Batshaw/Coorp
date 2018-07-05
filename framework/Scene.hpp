@@ -52,3 +52,10 @@ void load_sdf(string filename, Scene* scene)
         }
     }
 }
+
+std::shared_ptr<Material> findMaterial(std::string const& name, Scene& scene){
+    
+};
+bool operator<(std::shared_ptr<Material> const& lhs, std::shared_ptr<Material> const& rhs){
+        return lhs->name_ < rhs->name_;
+};
