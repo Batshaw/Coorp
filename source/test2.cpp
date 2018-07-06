@@ -31,7 +31,7 @@ TEST_CASE("aufgabe5", "[scene]")
     load_sdf("example.sdf", &scene1);
     findMaterialVector("green", scene1.material_vector);
     findMaterialMap("red", scene1.material_map);
-    findMaterialSet("green", scene1.material_set);
+    findMaterialSet("blue", scene1.material_set);
     
 }
 

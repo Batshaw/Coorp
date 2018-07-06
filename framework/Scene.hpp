@@ -89,7 +89,7 @@ bool operator<(std::shared_ptr<Material> const& lhs, std::shared_ptr<Material> c
 };
 std::shared_ptr<Material> findMaterialVector(std::string const& findName, vector<std::shared_ptr<Material>> const& material_vector){
     // find_if with a lambda that capture the needed name
-    auto iterLambda = find_if(material_vector.begin(), material_vector.end(),[&findName](std::shared_ptr<Material> const& material){    //capture findName by reference
+    auto iterLambda = find_if(material_vector.begin(), material_vector.end(),[findName](std::shared_ptr<Material> const& material){    //capture findName by reference
         return material->name_ == findName;
     });
 
@@ -106,8 +106,8 @@ std::shared_ptr<Material> findMaterialVector(std::string const& findName, vector
 };
 
 std::shared_ptr<Material> findMaterialSet(std::string const& findName, set<std::shared_ptr<Material>> const& material_set){
-    auto iterLambda = find_if(material_set.begin(), material_set.end(),[&findName](std::shared_ptr<Material> const& material){    //capture findName by reference
-        return material->name_ == findName;
+    auto iterLambda = find_if(material_set.begin(), material_set.end(),[findName](std::shared_ptr<Material> const& material){    //capture findName by reference
+        return material->name_ == findName;                             
     });
     if(iterLambda == material_set.end()){
         std::cout<< "Do not exist!!!!!\n";
