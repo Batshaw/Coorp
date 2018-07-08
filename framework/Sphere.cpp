@@ -1,5 +1,6 @@
 #include "Sphere.hpp"
 #include <cmath>
+#define piconst atan(1.0f)*4
 
 Sphere::Sphere() : Shape(),
                    _mpunkt{glm::vec3(0.0, 0.0, 0.0)},
@@ -22,7 +23,6 @@ Sphere::~Sphere()
 {
 };
 
-float const M_PI = atan(1.0f)*4;
 float Sphere::radius() const
 {
     return _radius;
@@ -30,12 +30,12 @@ float Sphere::radius() const
 
 float Sphere::area()
 {
-    return M_PI * pow(_radius, 2) * 4;
+    return piconst * pow(_radius, 2) * 4;
 };
 
 float Sphere::volume()
 {
-    return M_PI * pow(_radius, 3) * 4 / 3;
+    return piconst * pow(_radius, 3) * 4 / 3;
 };
 
 ostream &Sphere::print(ostream &os) const

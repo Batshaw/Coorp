@@ -4,7 +4,11 @@
             "name": "Linux",
             "browse": {
                 "path": [
-                    "${workspaceFolder}"
+                    "/usr/include/",
+                    "/usr/local/include/",
+                    "/usr/include/x86_64-linux-gnu/",
+                    "/usr/lib/clang/6.0.1/include",
+                    "${workspaceFolder}/"
                 ],
                 "limitSymbolsToIncludedHeaders": true
             },
@@ -15,8 +19,8 @@
                 "/usr/include/x86_64-linux-gnu/c++/5",
                 "${workspaceFolder}/external/glfw-3.2.1/include",
                 "${workspaceFolder}/framework",
-                "${workspaceFolder}/external/glm-0.9.5.3",
-                "${workspaceFolder}/external"
+                "${workspaceFolder}/external",
+                "${workspaceFolder}/external/glm-0.9.5.3"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/clang++-6.0",
