@@ -99,7 +99,7 @@ bool Box::intersect(Ray const &_r, float &_t) const
     for (int i = 0; i < 3; i++)
     {
         distance[i] = (anchor_coor[i] - ray_origin[i]) / ray_direction[i];
-        target[i] = anchor_coor[i];
+        target_coor[i] = anchor_coor[i];
     }
 
     sort(distance, distance + 3);
