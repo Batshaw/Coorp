@@ -15,38 +15,26 @@ Box::Box(vec3 const &_p1, vec3 const &_p2) : Shape(),
 {
 }
 
-Box::Box(string const &n, std::shared_ptr<Material> const& material) : Shape(n, material),
-                                              _minimum{vec3(0.0, 0.0, 0.0)},
-                                              _maximum{vec3(1.0, 1.0, 1.0)} {};
+Box::Box(string const &n, std::shared_ptr<Material> const &material) : Shape(n, material),
+                                                                       _minimum{vec3(0.0, 0.0, 0.0)},
+                                                                       _maximum{vec3(1.0, 1.0, 1.0)} {};
 
-Box::Box(vec3 const &_p1, vec3 const &_p2, string const &n, std::shared_ptr<Material> const& material) : Shape(n, material),
-                                                                                _minimum{set_min(_p1.x, _p2.x), set_min(_p1.y, _p2.y), set_min(_p1.z, _p2.z)},
-                                                                                _maximum{set_max(_p1.x, _p2.x), set_max(_p1.y, _p2.y), set_max(_p1.z, _p2.z)}
+Box::Box(vec3 const &_p1, vec3 const &_p2, string const &n, std::shared_ptr<Material> const &material) : Shape(n, material),
+                                                                                                         _minimum{set_min(_p1.x, _p2.x), set_min(_p1.y, _p2.y), set_min(_p1.z, _p2.z)},
+                                                                                                         _maximum{set_max(_p1.x, _p2.x), set_max(_p1.y, _p2.y), set_max(_p1.z, _p2.z)}
 {
 }
 
 Box::~Box(){};
+
 float Box::set_max(float const &coor1, float const &coor2)
 {
-    if (coor2 > coor1)
-    {
-        return coor2;
-    }
-    else
-    {
-        return coor1;
-    }
+    return ((coor2 > coor1) ? coor2 : coor1);
 }
+
 float Box::set_min(float const &coor1, float const &coor2)
 {
-    if (coor2 < coor1)
-    {
-        return coor2;
-    }
-    else
-    {
-        return coor1;
-    }
+    return ((coor2 < coor1) ? coor2 : coor1);
 }
 
 float Box::length() const
@@ -111,32 +99,28 @@ bool Box::intersect(Ray const &_r, float &_t) const
     for (int i = 0; i < 3; i++)
     {
         distance[i] = (anchor_coor[i] - ray_origin[i]) / ray_direction[i];
-        target[i] = anchor_coor[i];
+        target_coor[i] = anchor_coor[i];
     }
 
     sort(distance, distance + 3);
 
     for (int i = 0; i < 3; i++)
     {
-        cout << " distance " << i << ": " << distance[i] << endl;
-    }
-
-    for (int i = 0; i < 3; i++)
-    {
         target_coor[(i + 1) % 3] = ray_origin[(i + 1) % 3] + distance[i] * ray_direction[(i + 1) % 3];
         target_coor[(i + 2) % 3] = ray_origin[(i + 2) % 3] + distance[i] * ray_direction[(i + 2) % 3];
-        cout << " target: " << target_coor[0] << ", " << target_coor[1] << ", " << target_coor[2] << endl;
 
-        if (target_coor[0] >= _minimum.x && target_coor[0] <= _maximum.x &&
-            target_coor[1] >= _minimum.y && target_coor[1] <= _maximum.y &&
-            target_coor[2] >= _minimum.z && target_coor[2] <= _maximum.z )
+        target = {target_coor[0], target_coor[1], target_coor[2]};
+
+        if (is_on_surface(target))
         {
             _t = distance[i];
-            target = {target_coor[0], target_coor[1], target_coor[2]};
+            cout << "target : (" << target.x << "; " << target.y << "; " << target.z << ")" << endl;
+            cout << "distance: " << _t << endl;
             return true;
         }
     }
 
+    cout << "distance: " << distance[0] << endl;
     return false;
 }
 
@@ -168,81 +152,20 @@ vec3 Box::furthest_corner(vec3 const &min, vec3 const &max, vec3 const &origin) 
 
 float Box::nearest_komponent(float const &min, float const &max, float const &origin) const
 {
-
-    if (abs(origin - min) > abs(origin - max))
-    {
-        return max;
-    }
-    else
-    {
-        return min;
-    }
+    return ((abs(origin - min) > abs(origin - max)) ? max : min);
 }
 
 float Box::furthest_komponent(float const &min, float const &max, float const &origin) const
 {
-    if (abs(origin - min) < abs(origin - max))
-    {
-        return max;
-    }
-    else
-    {
-        return min;
-    }
+    return ((abs(origin - min) < abs(origin - max)) ? max : min);
 }
 
-bool Box::is_on_surface(vec3 const &p1, vec3 const &p2, vec3 const &input, float &distance) const
+bool Box::is_on_surface(vec3 const &input) const
 {
 
-    float coor1[3] = {p1.x, p1.y, p1.z};
-    float coor2[3] = {p2.x, p2.y, p2.z};
-
-    float input_coor[3] = {input.x, input.y, input.z};
-
-    bool inside[2] = {false, false};
-
-    for (int i = 0; i < 3; i++)
-    {
-
-        if (coor1[i] != coor2[i])
-        {
-
-            if (coor1[i] > coor2[i])
-            {
-
-                if (input_coor[i] > coor2[i] && input_coor[i] < coor1[i])
-                {
-                    inside[0] = true;
-                }
-
-                else
-                {
-                    inside[0] = false;
-                }
-            }
-            else
-            {
-                if (input_coor[i] > coor2[i] && input_coor[i] < coor1[i])
-                {
-                    inside[0] = true;
-                }
-
-                else
-                {
-                    inside[0] = false;
-                }
-            }
-        }
-    }
-
-    for (int i = 0; i < 2; i++)
-    {
-
-        if (!inside[i])
-        {
-            return false;
-        }
-    }
-
-    return true;
+    return ((input.x >= _minimum.x && input.x <= _maximum.x &&
+             input.y >= _minimum.y && input.y <= _maximum.y &&
+             input.z >= _minimum.z && input.z <= _maximum.z))
+               ? true
+               : false;
 }
