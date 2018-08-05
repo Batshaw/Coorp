@@ -9,5 +9,6 @@
         "limits": "cpp",
         "algorithm": "cpp",
         "vector": "cpp"
-    }
+    },
+    "cmake.configureOnOpen": false
 }
