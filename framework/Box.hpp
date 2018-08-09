@@ -15,8 +15,8 @@ public:
   Box();
   Box(glm::vec3 const &_pmin, glm::vec3 const &_pmax);
 
-  Box(std::string const &n, std::shared_ptr<Material> const& material);
-  Box(glm::vec3 const &_pmin, glm::vec3 const &_pmax, std::string const &n, std::shared_ptr<Material> const& material);
+  Box(std::string const &n, std::shared_ptr<Material> const &material);
+  Box(glm::vec3 const &_pmin, glm::vec3 const &_pmax, std::string const &n, std::shared_ptr<Material> const &material);
   ~Box();
 
   float length() const;
@@ -36,12 +36,11 @@ public:
 
   vec3 nearest_corner(glm::vec3 const &min, glm::vec3 const &max, glm::vec3 const &origin) const;
   vec3 furthest_corner(glm::vec3 const &min, glm::vec3 const &max, glm::vec3 const &origin) const;
-  
+
   float nearest_komponent(float const &min, float const &max, float const &origin) const;
   float furthest_komponent(float const &min, float const &max, float const &origin) const;
 
   bool is_on_surface(glm::vec3 const &input) const;
-
 };
 
 #endif //BOX_HPP

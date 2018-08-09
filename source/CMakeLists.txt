@@ -23,3 +23,11 @@ target_link_libraries(test2
   ${FRAMEWORK_NAME}
   )
 
+
+# Build test_r
+add_executable(test_r
+test_r.cpp)
+target_link_libraries(test_r
+  ${GLFW_LIBRARIES}
+  ${FRAMEWORK_NAME}
+  )

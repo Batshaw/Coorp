@@ -8,10 +8,9 @@ Box::Box() : Shape(),
 {
 }
 
-Box::Box(vec3 const &_p1, vec3 const &_p2) : Shape(),
+Box::Box(glm::vec3 const &_p1, glm::vec3 const &_p2) : Shape(),
                                              _minimum{set_min(_p1.x, _p2.x), set_min(_p1.y, _p2.y), set_min(_p1.z, _p2.z)},
                                              _maximum{set_max(_p1.x, _p2.x), set_max(_p1.y, _p2.y), set_max(_p1.z, _p2.z)}
-
 {
 }
 
