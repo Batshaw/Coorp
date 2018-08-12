@@ -84,8 +84,9 @@ std::shared_ptr<Material> findMaterialMap(std::string const &findName, map<std::
     }
 };
 
-void load_sdf(std::string filename, Scene scene)
+void load_sdf(std::string filename, Scene& scene)
 {
+
     std::ifstream ifs;
     std::string dir = "../sdf/" + filename;
     ifs.open(dir);
@@ -213,4 +214,6 @@ void load_sdf(std::string filename, Scene scene)
     {
         cout << "file not found" << endl;
     }
+
 };
+

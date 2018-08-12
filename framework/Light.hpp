@@ -9,7 +9,7 @@ struct Light
     Color _color;
     float _brightness;
 
-    Light(std::string const &name, glm::vec3 const &p, Color c, float m) : _name{name},
+    Light(std::string const &name, glm::vec3 const &p, Color const& c, float m) : _name{name},
                                                                            _origin{p},
                                                                            _color{c},
                                                                            _brightness{m}

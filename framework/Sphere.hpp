@@ -2,6 +2,7 @@
 #define SPHERE_HPP
 
 #include "Shape.hpp"
+#include <glm/glm.hpp>
 #include <glm/vec3.hpp>
 #include "material.hpp"
 
