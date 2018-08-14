@@ -8,7 +8,7 @@
     "showOutput": "always",
     "suppressTaskName": true,
     "options": {
-        "cwd": "C:/Users/Batshaw/Desktop/UbungC++/Coorp/build"
+        "cwd": "C:/Users/Batshaw/Desktop/UbungC++/Project/Coorp/build"
     },
     "tasks": [
         {

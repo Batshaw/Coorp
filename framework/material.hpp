@@ -7,6 +7,7 @@
 
 struct Material{
 
+    Material(): name_{"default"}, ka_{1, 0, 0}, kd_{1, 0, 0}, ks_{1, 1, 1}, m_{10.0f}  {}   //Default Konstruktor
     Material(Color ka, Color kd, Color ks, float m):
         name_{"unknown"}, ka_{ka}, kd_{kd}, ks_{ks}, m_{m}  {}
     Material(std::string name, Color ka, Color kd, Color ks, float m):

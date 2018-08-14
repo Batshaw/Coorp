@@ -15,7 +15,7 @@
 TEST_CASE("final1", "[scene]")
 {
     Scene scene2;
-    load_sdf("scene2.sdf", scene2);
+    load_sdf("scene1.sdf", scene2);
 
     REQUIRE(scene2.material_vector.size() == 2);
     REQUIRE(scene2.shape_vector.size() == 2);
