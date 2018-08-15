@@ -1,4 +1,0 @@
-    
-    unsigned int _width;
-    unsigned int _height;
-    std::string _name = "default";

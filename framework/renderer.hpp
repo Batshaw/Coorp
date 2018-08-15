@@ -13,6 +13,7 @@
 #include "color.hpp"
 #include "pixel.hpp"
 #include "ppmwriter.hpp"
+#include "Scene.hpp"
 #include <string>
 #include <glm/glm.hpp>
 
@@ -20,6 +21,7 @@ class Renderer
 {
 public:
   Renderer(unsigned w, unsigned h, std::string const& file);
+  Renderer(Scene const& scene);
 
   void render();
   void write(Pixel const& p);
