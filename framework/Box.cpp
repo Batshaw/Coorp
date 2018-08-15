@@ -74,7 +74,7 @@ ostream &Box::print(ostream &os) const
     return os;
 }
 
-bool Box::intersect(Ray const &_r) const
+/*bool Box::intersect(Ray const &_r) const
 {
 
     return true;
@@ -167,4 +167,60 @@ bool Box::is_on_surface(vec3 const &input) const
              input.z >= _minimum.z && input.z <= _maximum.z))
                ? true
                : false;
+}*/
+
+// in Box???
+bool Box::is_inBox(glm::vec3 const& punkt) {
+    if(_minimum.x <= punkt.x && punkt.x <= _maximum.x && _minimum.y <= punkt.y && punkt.y <= _maximum.y && _minimum.z <= punkt.z && punkt.z <= _maximum.z){
+        return true;
+    }
+    else return false;
+}
+
+bool Box::intersect(Ray const& _r, float& _t) {
+    bool result = false;
+    glm::vec3 schnittPunkt;
+    if(_r.direction.x != 0){
+        if(_r.direction.x > 0){
+            _t = (_minimum.x - _r.origin.x)/_r.direction.x;
+        }
+        else _t = (_maximum.x - _r.origin.x)/_r.direction.x;
+        if(_t > 0){
+            schnittPunkt = _r.origin + _t*_r.direction;
+            std::cout<<schnittPunkt.x<< " "<< schnittPunkt.y<< " "<< schnittPunkt.z<< " \n";
+            if(is_inBox(schnittPunkt)){
+                result = true;
+                std::cout<< "t = "<< _t<< "\n";
+            }
+        }
+    }
+    if(_r.direction.y != 0){
+        if(_r.direction.y > 0){
+            _t = (_minimum.y - _r.origin.y)/_r.direction.y;
+        }
+        else _t = (_maximum.y - _r.origin.y)/_r.direction.y;
+        if(_t > 0){
+            schnittPunkt = _r.origin + _t*_r.direction;
+            std::cout<<schnittPunkt.x<< " "<< schnittPunkt.y<< " "<< schnittPunkt.z<< " \n";
+            if(is_inBox(schnittPunkt)){
+                result = true;
+                std::cout<< "t = "<< _t<< "\n";
+            }
+        }
+    }
+    if(_r.direction.z != 0){
+        if(_r.direction.z > 0){
+            _t = (_minimum.z - _r.origin.z)/_r.direction.z;
+        }
+        else _t = (_maximum.z - _r.origin.z)/_r.direction.z;
+        if(_t > 0){
+            schnittPunkt = _r.origin + _t*_r.direction;
+            std::cout<<schnittPunkt.x<< " "<< schnittPunkt.y<< " "<< schnittPunkt.z<< " \n";
+            if(is_inBox(schnittPunkt)){
+                result = true;
+                std::cout<< "t = "<< _t<< "\n";
+            }
+        }
+    }
+    return result;
 }

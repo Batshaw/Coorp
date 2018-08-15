@@ -28,19 +28,20 @@ public:
 
   ostream &print(std::ostream &os) const override;
 
-  bool intersect(Ray const &_r) const override;
-  bool intersect(Ray const &_r, float &_t) const override;
+  //bool intersect(Ray const &_r) const override;
+  bool is_inBox(glm::vec3 const& punkt);
+  bool intersect(Ray const &_r, float &_t) override;
 
   float set_max(float const &coor1, float const &coor2);
   float set_min(float const &coor1, float const &coor2);
 
-  vec3 nearest_corner(glm::vec3 const &min, glm::vec3 const &max, glm::vec3 const &origin) const;
+  /*vec3 nearest_corner(glm::vec3 const &min, glm::vec3 const &max, glm::vec3 const &origin) const;
   vec3 furthest_corner(glm::vec3 const &min, glm::vec3 const &max, glm::vec3 const &origin) const;
 
   float nearest_komponent(float const &min, float const &max, float const &origin) const;
   float furthest_komponent(float const &min, float const &max, float const &origin) const;
 
-  bool is_on_surface(glm::vec3 const &input) const;
+  bool is_on_surface(glm::vec3 const &input) const;*/
 };
 
 #endif //BOX_HPP

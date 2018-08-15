@@ -43,19 +43,19 @@ ostream &Sphere::print(ostream &os) const
     return Shape::print(os);
 }
 
-bool Sphere::intersect(Ray const& _r) const
+bool Sphere::intersect(Ray const& _r, float& _t)
 {
-    float distance = 0.0f;
+    //float distance = 0.0f;
     auto ndirection = glm::normalize(_r.direction);
 
     auto result = glm::intersectRaySphere(_r.origin,
                                           ndirection,
                                           _mpunkt,
                                           pow(_radius, 2),
-                                          distance);
+                                          _t);
     return result;
 }
 
-bool Sphere::intersect(Ray const& _r, float& _t) const{
+/*bool Sphere::intersect(Ray const& _r, float& _t) const{
     return false;
-}
+}*/

@@ -7,7 +7,7 @@
 
 using namespace std;
 
-TEST_CASE("aufgabe3", "[interect]")
+/*TEST_CASE("aufgabe3", "[interect]")
 {
     Ray ray;
     ray.origin = {0.0,0.0,-8.0};
@@ -20,6 +20,18 @@ TEST_CASE("aufgabe3", "[interect]")
 
     std::cout<<box1;
     REQUIRE(box1.intersect(ray, distance) == true);
+}*/
+
+TEST_CASE("test ray_tracer mit Box 2.0", "[intersect]"){
+  glm::vec3 origin{0, 0, 0};
+  glm::vec3 direction{1, 0, 0};
+  Ray r{origin, direction};
+  glm::vec3 min{2.0f, -3.5f, -4.0f};
+  glm::vec3 max{3.0f, 5.0f, 6.5f};
+  Box b(min, max);
+  float t;
+  REQUIRE(b.intersect(r, t) == true);
+  std::cout<< "End!";
 }
 
 TEST_CASE("aufgabe5", "[scene]")

@@ -26,8 +26,8 @@ class Shape
     virtual float area() = 0;
     virtual float volume() = 0;
     virtual ostream &print(ostream &os) const;
-    virtual bool intersect(Ray const& _r) const = 0;
-    virtual bool intersect(Ray const& _r, float& _t) const = 0;
+    //virtual bool intersect(Ray const& _r) const = 0;
+    virtual bool intersect(Ray const& _r, float& _t) = 0;
 
     string name();
     // Color color();
