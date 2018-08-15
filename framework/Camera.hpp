@@ -1,3 +1,6 @@
+#ifndef CAMERA_HPP
+#define CAMERA_HPP
+
 #include <string>
 #include <glm/vec3.hpp>
 
@@ -10,3 +13,5 @@ struct Camera
     glm::vec3 _up;
     
 };
+
+#endif  //CAMERA_HPP

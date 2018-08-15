@@ -10,6 +10,7 @@
 #ifndef BUW_RENDERER_HPP
 #define BUW_RENDERER_HPP
 
+#include "Scene.hpp"
 #include "color.hpp"
 #include "pixel.hpp"
 #include "ppmwriter.hpp"
@@ -20,6 +21,7 @@ class Renderer
 {
 public:
   Renderer(unsigned w, unsigned h, std::string const& file);
+  Renderer (Scene const& scene);
 
   void render();
   void write(Pixel const& p);

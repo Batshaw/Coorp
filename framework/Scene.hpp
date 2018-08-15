@@ -1,3 +1,6 @@
+#ifndef SCENE_HPP
+#define SCENE_HPP
+
 #include <vector>
 #include "Shape.hpp"
 #include "Box.hpp"
@@ -22,12 +25,16 @@ struct Scene
     std::vector<std::shared_ptr<Shape>> shape_vector;
 
     std::vector<std::shared_ptr<Light>> light_vector;
+
+    unsigned  _width;
+    unsigned  _height;
+    std::string _name = "default";
 };
 
-bool operator<(std::shared_ptr<Material> const &lhs, std::shared_ptr<Material> const &rhs)
+/*bool operator<(std::shared_ptr<Material> const &lhs, std::shared_ptr<Material> const &rhs)
 {
     return lhs->name_ < rhs->name_;
-};
+};*/
 
 std::shared_ptr<Material> findMaterialVector(std::string const &findName, vector<std::shared_ptr<Material>> const &material_vector)
 {
@@ -219,3 +226,4 @@ void load_sdf(std::string filename, Scene& scene)
 
 };
 
+#endif  //SCENE_HPP
