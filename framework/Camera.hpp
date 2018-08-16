@@ -14,4 +14,4 @@ struct Camera
     
 };
 
-#endif  //CAMERA_HPP
+#endif 

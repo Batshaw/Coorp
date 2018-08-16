@@ -1,16 +1,6 @@
 #define CATCH_CONFIG_RUNNER
 #include <catch.hpp>
-#include "Scene.hpp"
-#include "Shape.hpp"
-#include "Box.hpp"
-#include "material.hpp"
-#include <renderer.hpp>
-#include <window.hpp>
-
-#include <GLFW/glfw3.h>
-#include <thread>
-#include <utility>
-#include <cmath>
+#include "sdfloader.hpp"
 
 TEST_CASE("final1", "[scene]")
 {
@@ -23,6 +13,5 @@ TEST_CASE("final1", "[scene]")
 
 int main(int argc, char *argv[])
 {
-
     return Catch::Session().run(argc, argv);
 }
