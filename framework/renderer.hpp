@@ -19,6 +19,7 @@
 #include <string>
 #include <glm/glm.hpp>
 #include "Hit.hpp"
+#include "Camera.hpp"
 
 class Renderer
 {
@@ -28,6 +29,8 @@ public:
 
   void render();
   void render(Scene const &scene);
+  void render_test(Camera const &camera, Material const &material, Sphere const &sphere, Color const &ambiente, Light const &light);
+
   Color trace(Ray const &ray, unsigned int depth_) const;
   void write(Pixel const &p);
 

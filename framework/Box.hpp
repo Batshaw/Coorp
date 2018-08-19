@@ -32,6 +32,8 @@ public:
   bool is_inBox(glm::vec3 const& punkt) const;
   bool intersect(Ray const& _r, float& _t) const override;
   Hit intersection (Ray const &_r, float &_t) const override;
+  glm::vec3 get_normal(Hit const& hit) const override;
+  glm::vec3 get_normal(int& _side) const;
 
   float set_max(float const &coor1, float const &coor2);
   float set_min(float const &coor1, float const &coor2);

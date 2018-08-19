@@ -264,3 +264,22 @@ Hit Box::intersection(Ray const &_r, float &_t) const
 
     return temp;
 }
+
+glm::vec3 Box::get_normal(int& _side) const
+{
+    switch (_side)
+    {
+    case 0:
+        return glm::vec3{-1.0, 0.0, 0.0}; // -x
+    case 1:
+        return glm::vec3{0.0, -1.0, 0.0}; // -y
+    case 2:
+        return glm::vec3{0.0, 0.0, -1.0}; // -z
+    case 3:
+        return glm::vec3{1.0, 0.0, 0.0}; // +x-Plane
+    case 4:
+        return glm::vec3{0.0, 1.0, 0.0}; // +y-Plane
+    case 5:
+        return glm::vec3{0.0, 0.0, 1.0}; // +z-Plane
+    }
+}

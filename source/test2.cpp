@@ -4,6 +4,7 @@
 #include "Shape.hpp"
 #include "Box.hpp"
 #include "material.hpp"
+#include "sdfloader.hpp"
 
 using namespace std;
 
@@ -22,30 +23,29 @@ using namespace std;
     REQUIRE(box1.intersect(ray, distance) == true);
 }*/
 
-TEST_CASE("test ray_tracer mit Box 2.0", "[intersect]"){
-  glm::vec3 origin{0, 0, 0};
-  glm::vec3 direction{1, 0, 0};
-  Ray r{origin, direction};
-  glm::vec3 min{2.0f, -3.5f, -4.0f};
-  glm::vec3 max{3.0f, 5.0f, 6.5f};
-  Box b(min, max);
-  float t;
-  REQUIRE(b.intersect(r, t) == true);
-  std::cout<< "End!";
+TEST_CASE("test ray_tracer mit Box 2.0", "[intersect]")
+{
+    glm::vec3 origin{0, 0, 0};
+    glm::vec3 direction{1, 0, 0};
+    Ray r{origin, direction};
+    glm::vec3 min{2.0f, -3.5f, -4.0f};
+    glm::vec3 max{3.0f, 5.0f, 6.5f};
+    Box b(min, max);
+    float t;
+    REQUIRE(b.intersect(r, t) == true);
+    std::cout << "End!";
 }
 
 TEST_CASE("aufgabe5", "[scene]")
 {
     Scene scene1;
-/*     load_sdf("scene1.sdf", scene1);
-    findMaterialVector("green", scene1.material_vector);
+    load_sdf("scene1.sdf", scene1);
+/*  findMaterialVector("green", scene1.material_vector);
     findMaterialMap("red", scene1.material_map);
     findMaterialSet("blue", scene1.material_set); */
 }
-
 
 int main(int argc, char *argv[])
 {
     return Catch::Session().run(argc, argv);
 }
-

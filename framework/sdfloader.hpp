@@ -50,8 +50,8 @@ void load_sdf(std::string filename, Scene &scene)
                                                                                         material_koof[9]);
 
                     scene.material_vector.push_back(neu_material);
-                    scene.material_map.insert(make_pair(neu_material->name_, neu_material));
-                    scene.material_set.insert(neu_material);
+/*                     scene.material_map.insert(make_pair(neu_material->name_, neu_material));
+                    scene.material_set.insert(neu_material); */
                 }
 
                 else if ("shape" == variable_name)

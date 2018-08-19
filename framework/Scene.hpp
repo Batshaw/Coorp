@@ -13,31 +13,48 @@
 #include <set>
 #include <sstream>
 #include "Light.hpp"
+#include "Camera.hpp"
 
 using namespace std;
 
 struct Scene
 {
     std::vector<std::shared_ptr<Material>> material_vector;
-    std::map<std::string, std::shared_ptr<Material>> material_map;
-    std::set<std::shared_ptr<Material>> material_set;
+    /*     std::map<std::string, std::shared_ptr<Material>> material_map;
+    std::set<std::shared_ptr<Material>> material_set; */
 
     std::vector<std::shared_ptr<Shape>> shape_vector;
-
     std::vector<std::shared_ptr<Light>> light_vector;
-     
+
     unsigned int _width;
     unsigned int _height;
     std::string _name = "default";
 
-};
+    Camera _camera;
 
+    //Default scene
+    Scene() : material_vector{},
+              shape_vector{std::vector<std::shared_ptr<Shape>>()},
+              light_vector{std::vector<std::shared_ptr<Light>>()},
+              _width{500},
+              _height{500},
+              _name{"default scene"},
+              _camera{Camera()} {};
+
+    //Kopie Scene
+    Scene(Scene const &scene) : material_vector{scene.material_vector},
+                                shape_vector{scene.shape_vector},
+                                light_vector{scene.light_vector},
+                                _width{scene._width},
+                                _height{scene._height},
+                                _name{scene._name},
+                                _camera{scene._camera} {};
+};
 
 /* bool operator<(std::shared_ptr<Material> const &lhs, std::shared_ptr<Material> const &rhs)
 {
     return lhs->name_ < rhs->name_;
 };*/
-
 
 /*
 

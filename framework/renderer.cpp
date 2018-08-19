@@ -9,15 +9,8 @@
 
 #include "renderer.hpp"
 
-/* Renderer::Renderer(unsigned w, unsigned h, std::string const &file)
-    : width_(w), height_(h), color_buffer_(w * h, Color(0.0, 0.0, 0.0)), filename_(file), ppm_(width_, height_)
-{
-} */
-
 Renderer::Renderer(Scene const &scene)
-    : scene_(scene), width_(scene._width), height_(scene._height), color_buffer_(scene._width * scene._height, Color(0.0, 0.0, 0.0)), filename_(scene._name), ppm_(scene._width, scene._height)
-{
-}
+    : scene_(scene), width_(scene._width), height_(scene._height), color_buffer_(scene._width * scene._height, Color(0.0, 0.0, 0.0)), filename_(scene._name), ppm_(scene._width, scene._height){};
 
 /* void Renderer::render()
 void Renderer::render()
@@ -44,7 +37,7 @@ void Renderer::render()
   ppm_.save(filename_);
 } */
 
-//Aufgabe 7.1 - von Scene gefundenen Shapes zu rendern 
+//Aufgabe 7.1 - von Scene gefundenen Shapes zu rendern
 void Renderer::render()
 {
 
@@ -53,25 +46,28 @@ void Renderer::render()
     for (unsigned x = 0; x < width_; ++x)
     {
       Pixel p(x, y);
-      Ray ray;
+      Ray ray = scene_._camera.rayThroughPixel(x, y, width_, height_);
       p.color;
 
       write(p);
     }
   }
   ppm_.save(filename_);
-
 }
 
 //Aufgabe 7.1 - raytrace
 
-Color Renderer::trace(Ray const& ray, unsigned int depth_) const{
+Color Renderer::trace(Ray const &ray, unsigned int depth_) const
+{
 
-  Color temp{0.0,0.0,0.0};
+  Color temp{0.0, 0.0, 0.0};
   float dist = 2000;
+  Hit hit;
 
-
-
+  for (int i = 0; i < scene_.shape_vector.size(); ++i)
+  {
+    hit = scene_.shape_vector[i]->intersection(ray, dist);
+  }
 }
 
 void Renderer::write(Pixel const &p)
