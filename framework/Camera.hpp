@@ -12,6 +12,8 @@ struct Camera
     glm::vec3 _dir;
     glm::vec3 _up;
     
+
+    
 };
 
 #endif 
