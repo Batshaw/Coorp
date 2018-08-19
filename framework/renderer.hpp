@@ -10,6 +10,7 @@
 #ifndef BUW_RENDERER_HPP
 #define BUW_RENDERER_HPP
 
+#include "Scene.hpp"
 #include "color.hpp"
 #include "Ray.hpp"
 #include "pixel.hpp"
@@ -38,6 +39,7 @@ private:
   Scene scene_;
   unsigned width_;
   unsigned height_;
+  Scene scene_;
   std::vector<Color> color_buffer_;
   std::string filename_;
   PpmWriter ppm_;

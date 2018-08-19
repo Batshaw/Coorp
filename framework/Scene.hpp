@@ -1,7 +1,6 @@
 #ifndef SCENE_HPP
 #define SCENE_HPP
 
-
 #include <vector>
 #include "Shape.hpp"
 #include "Box.hpp"
