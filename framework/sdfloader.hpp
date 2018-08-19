@@ -126,14 +126,29 @@ void load_sdf(std::string filename, Scene &scene)
 
                     scene.light_vector.push_back(neu_light);
                 }
+
+                else if ("camera" == variable_name){
+                    Camera temp;
+                    std::string camera_name;
+
+                    current_line_stream >> temp._name;
+                    current_line_stream >> temp._fov_x;
+
+                    scene._camera = temp;
+
+                }
             }
         }
+
+        scene._name = filename.substr(0,5);
     }
 
     else
     {
         cout << "file not found" << endl;
     }
+
+    ifs.close();
 };
 
 #endif

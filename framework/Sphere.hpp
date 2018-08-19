@@ -30,8 +30,8 @@ public:
 
   //bool intersect(Ray const& _r) const override;
   bool intersect(Ray const &_r, float &_t) const override;
-  Hit intersection(Ray const &_r, float &_t) const override;
+/*   Hit intersection(Ray const &_r, float &_t) const override;
   glm::vec3 get_normal(Hit const &hit) const;
-};
+ */};
 
 #endif //SPHERE_HPP

@@ -18,8 +18,6 @@
 #include "Scene.hpp"
 #include <string>
 #include <glm/glm.hpp>
-#include "Hit.hpp"
-#include "Camera.hpp"
 
 class Renderer
 {
@@ -28,7 +26,6 @@ public:
   Renderer(Scene const &scene);
 
   void render();
-  void render(Scene const &scene);
 
   Color trace(Ray const &ray) const;
   void write(Pixel const &p);
@@ -42,7 +39,6 @@ private:
   Scene scene_;
   unsigned width_;
   unsigned height_;
-  Scene scene_;
   std::vector<Color> color_buffer_;
   std::string filename_;
   PpmWriter ppm_;

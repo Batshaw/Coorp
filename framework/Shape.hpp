@@ -10,7 +10,6 @@
 #include <glm/gtx/intersect.hpp>
 #include <memory>
 #include "material.hpp"
-#include "Hit.hpp"
 
 using namespace std;
 using namespace glm;
@@ -31,9 +30,9 @@ public:
   //virtual bool intersect(Ray const& _r) const = 0;
 
   virtual bool intersect(Ray const &_r, float &_t) const = 0;
-  virtual Hit intersection(Ray const &_r, float &_t) const = 0;
+/*   virtual Hit intersection(Ray const &_r, float &_t) const = 0;
   virtual glm::vec3 get_normal(Hit const& _inter) const = 0;
-
+ */
   string name();
   // Color color();
   shared_ptr<Material> get_material_() const;

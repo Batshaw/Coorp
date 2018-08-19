@@ -51,7 +51,7 @@ bool Sphere::intersect(Ray const &_r, float &_t) const
     return result;
 }
 
-Hit Sphere::intersection(Ray const &_r, float &_t) const
+/* Hit Sphere::intersection(Ray const &_r, float &_t) const
 {
     Hit temp;
     if (intersect(_r, _t))
@@ -71,6 +71,6 @@ glm::vec3 Sphere::get_normal(Hit const &hit) const
 {
     return glm::normalize(glm::vec3{(hit.coor_ - _mpunkt)});
 }
-/*bool Sphere::intersect(Ray const& _r, float& _t) const{
+ *//*bool Sphere::intersect(Ray const& _r, float& _t) const{
     return false;
 }*/

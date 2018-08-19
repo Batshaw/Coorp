@@ -5,6 +5,7 @@
 
 #include <renderer.hpp>
 #include <window.hpp>
+#include "sdfloader.hpp"
 
 #include <GLFW/glfw3.h>
 #include <thread>
@@ -13,15 +14,16 @@
 
 int main(int argc, char *argv[])
 {
+    unsigned const image_width = 800;
+    unsigned const image_height = 600;
 
     Scene scene2;
     load_sdf("scene2.sdf", scene2);
 
-    unsigned const image_width = 800;
-    unsigned const image_height = 600;
-    std::string const filename = "./scene2.ppm";
-
-    Renderer renderer{image_width, image_height, filename};
+    Renderer renderer(scene2);
+    std::thread render_thread([&renderer]() {
+        renderer.render();
+    });
 
     Window window{{image_width, image_height}};
 
@@ -33,6 +35,6 @@ int main(int argc, char *argv[])
         }
         window.show(renderer.color_buffer());
     }
-
+    render_thread.join();
     return 0;
 }

@@ -246,7 +246,7 @@ bool Box::intersect(Ray const &_r, float &_t) const
     return result;
 };
 
-Hit Box::intersection(Ray const &_r, float &_t) const
+/* Hit Box::intersection(Ray const &_r, float &_t) const
 {
 
     Hit temp;
@@ -283,3 +283,4 @@ glm::vec3 Box::get_normal(int& _side) const
         return glm::vec3{0.0, 0.0, 1.0}; // +z-Plane
     }
 }
+ */
