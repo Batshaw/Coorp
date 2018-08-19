@@ -44,6 +44,8 @@ void Renderer::render()
   ppm_.save(filename_);
 }
 
+
+
 void Renderer::write(Pixel const& p)
 {
   // flip pixels, because of opengl glDrawPixels
