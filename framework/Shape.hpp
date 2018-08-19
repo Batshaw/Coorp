@@ -10,32 +10,37 @@
 #include <glm/gtx/intersect.hpp>
 #include <memory>
 #include "material.hpp"
+#include "Hit.hpp"
 
 using namespace std;
 using namespace glm;
 
 class Shape
 {
-  private:
-  public:
-    Shape();
-    Shape(string const &n, shared_ptr<Material> const& material);
-    //ohne virtual wird der Destruktor die abgeleitene Klasse nicht aufgerufen
-    ~Shape();
+private:
+public:
+  Shape();
+  Shape(string const &n, shared_ptr<Material> const &material);
+  //ohne virtual wird der Destruktor die abgeleitene Klasse nicht aufgerufen
+  ~Shape();
 
-    virtual float area() = 0;
-    virtual float volume() = 0;
-    virtual ostream &print(ostream &os) const;
-    //virtual bool intersect(Ray const& _r) const = 0;
-    virtual bool intersect(Ray const& _r, float& _t) = 0;
+  virtual float area() = 0;
+  virtual float volume() = 0;
+  virtual ostream &print(ostream &os) const;
 
-    string name();
-    // Color color();
+  //virtual bool intersect(Ray const& _r) const = 0;
 
-  protected:
-    string name_;
-    // Color color_;
-    shared_ptr<Material> material_;
+  virtual bool intersect(Ray const &_r, float &_t) const = 0;
+  virtual Hit intersection(Ray const &_r, float &_t) const = 0;
+  virtual glm::vec3 get_normal(Hit const& _inter) const = 0;
+
+  string name();
+  // Color color();
+
+protected:
+  string name_;
+  // Color color_;
+  shared_ptr<Material> material_;
 };
 
 ostream &operator<<(ostream &os, Shape const &s);

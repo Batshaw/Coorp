@@ -29,8 +29,9 @@ public:
   ostream &print(std::ostream &os) const override;
 
   //bool intersect(Ray const &_r) const override;
-  bool is_inBox(glm::vec3 const& punkt);
-  bool intersect(Ray const &_r, float &_t) override;
+  bool is_inBox(glm::vec3 const& punkt) const;
+  bool intersect(Ray const& _r, float& _t) const override;
+  Hit intersection (Ray const &_r, float &_t) const override;
 
   float set_max(float const &coor1, float const &coor2);
   float set_min(float const &coor1, float const &coor2);

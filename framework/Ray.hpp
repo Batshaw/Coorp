@@ -2,6 +2,7 @@
 #define RAY_HPP 
 
 #include <glm/glm.hpp>
+#include <glm/vec3.hpp>
 
 struct Ray
 {
@@ -13,6 +14,12 @@ struct Ray
 
     Ray(glm::vec3 origin_, glm::vec3 direction_):
         origin{origin_}, direction{glm::normalize(direction_)}  {}
+
+    glm::vec3 get_point(float t_) const{
+        return origin + direction*t_;
+    }
+
+
 };
 
 

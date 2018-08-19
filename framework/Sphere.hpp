@@ -30,7 +30,9 @@ public:
   ostream &print(ostream &os) const override;
 
   //bool intersect(Ray const& _r) const override;
-  bool intersect(Ray const& _r, float& _t) override;
+  bool intersect(Ray const& _r, float& _t) const override;
+  Hit intersection(Ray const &_r, float &_t) const override;
+
 };
 
 #endif //SPHERE_HPP

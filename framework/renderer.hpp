@@ -18,6 +18,7 @@
 #include "Scene.hpp"
 #include <string>
 #include <glm/glm.hpp>
+#include "Hit.hpp"
 
 class Renderer
 {

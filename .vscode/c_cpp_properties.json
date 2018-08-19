@@ -20,7 +20,8 @@
                 "${workspaceFolder}/external/glfw-3.2.1/include",
                 "${workspaceFolder}/framework",
                 "${workspaceFolder}/external",
-                "${workspaceFolder}/external/glm-0.9.5.3"
+                "${workspaceFolder}/external/glm-0.9.5.3",
+                "/usr/include/c++/5/tr1"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/clang++-6.0",
