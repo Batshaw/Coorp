@@ -36,6 +36,7 @@ public:
 
   string name();
   // Color color();
+  shared_ptr<Material> get_material_() const;
 
 protected:
   string name_;

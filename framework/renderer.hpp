@@ -29,9 +29,8 @@ public:
 
   void render();
   void render(Scene const &scene);
-  void render_test(Camera const &camera, Material const &material, Sphere const &sphere, Color const &ambiente, Light const &light);
 
-  Color trace(Ray const &ray, unsigned int depth_) const;
+  Color trace(Ray const &ray) const;
   void write(Pixel const &p);
 
   inline std::vector<Color> const &color_buffer() const

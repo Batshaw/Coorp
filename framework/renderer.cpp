@@ -47,7 +47,7 @@ void Renderer::render()
     {
       Pixel p(x, y);
       Ray ray = scene_._camera.rayThroughPixel(x, y, width_, height_);
-      p.color;
+      p.color = trace(ray);
 
       write(p);
     }
@@ -57,16 +57,41 @@ void Renderer::render()
 
 //Aufgabe 7.1 - raytrace
 
-Color Renderer::trace(Ray const &ray, unsigned int depth_) const
+Color Renderer::trace(Ray const &ray) const
 {
+  Camera cam1 = {scene_._camera};
 
   Color temp{0.0, 0.0, 0.0};
-  float dist = 2000;
-  Hit hit;
+  float dist = 0;
+  float dmin = 1000;
+
+  float is_intersect = true;
+  int closest_object_index = -1;
 
   for (int i = 0; i < scene_.shape_vector.size(); ++i)
   {
-    hit = scene_.shape_vector[i]->intersection(ray, dist);
+    is_intersect = (*scene_.shape_vector[i]).intersect(ray, dist);
+    //cout<<distance<<endl;
+    if (is_intersect)
+    {
+      cout << "true" << endl;
+
+      if (dist < dmin)
+      {
+        dmin = dist;
+        closest_object_index = i;
+      }
+    }
+  }
+  if (closest_object_index != -1)
+  {
+    cout << "nicht intersection" << endl;
+    return (scene_.shape_vector[closest_object_index])->get_material_()->ka_;
+  }
+
+  else
+  {
+    return Color{0, 0, 0};
   }
 }
 
