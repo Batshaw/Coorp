@@ -79,7 +79,7 @@ void load_sdf(std::string const& filename, Scene &scene)
                                                                                         Color{material_koof[6], material_koof[7], material_koof[8]},
                                                                                         material_koof[9]);
 
-                    scene->material_vector.push_back(neu_material);
+                    scene.material_vector.push_back(neu_material);
                     // scene.material_map.insert(make_pair(neu_material->name_, neu_material));
                     // scene.material_set.insert(neu_material);
                 }
@@ -110,7 +110,7 @@ void load_sdf(std::string const& filename, Scene &scene)
                                                                                shape_name,
                                                                                findMaterialVector(mat_name, scene.material_vector));
 
-                        scene->shape_vector.push_back(neu_box);
+                        scene.shape_vector.push_back(neu_box);
                     }
 
                     else if ("sphere" == shape_type)
@@ -133,7 +133,7 @@ void load_sdf(std::string const& filename, Scene &scene)
                                                                                      findMaterialVector(mat_name, scene.material_vector),
                                                                                      shape_name);
 
-                        scene->shape_vector.push_back(neu_sphere);
+                        scene.shape_vector.push_back(neu_sphere);
                     }
                 }
 
@@ -154,7 +154,7 @@ void load_sdf(std::string const& filename, Scene &scene)
                                                                                Color(light_att[3], light_att[4], light_att[5]),
                                                                                light_att[6]);
 
-                    scene->light_vector.push_back(neu_light);
+                    scene.light_vector.push_back(neu_light);
                 }
                 else if ("camera" == variable_name){
                     Camera temp;
@@ -163,7 +163,7 @@ void load_sdf(std::string const& filename, Scene &scene)
                     current_line_stream >> temp._name;
                     current_line_stream >> temp._fov_x;
 
-                    scene->_camera = temp;
+                    scene.camera = temp;
 
                 }
             }
@@ -176,5 +176,4 @@ void load_sdf(std::string const& filename, Scene &scene)
     }
     ifs.close();
     // return scene;
-
 }
