@@ -29,7 +29,7 @@ class Renderer
 public:
   Renderer(unsigned w, unsigned h, std::string const& file);
 
-  void render();
+  // void render();
   void render(Scene const& scene);
   Color trace(Scene const& scene, Ray const& ray);
   void write(Pixel const& p);

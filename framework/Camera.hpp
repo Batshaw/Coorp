@@ -14,7 +14,7 @@ struct Camera
     glm::vec3 _up;
 
     Camera():
-        _name{"default camera"}, _fov_x{45}  {}
+        _name{"default camera"}, _fov_x{45.0f}  {}
     //Konstruktor mit Name und Öffnungswinkel: 
     Camera(std::string name_, float fov_x_):
         _name{name_}, _fov_x{fov_x_}, _eye(glm::vec3{0.0f, 0.0f, 0.0f}), _dir(glm::vec3{0.0f, 0.0f, -1.0f}), _up(glm::vec3{1.0f, 0.0f, 0.0f})  {}

@@ -17,7 +17,7 @@ int main(int argc, char* argv[])
   Renderer renderer{image_width, image_height, filename};
 
   //create separate thread to see updates of pixels while rendering
-  renderer.render();
+  // renderer.render();
 
   // New Scene:
   Scene newScene;
