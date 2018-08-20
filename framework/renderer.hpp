@@ -12,9 +12,17 @@
 
 #include "color.hpp"
 #include "pixel.hpp"
+// #include "ray.hpp"
+// #include "shape.hpp"
+// #include "light.hpp"
+// #include "sphere.hpp"
+#include "scene.hpp"
 #include "ppmwriter.hpp"
 #include <string>
+#include <cmath>
 #include <glm/glm.hpp>
+#include <glm/vec3.hpp>
+#include <iostream>
 
 class Renderer
 {
@@ -22,6 +30,8 @@ public:
   Renderer(unsigned w, unsigned h, std::string const& file);
 
   void render();
+  void render(Scene const& scene);
+  Color trace(Scene const& scene, Ray const& ray);
   void write(Pixel const& p);
 
   inline std::vector<Color> const& color_buffer() const

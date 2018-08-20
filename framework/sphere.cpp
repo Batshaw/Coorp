@@ -10,6 +10,12 @@ Sphere::Sphere():
 Sphere::Sphere(glm::vec3 const& m, float const& r):
     mittel_{m}, radius_{r}, Shape{} {}
 
+Sphere::Sphere(float _x, float _y, float _z, float _r) : 
+    mittel_{glm::vec3(_x, _y, _z)}, radius_{_r}    {}
+
+Sphere::Sphere(glm::vec3 const &_p, float _r, std::shared_ptr<Material> const& material, std::string const &_n) : 
+    Shape(_n, material), mittel_{_p}, radius_{_r}   {}
+
 /*Sphere::Sphere(glm::vec3 const& m, float const& r, std::string const& name):
     mittel_{m}, radius_{r}, Shape{name} {}
 

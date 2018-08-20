@@ -8,6 +8,7 @@
 #include <glm/gtx/intersect.hpp>
 #include "ray.hpp"
 #include "material.hpp"
+#include "scene.hpp"
 
 
 /*TEST_CASE("get-Methode for Box", "[get]"){
@@ -148,13 +149,13 @@ TEST_CASE("test ray_tracer mit Box 2.0", "[intersect]"){
 
 TEST_CASE("test ray_tracer mit Box 3.0", "[intersect]"){
   glm::vec3 origin{0, 0, 8.0};
-  glm::vec3 direction{0, 0, 1};
+  glm::vec3 direction{0, 0, -1};
   Ray r{origin, direction};
   glm::vec3 min{-1.5f, -7.6f, -7.0f};
   glm::vec3 max{4.5f, 6.7f, -1.5f};
   Box b(min, max);
   float t;
-  REQUIRE(b.intersect(r, t) == false);
+  REQUIRE(b.intersect(r, t) == true);
   std::cout<< "End!";
 }
 
@@ -169,6 +170,15 @@ TEST_CASE("test ray_tracer mit Box 4.0", "[intersect]"){
   REQUIRE(b.intersect(r, t) == true);
   std::cout<< "End!";
 }
+
+// TEST_CASE("aufgabe5", "[scene]")
+// {
+//     Scene scene1;
+//     load_sdf("scene.sdf");
+//     findMaterialVector("green", scene1.material_vector);
+//     // findMaterialMap("red", scene1.material_map);
+//     // findMaterialSet("blue", scene1.material_set);
+// }
 
 
 int main(int argc, char *argv[])

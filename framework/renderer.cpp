@@ -8,6 +8,7 @@
 // -----------------------------------------------------------------------------
 
 #include "renderer.hpp"
+#include <algorithm>
 
 Renderer::Renderer(unsigned w, unsigned h, std::string const& file)
   : width_(w)
@@ -34,6 +35,43 @@ void Renderer::render()
     }
   }
   ppm_.save(filename_);
+}
+
+void Renderer::render(Scene const& scene){
+  for(unsigned y = 0; y < height_; ++y){
+    for(unsigned x = 0; x < width_; ++x){
+      Pixel pixel(x, y);
+      Ray ray = scene.camera.rayThroughPixel(x, y, width_, height_);
+      pixel.color = trace(scene, ray);
+      write(pixel);
+    }
+  }
+  ppm_.save(filename_);
+}
+
+Color Renderer::trace(Scene const& scene, Ray const& ray){
+  Camera camera = {scene.camera};
+  Color temp{1.0f, 1.0f, 1.0f,};
+  float distance = 0;
+  float dmin = 1000;
+
+  bool is_intersect = true;
+  int closetObjectIndex = -1;
+
+  for(int i = 0; i < scene.shape_vector.size(); ++i){
+    is_intersect = (*scene.shape_vector[i]).intersect(ray, distance);
+    if(is_intersect){
+      if( distance < dmin){
+        dmin = distance;
+        closetObjectIndex = i;
+      }
+    }
+  }
+  if(closetObjectIndex != -1){
+    cout << "nicht intersection" << endl;
+    return (scene.shape_vector[closetObjectIndex])->getMaterial()->ka_;
+  }
+  else return Color{0.0f, 0.0f, 0.0f};
 }
 
 void Renderer::write(Pixel const& p)
