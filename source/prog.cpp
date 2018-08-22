@@ -14,16 +14,16 @@
 
 int main(int argc, char *argv[])
 {
-    unsigned const image_width = 800;
-    unsigned const image_height = 600;
+    unsigned const image_width = 500;
+    unsigned const image_height = 500;
 
     Scene scene2;
     load_sdf("scene2.sdf", scene2);
 
     Renderer renderer(scene2);
-    std::thread render_thread([&renderer]() {
+   std::thread render_thread([&renderer]() {
         renderer.render();
-    });
+   });
 
     Window window{{image_width, image_height}};
 
