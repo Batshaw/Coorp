@@ -9,13 +9,15 @@
 
 #include "renderer.hpp"
 
+#define PRINT_DEBUG_INFO 0
+
 Renderer::Renderer(Scene const &scene)
-    : scene_(scene), 
-    width_(scene._width), 
-    height_(scene._height), 
-    color_buffer_(scene._width * scene._height, Color(0.0, 0.0, 0.0)), 
-    filename_(scene._name), 
-    ppm_(scene._width, scene._height){};
+    : scene_(scene),
+      width_(scene._width),
+      height_(scene._height),
+      color_buffer_(scene._width * scene._height, Color(0.0, 0.0, 0.0)),
+      filename_(scene._name),
+      ppm_(scene._width, scene._height){};
 
 /* void Renderer::render()
 void Renderer::render()
@@ -66,20 +68,36 @@ Color Renderer::trace(Ray const &ray) const
 {
   Camera cam1 = {scene_._camera};
 
-  Color temp{0.0, 0.0, 0.0};
-  float dist = 0;
+  Color background{0.0, 0.0, 0.0};
+
+  Hit hit = get_closest(scene_, ray);
+
+  if (hit.obj_ != nullptr)
+  {
+    Color current_color = (hit.obj_)->get_material_()->ka_;
+    return current_color;
+  }
+  else
+  {
+    return background;
+  }
+
+  /*   float dist = 0;
   float dmin = 1000;
 
-  float is_intersect = true;
+  bool is_intersect = true;
   int closest_object_index = -1;
 
+  //Get closest object that is hit by ray
   for (int i = 0; i < scene_.shape_vector.size(); ++i)
   {
     is_intersect = (*scene_.shape_vector[i]).intersect(ray, dist);
     //cout<<distance<<endl;
     if (is_intersect)
     {
+#if PRINT_DEBUG_INFO
       cout << "true" << endl;
+#endif
 
       if (dist < dmin)
       {
@@ -88,16 +106,41 @@ Color Renderer::trace(Ray const &ray) const
       }
     }
   }
+
   if (closest_object_index != -1)
   {
+#if PRINT_DEBUG_INFO
     cout << "nicht intersection" << endl;
+#endif
+
     return (scene_.shape_vector[closest_object_index])->get_material_()->ka_;
   }
 
   else
   {
     return Color{0, 0, 0};
+  } */
+}
+
+Hit Renderer::get_closest(Scene const &scene_, Ray const &ray) const
+{
+
+  Hit current_hit;
+  Hit closest_hit;
+
+  float distance = 0;
+
+  for (std::shared_ptr<Shape> shapes_ptr : scene_.shape_vector)
+  {
+    current_hit = (*shapes_ptr).intersection(ray, distance);
+
+    if (current_hit.distance_ < closest_hit.distance_)
+    {
+      closest_hit = current_hit;
+    }
   }
+
+  return closest_hit;
 }
 
 void Renderer::write(Pixel const &p)
@@ -117,4 +160,23 @@ void Renderer::write(Pixel const &p)
   }
 
   ppm_.write(p);
+}
+
+Color Renderer::shade(std::shared_ptr<Shape> const &shape, Ray const &ray, float &distance) const
+{
+  glm::vec3 x_point = ray.get_point(distance);
+
+  return Color{1.0, 1.0, 1.0};
+}
+
+Color Renderer::evaluate_diffusion(Light const &light, std::shared_ptr<Shape> const &shape, Ray const &ray, float &distance) const
+{
+  glm::vec3 normal = ray.get_point(distance);
+  return Color{1.0, 1.0, 1.0};
+}
+
+Color Renderer::evaluate_color(std::shared_ptr<Shape> const &shape, glm::vec3 const &cut, glm::vec3 const &normal, Scene const &scene, Ray const &ray) const
+{
+  Color result{1.0f, 1.0f, 1.0f};
+  return result;
 }

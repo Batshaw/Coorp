@@ -29,6 +29,10 @@ public:
 
   Color trace(Ray const &ray) const;
   void write(Pixel const &p);
+  Hit get_closest(Scene const &scene, Ray const &ray) const;
+  Color shade(std::shared_ptr<Shape> const &shape, Ray const &ray, float &distance) const;
+  Color evaluate_diffusion(Light const &light, std::shared_ptr<Shape> const &shape, Ray const &ray, float &distance) const;
+  Color evaluate_color(std::shared_ptr<Shape> const& shape, glm::vec3 const& cut, glm::vec3 const& normal, Scene const& scene, Ray const& ray) const;
 
   inline std::vector<Color> const &color_buffer() const
   {
