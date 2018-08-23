@@ -26,8 +26,8 @@ struct Scene
     std::vector<std::shared_ptr<Shape>> shape_vector;
     std::vector<std::shared_ptr<Light>> light_vector;
 
-    unsigned int _width;
-    unsigned int _height;
+    unsigned _width;
+    unsigned _height;
     std::string _name = "default";
 
     Camera _camera;
@@ -40,6 +40,12 @@ struct Scene
               _height{500},
               _name{"default scene"},
               _camera{Camera()} {};
+
+    //Size Scene
+    Scene(unsigned width, unsigned height) : _width{width}, _height{height}
+    {
+        Scene();
+    }
 
     //Kopie Scene
     Scene(Scene const &scene) : material_vector{scene.material_vector},

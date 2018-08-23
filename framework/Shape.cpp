@@ -2,16 +2,16 @@
 
 Shape::Shape() : name_{"default name"} {};
 
-Shape::Shape(string const &n, shared_ptr<Material> const &material) : name_{n}, material_{material} {};
+Shape::Shape(std::string const &n, std::shared_ptr<Material> const &material) : name_{n}, material_{material} {};
 
 Shape::~Shape(){};
 
-string Shape::name()
+std::string Shape::name()
 {
     return name_;
 }
 
-shared_ptr<Material> Shape::get_material_() const{
+std::shared_ptr<Material> Shape::get_material_() const{
     return material_;
 }
 
@@ -20,13 +20,13 @@ shared_ptr<Material> Shape::get_material_() const{
     return color_;
 }*/
 
-ostream &Shape::print(ostream &os) const
+std::ostream& Shape::print(std::ostream &os) const
 {
-    os << name_ << " " << material_ << endl;
+    os << name_ << " " << material_ << std::endl;
     return os;
 };
 
-ostream &operator<<(ostream &os, Shape const &s)
+std::ostream &operator<<(std::ostream &os, Shape const &s)
 {
     return s.print(os);
 }

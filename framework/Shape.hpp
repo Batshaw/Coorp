@@ -10,39 +10,41 @@
 #include <glm/gtx/intersect.hpp>
 #include <memory>
 #include "material.hpp"
+#include "Hit.hpp"
+#include "Light.hpp"
 
-using namespace std;
-using namespace glm;
+struct Hit;
 
 class Shape
 {
 private:
 public:
   Shape();
-  Shape(string const &n, shared_ptr<Material> const &material);
+  Shape(std::string const &n, std::shared_ptr<Material> const &material);
   //ohne virtual wird der Destruktor die abgeleitene Klasse nicht aufgerufen
   ~Shape();
 
-  virtual float area() = 0;
-  virtual float volume() = 0;
-  virtual ostream &print(ostream &os) const;
+  virtual float area() const = 0;
+  virtual float volume() const = 0;
+  virtual std::ostream &print(std::ostream &os) const;
 
   //virtual bool intersect(Ray const& _r) const = 0;
 
   virtual bool intersect(Ray const &_r, float &_t) const = 0;
-/*   virtual Hit intersection(Ray const &_r, float &_t) const = 0;
-  virtual glm::vec3 get_normal(Hit const& _inter) const = 0;
- */
-  string name();
+  virtual Hit intersection(Ray const &_r, float &_t) const = 0;
+  virtual glm::vec3 get_normal(Hit const &_inter) const = 0;
+  virtual glm::vec3 get_vector_to_light(Hit const &_inter, Light const &_light) const = 0;
+
+  std::string name();
   // Color color();
-  shared_ptr<Material> get_material_() const;
+  std::shared_ptr<Material> get_material_() const;
 
 protected:
-  string name_;
+  std::string name_;
   // Color color_;
-  shared_ptr<Material> material_;
+  std::shared_ptr<Material> material_;
 };
 
-ostream &operator<<(ostream &os, Shape const &s);
+std::ostream &operator<<(std::ostream &os, Shape const &s);
 
 #endif //SHAPE_HPP

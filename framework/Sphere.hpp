@@ -17,21 +17,22 @@ public:
 
   Sphere(glm::vec3 const &_p, float _r = 1.0);
   Sphere(float _x, float _y, float _z, float _r = 1.0);
-  Sphere(glm::vec3 const &_p, float _r, std::shared_ptr<Material> const &material, string const &_n);
+  Sphere(glm::vec3 const &_p, float _r, std::shared_ptr<Material> const &material, std::string const &_n);
 
   ~Sphere();
 
   float radius() const;
 
-  float area() override;
-  float volume() override;
+  float area() const override;
+  float volume() const override;
 
-  ostream &print(ostream &os) const override;
+ std::ostream &print(std::ostream &os) const override;
 
   //bool intersect(Ray const& _r) const override;
   bool intersect(Ray const &_r, float &_t) const override;
-/*   Hit intersection(Ray const &_r, float &_t) const override;
-  glm::vec3 get_normal(Hit const &hit) const;
- */};
+  Hit intersection(Ray const &_r, float &_t) const override;
+  glm::vec3 get_normal(Hit const &hit) const override;
+  glm::vec3 get_vector_to_light (Hit const& _inter, Light const& _light) const override;
+};
 
 #endif //SPHERE_HPP
