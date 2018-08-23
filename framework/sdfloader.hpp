@@ -50,7 +50,7 @@ void load_sdf(std::string filename, Scene &scene)
                                                                                         material_koof[9]);
 
                     scene.material_vector.push_back(neu_material);
-/*                     scene.material_map.insert(make_pair(neu_material->name_, neu_material));
+                    /*                     scene.material_map.insert(make_pair(neu_material->name_, neu_material));
                     scene.material_set.insert(neu_material); */
                 }
 
@@ -75,8 +75,8 @@ void load_sdf(std::string filename, Scene &scene)
                         std::string mat_name;
                         current_line_stream >> mat_name;
 
-                        std::shared_ptr<Shape> neu_box = std::make_shared<Box>(vec3(shape_points[0], shape_points[1], shape_points[2]),
-                                                                               vec3(shape_points[3], shape_points[4], shape_points[5]),
+                        std::shared_ptr<Shape> neu_box = std::make_shared<Box>(glm::vec3(shape_points[0], shape_points[1], shape_points[2]),
+                                                                               glm::vec3(shape_points[3], shape_points[4], shape_points[5]),
                                                                                shape_name,
                                                                                findMaterialVector(mat_name, scene.material_vector));
 
@@ -98,7 +98,7 @@ void load_sdf(std::string filename, Scene &scene)
                         std::string mat_name;
                         current_line_stream >> mat_name;
 
-                        std::shared_ptr<Shape> neu_sphere = std::make_shared<Sphere>(vec3(shape_points[0], shape_points[1], shape_points[2]),
+                        std::shared_ptr<Shape> neu_sphere = std::make_shared<Sphere>(glm::vec3(shape_points[0], shape_points[1], shape_points[2]),
                                                                                      shape_points[3],
                                                                                      findMaterialVector(mat_name, scene.material_vector),
                                                                                      shape_name);
@@ -120,14 +120,15 @@ void load_sdf(std::string filename, Scene &scene)
                     }
 
                     std::shared_ptr<Light> neu_light = std::make_shared<Light>(light_name,
-                                                                               vec3(light_att[0], light_att[1], light_att[2]),
+                                                                               glm::vec3(light_att[0], light_att[1], light_att[2]),
                                                                                Color(light_att[3], light_att[4], light_att[5]),
                                                                                light_att[6]);
 
                     scene.light_vector.push_back(neu_light);
                 }
 
-                else if ("camera" == variable_name){
+                else if ("camera" == variable_name)
+                {
                     Camera temp;
                     std::string camera_name;
 
@@ -135,12 +136,30 @@ void load_sdf(std::string filename, Scene &scene)
                     current_line_stream >> temp._fov_x;
 
                     scene._camera = temp;
+                }
+            }
+            else if ("render" == first_symbol)
+            {
+                std::string camera_name;
+                current_line_stream >> camera_name;
+
+                
+                if (camera_name == scene._camera._name) {
+                    std::string type;
+                    current_line_stream >> type;
+                    std::string extension;
+                    current_line_stream >> extension;
+
+                    scene._name = filename + "_"+type+extension;
+
+                    current_line_stream >> scene._width;
+                    current_line_stream >> scene._height;
 
                 }
+                
             }
         }
 
-        scene._name = filename.substr(0,5);
     }
 
     else
