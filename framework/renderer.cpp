@@ -72,7 +72,7 @@ Color Renderer::trace(Ray const &ray) const
 
   Hit hit = get_closest(scene_, ray);
 
-  if (hit.obj_ != nullptr)
+  if (hit.isHit_)
   {
     Color current_color = (hit.obj_)->get_material_()->ka_;
     return current_color;
@@ -126,15 +126,13 @@ Hit Renderer::get_closest(Scene const &scene_, Ray const &ray) const
 {
 
   Hit current_hit;
-  Hit closest_hit{nullptr};
-
-  float min_distance = 0;
+  Hit closest_hit;
 
   for (std::shared_ptr<Shape> shapes_ptr : scene_.shape_vector)
   {
     current_hit = (*shapes_ptr).intersect(ray);
 
-    if (current_hit.distance_ < closest_hit.distance_ || (min_distance == 0.0f && closest_hit.obj_ == nullptr))
+    if (current_hit.distance_ < closest_hit.distance_)
     {
       closest_hit = current_hit;
     }

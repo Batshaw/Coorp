@@ -74,96 +74,6 @@ std::ostream &Box::print(std::ostream &os) const
     return os;
 };
 
-/*
-bool Box::intersect(Ray const &_r, float &_t) const
-{
-    vec3 anchor{nearest_corner(_minimum, _maximum, _r.origin)};
-
-    cout << "anchor : (" << anchor.x << "; " << anchor.y << "; " << anchor.z << ")" << endl;
-
-    float anchor_coor[3] = {anchor.x, anchor.y, anchor.z};
-    float ray_origin[3] = {_r.origin.x, _r.origin.y, _r.origin.z};
-    float ray_direction[3] = {_r.direction.x, _r.direction.y, _r.direction.z};
-
-    float distance[3];
-
-    vec3 target;
-    float target_coor[3];
-
-    for (int i = 0; i < 3; i++)
-    {
-        distance[i] = (anchor_coor[i] - ray_origin[i]) / ray_direction[i];
-        target_coor[i] = anchor_coor[i];
-    }
-
-    sort(distance, distance + 3);
-
-    for (int i = 0; i < 3; i++)
-    {
-        target_coor[(i + 1) % 3] = ray_origin[(i + 1) % 3] + distance[i] * ray_direction[(i + 1) % 3];
-        target_coor[(i + 2) % 3] = ray_origin[(i + 2) % 3] + distance[i] * ray_direction[(i + 2) % 3];
-
-        target = {target_coor[0], target_coor[1], target_coor[2]};
-
-        if (is_on_surface(target))
-        {
-            _t = distance[i];
-            cout << "target : (" << target.x << "; " << target.y << "; " << target.z << ")" << endl;
-            cout << "distance: " << _t << endl;
-            return true;
-        }
-    }
-
-    cout << "distance: " << distance[0] << endl;
-    return false;
-}
-
-vec3 Box::nearest_corner(vec3 const &min, vec3 const &max, vec3 const &origin) const
-{
-
-    float x, y, z;
-    x = nearest_komponent(min.x, max.x, origin.x);
-    y = nearest_komponent(min.y, max.y, origin.y);
-    z = nearest_komponent(min.z, max.z, origin.z);
-
-    vec3 anchor{x, y, z};
-
-    return anchor;
-}
-
-vec3 Box::furthest_corner(vec3 const &min, vec3 const &max, vec3 const &origin) const
-{
-
-    float x, y, z;
-    x = furthest_komponent(min.x, max.x, origin.x);
-    y = furthest_komponent(min.y, max.y, origin.y);
-    z = furthest_komponent(min.z, max.z, origin.z);
-
-    vec3 anchor{x, y, z};
-
-    return anchor;
-}
-
-float Box::nearest_komponent(float const &min, float const &max, float const &origin) const
-{
-    return ((abs(origin - min) > abs(origin - max)) ? max : min);
-}
-
-float Box::furthest_komponent(float const &min, float const &max, float const &origin) const
-{
-    return ((abs(origin - min) < abs(origin - max)) ? max : min);
-}
-
-bool Box::is_on_surface(vec3 const &input) const
-{
-
-    return ((input.x >= _minimum.x && input.x <= _maximum.x &&
-             input.y >= _minimum.y && input.y <= _maximum.y &&
-             input.z >= _minimum.z && input.z <= _maximum.z))
-               ? true
-               : false;
-}*/
-
 // in Box???
 bool Box::is_inBox(glm::vec3 const &punkt) const
 {
@@ -301,7 +211,7 @@ Hit Box::intersect(Ray const &_r) const
         }
     }
 
-    if (dmin_x > dmin_y)
+    if (dmin_x < dmin_y)
     {
         entry_distance = dmin_x;
         entry_side = (_r.direction.x >= 0.0) ? 0 : 3;
@@ -312,13 +222,13 @@ Hit Box::intersect(Ray const &_r) const
         entry_side = (_r.direction.y >= 0.0) ? 1 : 4;
     }
 
-    if (dmin_z > entry_distance)
+    if (dmin_z < entry_distance)
     {
         entry_distance = dmin_z;
         entry_side = (_r.direction.z >= 0.0) ? 2 : 5;
     }
 
-    if (dmax_x < dmax_y)
+    if (dmax_x > dmax_y)
     {
         exit_distance = dmax_x;
         exit_side = (_r.direction.x >= 0.0) ? 3 : 0;
@@ -329,7 +239,7 @@ Hit Box::intersect(Ray const &_r) const
         exit_side = (_r.direction.y >= 0.0) ? 4 : 1;
     }
 
-    if (dmax_z < exit_distance)
+    if (dmax_z > exit_distance)
     {
         exit_distance = dmax_z;
         exit_side = (_r.direction.z >= 0.0) ? 5 : 2;
