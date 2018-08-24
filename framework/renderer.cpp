@@ -126,15 +126,15 @@ Hit Renderer::get_closest(Scene const &scene_, Ray const &ray) const
 {
 
   Hit current_hit;
-  Hit closest_hit;
+  Hit closest_hit{nullptr};
 
-  float distance = 0;
+  float min_distance = 0;
 
   for (std::shared_ptr<Shape> shapes_ptr : scene_.shape_vector)
   {
-    current_hit = (*shapes_ptr).intersection(ray, distance);
+    current_hit = (*shapes_ptr).intersect(ray);
 
-    if (current_hit.distance_ < closest_hit.distance_)
+    if (current_hit.distance_ < closest_hit.distance_ || (min_distance == 0.0f && closest_hit.obj_ == nullptr))
     {
       closest_hit = current_hit;
     }

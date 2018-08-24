@@ -28,7 +28,7 @@ struct Scene
 
     unsigned _width;
     unsigned _height;
-    std::string _name = "default";
+    std::string _name;
 
     Camera _camera;
 

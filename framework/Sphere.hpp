@@ -26,13 +26,15 @@ public:
   float area() const override;
   float volume() const override;
 
- std::ostream &print(std::ostream &os) const override;
+  std::ostream &print(std::ostream &os) const override;
 
   //bool intersect(Ray const& _r) const override;
-  bool intersect(Ray const &_r, float &_t) const override;
-  Hit intersection(Ray const &_r, float &_t) const override;
+  Hit intersect(Ray const &_r) const override;
+
   glm::vec3 get_normal(Hit const &hit) const override;
-  glm::vec3 get_vector_to_light (Hit const& _inter, Light const& _light) const override;
+  glm::vec3 get_normal(glm::vec3 const &_cut) const;
+  
+  glm::vec3 get_vector_to_light(Hit const &_inter, Light const &_light) const override;
 };
 
 #endif //SPHERE_HPP

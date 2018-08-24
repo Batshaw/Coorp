@@ -178,10 +178,12 @@ bool Box::is_inBox(glm::vec3 const &punkt) const
 }
 
 //old intersect method
-bool Box::intersect(Ray const &_r, float &_t) const
+/* s */
+
+/* bool Box::intersect(Ray const &_r, float &_t, int &_index) const
 {
-    bool result = false;
-    glm::vec3 schnittPunkt;
+    bool _result = false;
+    glm::vec3 _schnittPunkt;
     if (_r.direction.x != 0)
     {
         if (_r.direction.x > 0)
@@ -192,12 +194,12 @@ bool Box::intersect(Ray const &_r, float &_t) const
             _t = (_maximum.x - _r.origin.x) / _r.direction.x;
         if (_t > 0)
         {
-            schnittPunkt = _r.origin + _t * _r.direction;
-            //std::cout << schnittPunkt.x << " " << schnittPunkt.y << " " << schnittPunkt.z << " \n";
-            if (is_inBox(schnittPunkt))
+            _schnittPunkt = _r.origin + _t * _r.direction;
+            std::cout << _schnittPunkt.x << " " << _schnittPunkt.y << " " << _schnittPunkt.z << " \n";
+            if (is_inBox(_schnittPunkt))
             {
-                result = true;
-                //std::cout << "t = " << _t << "\n";
+                _result = true;
+                std::cout << "t = " << _t << "\n";
             }
         }
     }
@@ -211,12 +213,12 @@ bool Box::intersect(Ray const &_r, float &_t) const
             _t = (_maximum.y - _r.origin.y) / _r.direction.y;
         if (_t > 0)
         {
-            schnittPunkt = _r.origin + _t * _r.direction;
-            //std::cout << schnittPunkt.x << " " << schnittPunkt.y << " " << schnittPunkt.z << " \n";
-            if (is_inBox(schnittPunkt))
+            _schnittPunkt = _r.origin + _t * _r.direction;
+            std::cout << _schnittPunkt.x << " " << _schnittPunkt.y << " " << _schnittPunkt.z << " \n";
+            if (is_inBox(_schnittPunkt))
             {
-                result = true;
-                //std::cout << "t = " << _t << "\n";
+                _result = true;
+                std::cout << "t = " << _t << "\n";
             }
         }
     }
@@ -230,22 +232,21 @@ bool Box::intersect(Ray const &_r, float &_t) const
             _t = (_maximum.z - _r.origin.z) / _r.direction.z;
         if (_t > 0)
         {
-            schnittPunkt = _r.origin + _t * _r.direction;
-            //std::cout << schnittPunkt.x << " " << schnittPunkt.y << " " << schnittPunkt.z << " \n";
-            if (is_inBox(schnittPunkt))
+            _schnittPunkt = _r.origin + _t * _r.direction;
+            std::cout << _schnittPunkt.x << " " << _schnittPunkt.y << " " << _schnittPunkt.z << " \n";
+            if (is_inBox(_schnittPunkt))
             {
-                result = true;
-                //std::cout << "t = " << _t << "\n";
+                _result = true;
+                std::cout << "t = " << _t << "\n";
             }
         }
     }
-    return result;
-};
+    return _result;
+}; */
 
-bool Box::intersect(Ray const &_r, float &_t, int &_index) const
+Hit Box::intersect(Ray const &_r) const
 {
-    bool result = false;
-    glm::vec3 schnittPunkt;
+    float _t = 0;
 
     float dmin_x, dmin_y, dmin_z;
     float dmax_x, dmax_y, dmax_z;
@@ -253,119 +254,110 @@ bool Box::intersect(Ray const &_r, float &_t, int &_index) const
     float entry_distance;
     float exit_distance;
 
-    int entry_plane_index;
-    int exit_plane_index;
+    bool _result = false;
+
+    glm::vec3 _schnittPunkt;
+
+    int entry_side;
+    int exit_side;
 
     if (_r.direction.x != 0)
     {
         if (_r.direction.x > 0)
         {
             dmin_x = (_minimum.x - _r.origin.x) / _r.direction.x;
+            dmax_x = (_maximum.x - _r.origin.x) / _r.direction.x;
         }
         else
-            dmax_x = (_maximum.x - _r.origin.x) / _r.direction.x;
+        {
+            dmin_x = (_maximum.x - _r.origin.x) / _r.direction.x;
+            dmax_x = (_minimum.x - _r.origin.x) / _r.direction.x;
+        }
     }
-
     if (_r.direction.y != 0)
     {
         if (_r.direction.y > 0)
         {
             dmin_y = (_minimum.y - _r.origin.y) / _r.direction.y;
+            dmax_y = (_maximum.y - _r.origin.y) / _r.direction.y;
         }
         else
-            dmax_y = (_maximum.y - _r.origin.y) / _r.direction.y;
+        {
+            dmin_y = (_maximum.y - _r.origin.y) / _r.direction.y;
+            dmax_y = (_minimum.y - _r.origin.y) / _r.direction.y;
+        }
     }
-
     if (_r.direction.z != 0)
     {
         if (_r.direction.z > 0)
         {
             dmin_z = (_minimum.z - _r.origin.z) / _r.direction.z;
+            dmax_z = (_maximum.z - _r.origin.z) / _r.direction.z;
         }
         else
-            dmax_z = (_maximum.z - _r.origin.z) / _r.direction.z;
+        {
+            dmin_z = (_maximum.z - _r.origin.z) / _r.direction.z;
+            dmax_z = (_minimum.z - _r.origin.z) / _r.direction.z;
+        }
     }
 
     if (dmin_x > dmin_y)
     {
-
         entry_distance = dmin_x;
-        entry_plane_index = (_r.direction.x >= 0) ? 0 : 3;
+        entry_side = (_r.direction.x >= 0.0) ? 0 : 3;
     }
     else
     {
-
         entry_distance = dmin_y;
-        entry_plane_index = (_r.direction.y >= 0) ? 1 : 4;
+        entry_side = (_r.direction.y >= 0.0) ? 1 : 4;
     }
+
     if (dmin_z > entry_distance)
     {
-
         entry_distance = dmin_z;
-        entry_plane_index = (_r.direction.z >= 0) ? 2 : 5;
+        entry_side = (_r.direction.z >= 0.0) ? 2 : 5;
     }
 
-    if (dmax_x > dmax_y)
+    if (dmax_x < dmax_y)
     {
         exit_distance = dmax_x;
-        exit_plane_index = (_r.direction.x >= 0) ? 3 : 0;
+        exit_side = (_r.direction.x >= 0.0) ? 3 : 0;
     }
     else
     {
         exit_distance = dmax_y;
-        exit_plane_index = (_r.direction.y >= 0) ? 4 : 1;
+        exit_side = (_r.direction.y >= 0.0) ? 4 : 1;
     }
-    if (dmax_z > exit_distance)
+
+    if (dmax_z < exit_distance)
     {
         exit_distance = dmax_z;
-        exit_plane_index = (_r.direction.z >= 0) ? 5 : 2;
+        exit_side = (_r.direction.z >= 0.0) ? 5 : 2;
     }
 
-    result = entry_distance < exit_distance && exit_distance != 0;
+    _result = (entry_distance < exit_distance && exit_distance > 0.0f);
 
-    if (result)
+    if (_result = true)
     {
-
-        if (entry_distance > 0)
-        {
-            _t = entry_distance;
-            _index = entry_plane_index;
-        }
-
-        else
-        {
-            _t = exit_distance;
-            _index = exit_plane_index;
-        }
+        Hit hit{_t, _result, _schnittPunkt, get_normal(entry_side), this};
+        return hit;
     }
-
-    return result;
-};
-
-Hit Box::intersection(Ray const &_r, float &_t) const
-{
-    int index;
-    Hit null_hit{nullptr};
-    glm::vec3 normal{0, 0, 0};
-
-    if (intersect(_r, _t, index))
+    else
     {
-        Hit temp{true, _t, (_r.get_point(temp.distance_)), (get_normal(index)), this};
-        return temp;
+        Hit hit{_t, _result, _schnittPunkt, get_normal(exit_side), this};
+        return hit;
     }
-
-    return null_hit;
 }
 
 //old get_normal
 glm::vec3 Box::get_normal(Hit const &hit) const
 {
-    return glm::normalize(glm::vec3{(hit.coor_)});
+    return hit.normal_;
 }
 
-glm::vec3 Box::get_normal(int &_side) const
+glm::vec3 Box::get_normal(int &__side) const
 {
-    switch (_side)
+    switch (__side)
     {
     case 0:
         return glm::vec3{-1.0, 0.0, 0.0}; // -x

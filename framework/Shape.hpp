@@ -13,7 +13,6 @@
 #include "Hit.hpp"
 #include "Light.hpp"
 
-struct Hit;
 
 class Shape
 {
@@ -28,15 +27,13 @@ public:
   virtual float volume() const = 0;
   virtual std::ostream &print(std::ostream &os) const;
 
-  //virtual bool intersect(Ray const& _r) const = 0;
-
-  virtual bool intersect(Ray const &_r, float &_t) const = 0;
-  virtual Hit intersection(Ray const &_r, float &_t) const = 0;
+  //virtual bool intersect(Ray const &_r, float &_t) const = 0;
+  virtual Hit intersect(Ray const &_r) const = 0;
+  
   virtual glm::vec3 get_normal(Hit const &_inter) const = 0;
   virtual glm::vec3 get_vector_to_light(Hit const &_inter, Light const &_light) const = 0;
 
   std::string name();
-  // Color color();
   std::shared_ptr<Material> get_material_() const;
 
 protected:

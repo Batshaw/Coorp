@@ -38,8 +38,9 @@ std::ostream &Sphere::print(std::ostream &os) const
     return Shape::print(os);
 }
 
-bool Sphere::intersect(Ray const &_r, float &_t) const
+Hit Sphere::intersect(Ray const &_r) const
 {
+    float _t;
     //float distance = 0.0f;
     auto ndirection = glm::normalize(_r.direction);
 
@@ -48,14 +49,20 @@ bool Sphere::intersect(Ray const &_r, float &_t) const
                                           _mpunkt,
                                           std::pow(_radius, 2),
                                           _t);
-    return result;
+
+    glm::vec3 cut = _r.get_point(_t);
+
+    Hit hit{_t,result,cut,get_normal(cut),this};
+
+    return hit;
 }
 
+/* 
 Hit Sphere::intersection(Ray const &_r, float &_t) const
 {
     Hit temp;
-    float distance = 10000;
-    if (intersect(_r, _t))
+    float distance;
+    if (intersect(_r, temp))
     {
         if (distance < _t)
         {
@@ -69,15 +76,18 @@ Hit Sphere::intersection(Ray const &_r, float &_t) const
     }
 
     return temp;
-};
+}; */
 
-glm::vec3 Sphere::get_normal(Hit const &hit) const
+glm::vec3 Sphere::get_normal(Hit const &hit) const{
+    return hit.normal_;
+}
+
+glm::vec3 Sphere::get_normal(glm::vec3 const& _cut) const
 {
-    return glm::normalize(glm::vec3{(hit.coor_ - _mpunkt)});
+    return glm::normalize(glm::vec3{(_cut - _mpunkt)});
 }
 
 glm::vec3 Sphere::get_vector_to_light(Hit const &_inter, Light const &_light) const
 {
-
     return glm::normalize(glm::vec3{_inter.coor_ - _light._origin});
 }

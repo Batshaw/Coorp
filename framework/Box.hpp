@@ -4,6 +4,7 @@
 #include "Shape.hpp"
 #include <glm/vec3.hpp>
 #include "material.hpp"
+#
 
 class Box : public Shape
 {
@@ -31,10 +32,10 @@ public:
   //bool intersect(Ray const &_r) const override;
   bool is_inBox(glm::vec3 const &punkt) const;
   
-  bool intersect(Ray const &_r, float &_t) const override;  
-  bool intersect(Ray const &_r, float &_t, int& _index) const;
+  Hit intersect(Ray const &_r) const override;  
+  //Hit intersect(Ray const &_r, float &_t, int& _index) const;
   
-  Hit intersection(Ray const &_r, float &_t) const override;
+  //Hit intersection(Ray const &_r, float &_t) const override;
   
   glm::vec3 get_normal(Hit const &hit) const override;
   glm::vec3 get_normal(int &_side) const;
