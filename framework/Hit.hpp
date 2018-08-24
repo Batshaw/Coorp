@@ -26,6 +26,12 @@ struct Hit
                                  normal_{input_.normal_},
                                  obj_{input_.obj_} {};
 
+        Hit(Shape const *input_) : distance_{2000},
+                                   isHit_{false},
+                                   coor_{0.0f, 0.0f, 0.0f},
+                                   normal_{0.0, 0.0, 0.0},
+                                   obj_{input_} {};
+
         Hit(float distance, bool is_hit, glm::vec3 const& point, glm::vec3 const& normal, Shape const *obj) : distance_{distance},
                                                                                                 isHit_{is_hit},
                                                                                                 coor_{point},

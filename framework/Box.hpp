@@ -38,7 +38,7 @@ public:
   //Hit intersection(Ray const &_r, float &_t) const override;
   
   glm::vec3 get_normal(Hit const &hit) const override;
-  glm::vec3 get_normal(int &_side) const;
+  glm::vec3 get_normal(int _side) const;
 
   float set_max(float coor1, float coor2);
   float set_min(float coor1, float coor2);

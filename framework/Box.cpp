@@ -157,106 +157,64 @@ bool Box::is_inBox(glm::vec3 const &punkt) const
 Hit Box::intersect(Ray const &_r) const
 {
     float _t = 0;
-
-    float dmin_x, dmin_y, dmin_z;
-    float dmax_x, dmax_y, dmax_z;
-
-    float entry_distance;
-    float exit_distance;
-
     bool _result = false;
-
     glm::vec3 _schnittPunkt;
-
-    int entry_side;
-    int exit_side;
-
     if (_r.direction.x != 0)
     {
         if (_r.direction.x > 0)
         {
-            dmin_x = (_minimum.x - _r.origin.x) / _r.direction.x;
-            dmax_x = (_maximum.x - _r.origin.x) / _r.direction.x;
+            _t = (_minimum.x - _r.origin.x) / _r.direction.x;
         }
         else
+            _t = (_maximum.x - _r.origin.x) / _r.direction.x;
+        if (_t > 0)
         {
-            dmin_x = (_maximum.x - _r.origin.x) / _r.direction.x;
-            dmax_x = (_minimum.x - _r.origin.x) / _r.direction.x;
+            _schnittPunkt = _r.origin + _t * _r.direction;
+            if (is_inBox(_schnittPunkt))
+            {
+                _result = true;
+            }
         }
     }
     if (_r.direction.y != 0)
     {
         if (_r.direction.y > 0)
         {
-            dmin_y = (_minimum.y - _r.origin.y) / _r.direction.y;
-            dmax_y = (_maximum.y - _r.origin.y) / _r.direction.y;
+            _t = (_minimum.y - _r.origin.y) / _r.direction.y;
         }
         else
+            _t = (_maximum.y - _r.origin.y) / _r.direction.y;
+        if (_t > 0)
         {
-            dmin_y = (_maximum.y - _r.origin.y) / _r.direction.y;
-            dmax_y = (_minimum.y - _r.origin.y) / _r.direction.y;
+            _schnittPunkt = _r.origin + _t * _r.direction;
+            if (is_inBox(_schnittPunkt))
+            {
+                _result = true;
+            }
         }
     }
     if (_r.direction.z != 0)
     {
         if (_r.direction.z > 0)
         {
-            dmin_z = (_minimum.z - _r.origin.z) / _r.direction.z;
-            dmax_z = (_maximum.z - _r.origin.z) / _r.direction.z;
+            _t = (_minimum.z - _r.origin.z) / _r.direction.z;
         }
         else
+            _t = (_maximum.z - _r.origin.z) / _r.direction.z;
+        if (_t > 0)
         {
-            dmin_z = (_maximum.z - _r.origin.z) / _r.direction.z;
-            dmax_z = (_minimum.z - _r.origin.z) / _r.direction.z;
+            _schnittPunkt = _r.origin + _t * _r.direction;
+            if (is_inBox(_schnittPunkt))
+            {
+                _result = true;
+
+            }
         }
     }
+    //Zum testen mit side index 5
+    glm::vec3 _normal = get_normal(5);
 
-    if (dmin_x < dmin_y)
-    {
-        entry_distance = dmin_x;
-        entry_side = (_r.direction.x >= 0.0) ? 0 : 3;
-    }
-    else
-    {
-        entry_distance = dmin_y;
-        entry_side = (_r.direction.y >= 0.0) ? 1 : 4;
-    }
-
-    if (dmin_z < entry_distance)
-    {
-        entry_distance = dmin_z;
-        entry_side = (_r.direction.z >= 0.0) ? 2 : 5;
-    }
-
-    if (dmax_x > dmax_y)
-    {
-        exit_distance = dmax_x;
-        exit_side = (_r.direction.x >= 0.0) ? 3 : 0;
-    }
-    else
-    {
-        exit_distance = dmax_y;
-        exit_side = (_r.direction.y >= 0.0) ? 4 : 1;
-    }
-
-    if (dmax_z > exit_distance)
-    {
-        exit_distance = dmax_z;
-        exit_side = (_r.direction.z >= 0.0) ? 5 : 2;
-    }
-
-    _result = (entry_distance < exit_distance && exit_distance > 0.0f);
-
-    if (_result = true)
-    {
-        Hit hit{_t, _result, _schnittPunkt, get_normal(entry_side), this};
-        return hit;
-    }
-    else
-    {
-        Hit hit{_t, _result, _schnittPunkt, get_normal(exit_side), this};
-        return hit;
-    }
+    return Hit{_t,_result,_schnittPunkt,_normal,this};
 }
 
 //old get_normal
@@ -265,9 +223,9 @@ glm::vec3 Box::get_normal(Hit const &hit) const
     return hit.normal_;
 }
 
-glm::vec3 Box::get_normal(int &__side) const
+glm::vec3 Box::get_normal(int _side) const
 {
-    switch (__side)
+    switch (_side)
     {
     case 0:
         return glm::vec3{-1.0, 0.0, 0.0}; // -x

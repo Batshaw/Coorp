@@ -22,6 +22,7 @@
 
 checkerboard.ppm
 
+build
 cmake_out
 raytracer.cpp
 .vscode
