@@ -2,6 +2,7 @@
 #define BOX_HPP
 
 #include "shape.hpp"
+#include "Hit.hpp"
 #include <glm/vec3.hpp>
 #include <memory>
 
@@ -23,6 +24,7 @@ class Box : public Shape{
         // Color getColor() const override;
         bool is_inBox(glm::vec3 const& punkt);
         bool intersect(Ray const& r, float& t) override;
+        Hit intersectHit(Ray const& ray) override;
 
         std::ostream& print(std::ostream& os) const override;
 

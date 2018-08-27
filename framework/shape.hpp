@@ -7,6 +7,7 @@
 #include "material.hpp"
 #include "ray.hpp"
 #include "glm/vec3.hpp"
+#include "Hit.hpp"
 #include <memory>
 
 class Shape{
@@ -25,6 +26,7 @@ class Shape{
         virtual float volumen() const = 0;
         
         virtual bool intersect(Ray const& r, float& t) = 0;
+        virtual Hit intersectHit(Ray const& ray) = 0;
         
         virtual std::ostream& print(std::ostream& os) const;
 

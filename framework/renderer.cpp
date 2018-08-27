@@ -51,7 +51,7 @@ void Renderer::render(Scene const& scene){
 
 Color Renderer::trace(Scene const& scene, Ray const& ray){
   Camera camera = {scene.camera};
-  Color temp{1.0f, 1.0f, 1.0f,};
+  Color temp{1.0f, 1.0f, 1.0f};
   float distance = 0;
   float dmin = 1000;
 
@@ -64,16 +64,38 @@ Color Renderer::trace(Scene const& scene, Ray const& ray){
       if( distance < dmin){
         dmin = distance;
         closetObjectIndex = i;
-        return (scene.shape_vector[closetObjectIndex])->getMaterial()->kd_;
+        // return (scene.shape_vector[closetObjectIndex])->getMaterial()->ka_;
       }
     }
-    else return Color{0.0f, 0.0f, 0.0f};
+    // else return Color{0.0f, 0.0f, 0.0f};
   }
-  // if(closetObjectIndex != -1){
-  //   cout << "nicht intersection" << endl;
-  //   return (scene.shape_vector[closetObjectIndex])->getMaterial()->kd_;
-  // }
-  // else return Color{0.0f, 0.0f, 0.0f};
+  if(closetObjectIndex != -1){
+    // cout << "nicht intersection" << endl;
+    // return (scene.shape_vector[closetObjectIndex])->getMaterial()->ka_;
+    Color cl = shade(scene, ray, *scene.light_vector[0], closetObjectIndex);
+    return cl;
+  }
+  else return Color{1.0f, 1.0f, 1.0f};
+}
+
+Color Renderer::shade(Scene const& scene, Ray const& ray, Light const& light, int const closest){
+  // Difusse Refektion
+  Hit h = scene.shape_vector[closest]->intersectHit(ray);
+  glm::vec3 lightVec = glm::normalize(h.schnittPunkt_ - light._origin);
+  float cosPhi = std::max(glm::dot(lightVec, h.normalVector_), 0.0f);
+  Color lightIntensity{light._color.r*light._brightness, light._color.g*light._brightness, light._color.b*light._brightness};
+  // Color lightIntensity = light._color;
+  Color diffuColor = (lightIntensity)*(scene.shape_vector[closest]->getMaterial()->kd_)*cosPhi;
+
+  // Ambiente Color
+  Color ambColor = (scene.ambient.color_)*(scene.shape_vector[closest]->getMaterial()->ka_);
+
+  // Spekulare Licht
+  
+
+
+  Color endColor = diffuColor + ambColor;
+  return endColor;
 }
 
 void Renderer::write(Pixel const& p)

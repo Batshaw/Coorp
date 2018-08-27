@@ -68,3 +68,16 @@ bool Sphere::intersect(Ray const& r, float& t){
     bool result = glm::intersectRaySphere(r.origin, v, mittel_, squaredRadius, t);
     return result;
 }
+
+Hit Sphere::intersectHit(Ray const& ray){
+    float distance;
+    glm::vec3 v = glm::normalize(ray.direction);
+    auto squaredRadius = std::pow(radius_, 2);
+    bool result = glm::intersectRaySphere(ray.origin, v, mittel_, squaredRadius, distance);
+    if(result == true){
+        glm::vec3 schnittPunkt = ray.origin + distance*ray.direction;
+        glm::vec3 normalVector = glm::normalize(schnittPunkt - mittel_);
+        return Hit{true, distance, normalVector, schnittPunkt};
+    }
+    return Hit{};
+}

@@ -22,13 +22,13 @@ std::shared_ptr<Material> findMaterialVector(std::string const &findName, vector
     // scope to show the material that was founded
     if (iterLambda == material_vector.end())
     {
-        std::cout << "Do not exist!!!!!!! Use default Material\n"; //Material nicht gefunden wird, wird DefaultKonstruktor genutzt!
+        // std::cout << "Do not exist!!!!!!! Use default Material\n"; //Material nicht gefunden wird, wird DefaultKonstruktor genutzt!
         std::cout << *defaultMaterial;
         return defaultMaterial;
     }
     else
     {
-        std::cout << "Here's what u need from vector: \n";
+        // std::cout << "Here's what u need from vector: \n";
         std::cout << *(*iterLambda) << "\n"; // show the value of the value of the lambda that is the material.
         return *iterLambda;
     }
@@ -144,7 +144,7 @@ void load_sdf(std::string const& filename, Scene &scene)
 
                     float light_att[7];
 
-                    for (int i = 0; i < 4; i++)
+                    for (int i = 0; i < 7; i++)
                     {
                         current_line_stream >> light_att[i];
                     }
@@ -164,6 +164,19 @@ void load_sdf(std::string const& filename, Scene &scene)
                     current_line_stream >> temp._fov_x;
 
                     scene.camera = temp;
+
+                }
+                else if ("ambient" == variable_name){
+                    float ambient_att[3];
+
+                    for (int i = 0; i < 3; i++)
+                    {
+                        current_line_stream >> ambient_att[i];
+                    }
+
+                    Ambient temp{Color(ambient_att[0], ambient_att[1], ambient_att[2])};
+
+                    scene.ambient = temp;
 
                 }
             }

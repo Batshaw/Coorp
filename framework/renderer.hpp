@@ -12,9 +12,10 @@
 
 #include "color.hpp"
 #include "pixel.hpp"
-// #include "ray.hpp"
-// #include "shape.hpp"
-// #include "light.hpp"
+#include "Hit.hpp"
+#include "ray.hpp"
+#include "shape.hpp"
+#include "light.hpp"
 // #include "sphere.hpp"
 #include "scene.hpp"
 #include "ppmwriter.hpp"
@@ -32,6 +33,7 @@ public:
   // void render();
   void render(Scene const& scene);
   Color trace(Scene const& scene, Ray const& ray);
+  Color shade(Scene const& scene, Ray const& ray, Light const& light, int closest);
   void write(Pixel const& p);
 
   inline std::vector<Color> const& color_buffer() const

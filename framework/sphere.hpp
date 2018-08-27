@@ -4,6 +4,7 @@
 #include "shape.hpp"
 #include <glm/vec3.hpp>
 #include "ray.hpp"
+#include "Hit.hpp"
 
 class Sphere : public Shape{
     public:
@@ -31,6 +32,7 @@ class Sphere : public Shape{
 
         // intersect-Methode
         bool intersect(Ray const& r, float& t) override;
+        Hit intersectHit(Ray const& ray) override;
 
     protected:
         glm::vec3 mittel_;

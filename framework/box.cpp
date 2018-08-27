@@ -58,10 +58,10 @@ bool Box::intersect(Ray const& r, float& t){
         else t = (max_.x - r.origin.x)/r.direction.x;
         if(t > 0){
             schnittPunkt = r.origin + t*r.direction;
-            std::cout<<schnittPunkt.x<< " "<< schnittPunkt.y<< " "<< schnittPunkt.z<< " \n";
+            // std::cout<<schnittPunkt.x<< " "<< schnittPunkt.y<< " "<< schnittPunkt.z<< " \n";
             if(is_inBox(schnittPunkt)){
                 result = true;
-                std::cout<< "t = "<< t<< "\n";
+                // std::cout<< "t = "<< t<< "\n";
             }
         }
     }
@@ -72,10 +72,10 @@ bool Box::intersect(Ray const& r, float& t){
         else t = (max_.y - r.origin.y)/r.direction.y;
         if(t > 0){
             schnittPunkt = r.origin + t*r.direction;
-            std::cout<<schnittPunkt.x<< " "<< schnittPunkt.y<< " "<< schnittPunkt.z<< " \n";
+            // std::cout<<schnittPunkt.x<< " "<< schnittPunkt.y<< " "<< schnittPunkt.z<< " \n";
             if(is_inBox(schnittPunkt)){
                 result = true;
-                std::cout<< "t = "<< t<< "\n";
+                // std::cout<< "t = "<< t<< "\n";
             }
         }
     }
@@ -86,14 +86,18 @@ bool Box::intersect(Ray const& r, float& t){
         else t = (max_.z - r.origin.z)/r.direction.z;
         if(t > 0){
             schnittPunkt = r.origin + t*r.direction;
-            std::cout<<schnittPunkt.x<< " "<< schnittPunkt.y<< " "<< schnittPunkt.z<< " \n";
+            // std::cout<<schnittPunkt.x<< " "<< schnittPunkt.y<< " "<< schnittPunkt.z<< " \n";
             if(is_inBox(schnittPunkt)){
                 result = true;
-                std::cout<< "t = "<< t<< "\n";
+                // std::cout<< "t = "<< t<< "\n";
             }
         }
     }
     return result;
+}
+
+Hit Box::intersectHit(Ray const& ray){
+    return Hit{};
 }
 
 // print-Methode

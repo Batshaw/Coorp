@@ -12,12 +12,12 @@ Shape::Shape(Color const& color):
     name_{"unknown"}, color_{color} {}*/
 Shape::Shape(std::string const& name, std::shared_ptr<Material> const& material):
     name_{name}, material_{material}  {
-        std::cout<< "Constructor of Shape!"<< std::endl;
+        // std::cout<< "Constructor of Shape!"<< std::endl;
     }
 
 // Destruktor (Aufgabe8):
 Shape::~Shape() {
-    std::cout<< "Destruction of Shape!"<< std::endl;
+    // std::cout<< "Destruction of Shape!"<< std::endl;
 }
 
 // get-Methode

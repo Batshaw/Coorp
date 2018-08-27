@@ -15,6 +15,7 @@
 #include "box.hpp"
 #include "sphere.hpp"
 #include "material.hpp"
+#include "ambient.hpp"
 
 using namespace std;
 
@@ -28,7 +29,7 @@ struct Scene
 
     std::string name = "default scene";
     Camera camera;
-    Color ambient {1.0f,1.0f,1.0f};
+    Ambient ambient;
 
 };
 
