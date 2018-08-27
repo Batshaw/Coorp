@@ -27,6 +27,8 @@ struct Camera
         return rayCamera;
     }
     
+
+    
 };
 
 #endif 

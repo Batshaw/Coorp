@@ -28,14 +28,14 @@ float Sphere::radius() const
     return _radius;
 }
 
-float Sphere::area()
+float Sphere::area() 
 {
-    return piconst * pow(_radius, 2) * 4;
+    return piconst * std::pow(_radius,2) * 4;
 };
 
-float Sphere::volume()
+float Sphere::volume() 
 {
-    return piconst * pow(_radius, 3) * 4 / 3;
+    return piconst * std::pow(_radius,3) * 4 / 3;
 };
 
 ostream &Sphere::print(ostream &os) const
@@ -43,7 +43,7 @@ ostream &Sphere::print(ostream &os) const
     return Shape::print(os);
 }
 
-bool Sphere::intersect(Ray const& _r, float& _t)
+bool Sphere::intersect(Ray const& _r, float& _t) const
 {
     //float distance = 0.0f;
     auto ndirection = glm::normalize(_r.direction);
@@ -51,10 +51,25 @@ bool Sphere::intersect(Ray const& _r, float& _t)
     auto result = glm::intersectRaySphere(_r.origin,
                                           ndirection,
                                           _mpunkt,
-                                          pow(_radius, 2),
+                                          std::pow(_radius,2),
                                           _t);
     return result;
 }
+
+Hit Sphere::intersection(Ray const &_r, float &_t) const {
+    Hit temp;
+    if(intersect(_r, _t)){
+        temp.isHit_ = true;
+        temp.distance_ = _t;
+        temp.coor_ = _r.get_point(temp.distance_);
+        temp.normal_ = glm::normalize(temp.coor_ - _mpunkt);
+        //this is type const*
+        temp.closest_ = make_shared<Sphere>(this);
+    }
+
+    return temp;
+};
+
 
 /*bool Sphere::intersect(Ray const& _r, float& _t) const{
     return false;

@@ -17,12 +17,13 @@ struct Light
               _color{1.0f, 1.0f, 1.0f},
               _brightness{2000.0f} {};
 
-    Light(std::string const &name, glm::vec3 const &p, Color const &c, float m) : _name{name},
-                                                                                  _origin{p},
-                                                                                  _color{c},
-                                                                                  _brightness{m}
-    {
-    }
+    Light(std::string const &name,
+          glm::vec3 const &p,
+          Color const &c,
+          float m) : _name{name},
+                     _origin{p},
+                     _color{c},
+                     _brightness{m}{}
 };
 
 #endif
