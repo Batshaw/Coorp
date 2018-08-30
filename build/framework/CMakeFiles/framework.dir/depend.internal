@@ -7,6 +7,7 @@ framework/CMakeFiles/framework.dir/glew.c.o
  ../external/GL/wglew.h
  /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/framework/glew.c
 framework/CMakeFiles/framework.dir/Box.cpp.o
+ ../external/catch-1.5/catch.hpp
  ../external/glm-0.9.5.3/glm/common.hpp
  ../external/glm-0.9.5.3/glm/detail/_fixes.hpp
  ../external/glm-0.9.5.3/glm/detail/_swizzle.hpp

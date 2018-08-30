@@ -32,11 +32,11 @@ struct Hit
                                    normal_{0.0, 0.0, 0.0},
                                    obj_{input_} {};
 
-        Hit(float distance, bool is_hit, glm::vec3 const& point, glm::vec3 const& normal, Shape const *obj) : distance_{distance},
-                                                                                                isHit_{is_hit},
-                                                                                                coor_{point},
-                                                                                                normal_{normal},
-                                                                                                obj_{obj} {};
+        Hit(float distance, bool is_hit, glm::vec3 const &point, glm::vec3 const &normal, Shape const *obj) : distance_{distance},
+                                                                                                              isHit_{is_hit},
+                                                                                                              coor_{point},
+                                                                                                              normal_{normal},
+                                                                                                              obj_{obj} {};
 };
 
 #endif //HIT_HPP

@@ -1,0 +1,1 @@
+/usr/bin/c++   -std=c++14  -rdynamic CMakeFiles/tests.dir/tests.cpp.o  -o tests ../framework/libframework.a -lGL -lGLU 
