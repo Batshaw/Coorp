@@ -14,11 +14,11 @@ struct Camera
 
     //Default Constructor
     Camera():
-        _name{"default camera"}, _fov_x{45}  {}
+        _name{"default camera"}, _fov_x{45}, _eye{0.0f,0.0f,0.0f}, _dir{0.0f,0.0f,-1.0f}, _up{0.0f,1.0f,0.0f}{}
 
     //Konstruktor mit Name und Öffnungswinkel: 
     Camera(std::string name_, float fov_x_):
-        _name{name_}, _fov_x{fov_x_}  {}
+        _name{name_}, _fov_x{fov_x_}, _eye{0.0f,0.0f,0.0f}, _dir{0.0f,0.0f,-1.0f}, _up{0.0f,1.0f,0.0f} {}
 
     //Konstruktor für Aufgabe 7.3:
     Camera(std::string name_, float fov_x_, glm::vec3 eye_, glm::vec3 dir_, glm::vec3 up_):

@@ -162,14 +162,14 @@ void Renderer::write(Pixel const &p)
 
 Color Renderer::shade(std::shared_ptr<Shape> const &shape, Ray const &ray, float &distance) const
 {
-  glm::vec3 x_point = ray.get_point(distance);
+  glm::vec3 x_point = get_point(distance,ray);
 
   return Color{1.0, 1.0, 1.0};
 }
 
 Color Renderer::evaluate_diffusion(Light const &light, std::shared_ptr<Shape> const &shape, Ray const &ray, float &distance) const
 {
-  glm::vec3 normal = ray.get_point(distance);
+  glm::vec3 normal = get_point(distance,ray);
   return Color{1.0, 1.0, 1.0};
 }
 

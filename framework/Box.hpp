@@ -4,7 +4,6 @@
 #include "Shape.hpp"
 #include <glm/vec3.hpp>
 #include "material.hpp"
-#
 
 class Box : public Shape
 {
@@ -39,9 +38,9 @@ public:
 
   glm::vec3 get_normal(Hit const &hit) const override;
   glm::vec3 get_normal(int _side) const;
-  glm::vec3 get_normal(glm::vec3 const& coor_) const;
+  glm::vec3 get_normal(glm::vec3 const &coor_) const;
 
-      float set_max(float coor1, float coor2);
+  float set_max(float coor1, float coor2);
   float set_min(float coor1, float coor2);
 
   glm::vec3 get_vector_to_light(Hit const &_inter, Light const &_light) const override;

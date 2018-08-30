@@ -62,8 +62,8 @@ void load_sdf(std::string filename, Scene &scene)
                     if ("box" == shape_type)
                     {
 
-                        std::string shape_name;
-                        current_line_stream >> shape_name;
+                        std::string obj_name;
+                        current_line_stream >> obj_name;
 
                         float shape_points[6];
 
@@ -77,7 +77,7 @@ void load_sdf(std::string filename, Scene &scene)
 
                         std::shared_ptr<Shape> neu_box = std::make_shared<Box>(glm::vec3(shape_points[0], shape_points[1], shape_points[2]),
                                                                                glm::vec3(shape_points[3], shape_points[4], shape_points[5]),
-                                                                               shape_name,
+                                                                               obj_name,
                                                                                findMaterialVector(mat_name, scene.material_vector));
 
                         scene.shape_vector.push_back(neu_box);
@@ -85,8 +85,8 @@ void load_sdf(std::string filename, Scene &scene)
 
                     else if ("sphere" == shape_type)
                     {
-                        std::string shape_name;
-                        current_line_stream >> shape_name;
+                        std::string obj_name;
+                        current_line_stream >> obj_name;
 
                         float shape_points[4];
 
@@ -101,7 +101,7 @@ void load_sdf(std::string filename, Scene &scene)
                         std::shared_ptr<Shape> neu_sphere = std::make_shared<Sphere>(glm::vec3(shape_points[0], shape_points[1], shape_points[2]),
                                                                                      shape_points[3],
                                                                                      findMaterialVector(mat_name, scene.material_vector),
-                                                                                     shape_name);
+                                                                                     obj_name);
 
                         scene.shape_vector.push_back(neu_sphere);
                     }
@@ -138,28 +138,76 @@ void load_sdf(std::string filename, Scene &scene)
                     scene._camera = temp;
                 }
             }
+
+            else if ("transform" == first_symbol)
+            {
+                std::string obj_name;
+                current_line_stream >> obj_name;
+
+                for (std::shared_ptr<Shape> shape : scene.shape_vector)
+                {
+
+                    if (shape->name() == obj_name)
+                    {
+                        std::string transform;
+                        current_line_stream >> transform;
+
+                        glm::vec3 read_scale;
+                        glm::vec3 read_translate;
+                        float read_float;
+                        glm::vec3 read_rotate;
+
+                        if ("scale" == transform)
+                        {
+                            current_line_stream >> read_scale.x;
+                            current_line_stream >> read_scale.y;
+                            current_line_stream >> read_scale.z;
+                        }
+
+                        else if ("translate" == transform)
+                        {
+                            current_line_stream >> read_translate.x;
+                            current_line_stream >> read_translate.y;
+                            current_line_stream >> read_translate.z;
+                        }
+
+                        else if ("rotate" == transform)
+                        {
+                            current_line_stream >> read_float;
+                            current_line_stream >> read_rotate.x;
+                            current_line_stream >> read_rotate.y;
+                            current_line_stream >> read_rotate.z;
+                        }
+
+                        shape->scale(read_scale);
+                        shape->rotate(read_float, read_rotate);
+                        shape->translate(read_translate);
+
+                    }
+                }
+                
+            }
+
             else if ("render" == first_symbol)
             {
                 std::string camera_name;
                 current_line_stream >> camera_name;
 
-                
-                if (camera_name == scene._camera._name) {
+                if (camera_name == scene._camera._name)
+                {
                     std::string type;
                     current_line_stream >> type;
                     std::string extension;
                     current_line_stream >> extension;
 
-                    scene._name = filename + "_"+type+extension;
+                    scene._name = filename + "_" + type + extension;
 
                     current_line_stream >> scene._width;
                     current_line_stream >> scene._height;
-
                 }
-                
+
             }
         }
-
     }
 
     else

@@ -50,7 +50,7 @@ Hit Sphere::intersect(Ray const &_r) const
                                           std::pow(_radius, 2),
                                           _t);
 
-    glm::vec3 cut = _r.get_point(_t);
+    glm::vec3 cut = get_point(_t,_r);
 
     Hit hit{_t,result,cut,get_normal(cut),this};
 
