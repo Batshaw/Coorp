@@ -27,7 +27,7 @@ struct Scene
     std::vector<std::shared_ptr<Shape>> shape_vector;
     std::vector<std::shared_ptr<Light>> light_vector; 
 
-    std::string name = "default scene";
+    std::string name = "default_scene.ppm";
     Camera camera;
     Ambient ambient;
 

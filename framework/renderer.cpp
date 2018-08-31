@@ -39,6 +39,7 @@ Renderer::Renderer(unsigned w, unsigned h, std::string const& file)
 // }
 
 void Renderer::render(Scene const& scene){
+  filename_ = scene.name;
   for(unsigned y = 0; y < height_; ++y){
     for(unsigned x = 0; x < width_; ++x){
       Pixel pixel(x, y);
@@ -53,7 +54,7 @@ void Renderer::render(Scene const& scene){
 Color Renderer::trace(Scene const& scene, Ray const& ray){
   Camera camera = {scene.camera};
   Color temp{1.0f, 1.0f, 1.0f};
-  float distance = 0;
+  float distance;
   float dmin = 1000;
 
   bool is_intersect = true;

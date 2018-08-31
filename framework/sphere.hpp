@@ -4,7 +4,6 @@
 #include "shape.hpp"
 #include <glm/vec3.hpp>
 #include "ray.hpp"
-#include "Hit.hpp"
 
 class Sphere : public Shape{
     public:

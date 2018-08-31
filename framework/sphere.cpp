@@ -77,7 +77,7 @@ Hit Sphere::intersectHit(Ray const& ray){
     if(result == true){
         glm::vec3 schnittPunkt = ray.origin + distance*ray.direction;
         glm::vec3 normalVector = glm::normalize(schnittPunkt - mittel_);
-        return Hit{true, distance, normalVector, schnittPunkt};
+        return Hit{true, distance, this, normalVector, schnittPunkt};
     }
     return Hit{};
 }

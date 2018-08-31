@@ -2,7 +2,7 @@
 #define BOX_HPP
 
 #include "shape.hpp"
-#include "Hit.hpp"
+
 #include <glm/vec3.hpp>
 #include <memory>
 
@@ -14,6 +14,7 @@ class Box : public Shape{
         /*Box(glm::vec3 const min, glm::vec3 const& max, std::string const& name);
         Box(glm::vec3 const& min, glm::vec3 const& max, Color const& color);*/
         Box(glm::vec3 const min, glm::vec3 const& max, std::string const& name, std::shared_ptr<Material> const& material);
+        ~Box();
 
         // Methode
         float area() const override;
