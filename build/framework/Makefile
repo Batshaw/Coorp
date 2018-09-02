@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp
+CMAKE_SOURCE_DIR = /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build
+CMAKE_BINARY_DIR = /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -124,14 +124,14 @@ list_install_components/fast: list_install_components
 
 # The main all target
 all: cmake_check_build_system
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(CMAKE_COMMAND) -E cmake_progress_start /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build/CMakeFiles /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build/framework/CMakeFiles/progress.marks
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(MAKE) -f CMakeFiles/Makefile2 framework/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build/CMakeFiles 0
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(CMAKE_COMMAND) -E cmake_progress_start /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build/CMakeFiles /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build/framework/CMakeFiles/progress.marks
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(MAKE) -f CMakeFiles/Makefile2 framework/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(MAKE) -f CMakeFiles/Makefile2 framework/clean
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(MAKE) -f CMakeFiles/Makefile2 framework/clean
 .PHONY : clean
 
 # The main clean target
@@ -141,22 +141,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(MAKE) -f CMakeFiles/Makefile2 framework/preinstall
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(MAKE) -f CMakeFiles/Makefile2 framework/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(MAKE) -f CMakeFiles/Makefile2 framework/preinstall
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(MAKE) -f CMakeFiles/Makefile2 framework/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 framework/CMakeFiles/framework.dir/rule:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(MAKE) -f CMakeFiles/Makefile2 framework/CMakeFiles/framework.dir/rule
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(MAKE) -f CMakeFiles/Makefile2 framework/CMakeFiles/framework.dir/rule
 .PHONY : framework/CMakeFiles/framework.dir/rule
 
 # Convenience name for target.
@@ -166,7 +166,7 @@ framework: framework/CMakeFiles/framework.dir/rule
 
 # fast build rule for target.
 framework/fast:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/build
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/build
 .PHONY : framework/fast
 
 Box.o: Box.cpp.o
@@ -175,7 +175,7 @@ Box.o: Box.cpp.o
 
 # target to build an object file
 Box.cpp.o:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/Box.cpp.o
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/Box.cpp.o
 .PHONY : Box.cpp.o
 
 Box.i: Box.cpp.i
@@ -184,7 +184,7 @@ Box.i: Box.cpp.i
 
 # target to preprocess a source file
 Box.cpp.i:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/Box.cpp.i
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/Box.cpp.i
 .PHONY : Box.cpp.i
 
 Box.s: Box.cpp.s
@@ -193,7 +193,7 @@ Box.s: Box.cpp.s
 
 # target to generate assembly for a file
 Box.cpp.s:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/Box.cpp.s
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/Box.cpp.s
 .PHONY : Box.cpp.s
 
 Shape.o: Shape.cpp.o
@@ -202,7 +202,7 @@ Shape.o: Shape.cpp.o
 
 # target to build an object file
 Shape.cpp.o:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/Shape.cpp.o
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/Shape.cpp.o
 .PHONY : Shape.cpp.o
 
 Shape.i: Shape.cpp.i
@@ -211,7 +211,7 @@ Shape.i: Shape.cpp.i
 
 # target to preprocess a source file
 Shape.cpp.i:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/Shape.cpp.i
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/Shape.cpp.i
 .PHONY : Shape.cpp.i
 
 Shape.s: Shape.cpp.s
@@ -220,7 +220,7 @@ Shape.s: Shape.cpp.s
 
 # target to generate assembly for a file
 Shape.cpp.s:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/Shape.cpp.s
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/Shape.cpp.s
 .PHONY : Shape.cpp.s
 
 Sphere.o: Sphere.cpp.o
@@ -229,7 +229,7 @@ Sphere.o: Sphere.cpp.o
 
 # target to build an object file
 Sphere.cpp.o:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/Sphere.cpp.o
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/Sphere.cpp.o
 .PHONY : Sphere.cpp.o
 
 Sphere.i: Sphere.cpp.i
@@ -238,7 +238,7 @@ Sphere.i: Sphere.cpp.i
 
 # target to preprocess a source file
 Sphere.cpp.i:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/Sphere.cpp.i
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/Sphere.cpp.i
 .PHONY : Sphere.cpp.i
 
 Sphere.s: Sphere.cpp.s
@@ -247,7 +247,7 @@ Sphere.s: Sphere.cpp.s
 
 # target to generate assembly for a file
 Sphere.cpp.s:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/Sphere.cpp.s
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/Sphere.cpp.s
 .PHONY : Sphere.cpp.s
 
 glew.o: glew.c.o
@@ -256,7 +256,7 @@ glew.o: glew.c.o
 
 # target to build an object file
 glew.c.o:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/glew.c.o
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/glew.c.o
 .PHONY : glew.c.o
 
 glew.i: glew.c.i
@@ -265,7 +265,7 @@ glew.i: glew.c.i
 
 # target to preprocess a source file
 glew.c.i:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/glew.c.i
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/glew.c.i
 .PHONY : glew.c.i
 
 glew.s: glew.c.s
@@ -274,7 +274,7 @@ glew.s: glew.c.s
 
 # target to generate assembly for a file
 glew.c.s:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/glew.c.s
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/glew.c.s
 .PHONY : glew.c.s
 
 pixel.o: pixel.cpp.o
@@ -283,7 +283,7 @@ pixel.o: pixel.cpp.o
 
 # target to build an object file
 pixel.cpp.o:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/pixel.cpp.o
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/pixel.cpp.o
 .PHONY : pixel.cpp.o
 
 pixel.i: pixel.cpp.i
@@ -292,7 +292,7 @@ pixel.i: pixel.cpp.i
 
 # target to preprocess a source file
 pixel.cpp.i:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/pixel.cpp.i
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/pixel.cpp.i
 .PHONY : pixel.cpp.i
 
 pixel.s: pixel.cpp.s
@@ -301,7 +301,7 @@ pixel.s: pixel.cpp.s
 
 # target to generate assembly for a file
 pixel.cpp.s:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/pixel.cpp.s
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/pixel.cpp.s
 .PHONY : pixel.cpp.s
 
 ppmwriter.o: ppmwriter.cpp.o
@@ -310,7 +310,7 @@ ppmwriter.o: ppmwriter.cpp.o
 
 # target to build an object file
 ppmwriter.cpp.o:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/ppmwriter.cpp.o
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/ppmwriter.cpp.o
 .PHONY : ppmwriter.cpp.o
 
 ppmwriter.i: ppmwriter.cpp.i
@@ -319,7 +319,7 @@ ppmwriter.i: ppmwriter.cpp.i
 
 # target to preprocess a source file
 ppmwriter.cpp.i:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/ppmwriter.cpp.i
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/ppmwriter.cpp.i
 .PHONY : ppmwriter.cpp.i
 
 ppmwriter.s: ppmwriter.cpp.s
@@ -328,7 +328,7 @@ ppmwriter.s: ppmwriter.cpp.s
 
 # target to generate assembly for a file
 ppmwriter.cpp.s:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/ppmwriter.cpp.s
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/ppmwriter.cpp.s
 .PHONY : ppmwriter.cpp.s
 
 renderer.o: renderer.cpp.o
@@ -337,7 +337,7 @@ renderer.o: renderer.cpp.o
 
 # target to build an object file
 renderer.cpp.o:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/renderer.cpp.o
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/renderer.cpp.o
 .PHONY : renderer.cpp.o
 
 renderer.i: renderer.cpp.i
@@ -346,7 +346,7 @@ renderer.i: renderer.cpp.i
 
 # target to preprocess a source file
 renderer.cpp.i:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/renderer.cpp.i
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/renderer.cpp.i
 .PHONY : renderer.cpp.i
 
 renderer.s: renderer.cpp.s
@@ -355,7 +355,7 @@ renderer.s: renderer.cpp.s
 
 # target to generate assembly for a file
 renderer.cpp.s:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/renderer.cpp.s
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/renderer.cpp.s
 .PHONY : renderer.cpp.s
 
 window.o: window.cpp.o
@@ -364,7 +364,7 @@ window.o: window.cpp.o
 
 # target to build an object file
 window.cpp.o:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/window.cpp.o
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/window.cpp.o
 .PHONY : window.cpp.o
 
 window.i: window.cpp.i
@@ -373,7 +373,7 @@ window.i: window.cpp.i
 
 # target to preprocess a source file
 window.cpp.i:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/window.cpp.i
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/window.cpp.i
 .PHONY : window.cpp.i
 
 window.s: window.cpp.s
@@ -382,7 +382,7 @@ window.s: window.cpp.s
 
 # target to generate assembly for a file
 window.cpp.s:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/window.cpp.s
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/window.cpp.s
 .PHONY : window.cpp.s
 
 # Help Target
@@ -433,6 +433,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

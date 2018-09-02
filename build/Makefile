@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp
+CMAKE_SOURCE_DIR = /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build
+CMAKE_BINARY_DIR = /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -124,9 +124,9 @@ list_install_components/fast: list_install_components
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build/CMakeFiles /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build/CMakeFiles /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -245,19 +245,6 @@ raytracer/fast:
 	$(MAKE) -f source/CMakeFiles/raytracer.dir/build.make source/CMakeFiles/raytracer.dir/build
 .PHONY : raytracer/fast
 
-#=============================================================================
-# Target rules for targets named test_r
-
-# Build rule for target.
-test_r: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 test_r
-.PHONY : test_r
-
-# fast build rule for target.
-test_r/fast:
-	$(MAKE) -f source/CMakeFiles/test_r.dir/build.make source/CMakeFiles/test_r.dir/build
-.PHONY : test_r/fast
-
 external/nanovg/src/nanovg.o: external/nanovg/src/nanovg.c.o
 
 .PHONY : external/nanovg/src/nanovg.o
@@ -304,7 +291,6 @@ help:
 	@echo "... example"
 	@echo "... prog"
 	@echo "... raytracer"
-	@echo "... test_r"
 	@echo "... external/nanovg/src/nanovg.o"
 	@echo "... external/nanovg/src/nanovg.i"
 	@echo "... external/nanovg/src/nanovg.s"

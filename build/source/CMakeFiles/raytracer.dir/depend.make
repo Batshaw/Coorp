@@ -94,6 +94,7 @@ source/CMakeFiles/raytracer.dir/raytracer.cpp.o: ../framework/Ray.hpp
 source/CMakeFiles/raytracer.dir/raytracer.cpp.o: ../framework/Scene.hpp
 source/CMakeFiles/raytracer.dir/raytracer.cpp.o: ../framework/Shape.hpp
 source/CMakeFiles/raytracer.dir/raytracer.cpp.o: ../framework/Sphere.hpp
+source/CMakeFiles/raytracer.dir/raytracer.cpp.o: ../framework/ambient.hpp
 source/CMakeFiles/raytracer.dir/raytracer.cpp.o: ../framework/color.hpp
 source/CMakeFiles/raytracer.dir/raytracer.cpp.o: ../framework/material.hpp
 source/CMakeFiles/raytracer.dir/raytracer.cpp.o: ../framework/pixel.hpp

@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp
+CMAKE_SOURCE_DIR = /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build
+CMAKE_BINARY_DIR = /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -124,14 +124,14 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(CMAKE_COMMAND) -E cmake_progress_start /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build/CMakeFiles /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build/external/glfw-3.2.1/docs/CMakeFiles/progress.marks
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(MAKE) -f CMakeFiles/Makefile2 external/glfw-3.2.1/docs/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build/CMakeFiles 0
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(CMAKE_COMMAND) -E cmake_progress_start /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build/CMakeFiles /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build/external/glfw-3.2.1/docs/CMakeFiles/progress.marks
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(MAKE) -f CMakeFiles/Makefile2 external/glfw-3.2.1/docs/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(MAKE) -f CMakeFiles/Makefile2 external/glfw-3.2.1/docs/clean
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(MAKE) -f CMakeFiles/Makefile2 external/glfw-3.2.1/docs/clean
 .PHONY : clean
 
 # The main clean target
@@ -141,22 +141,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(MAKE) -f CMakeFiles/Makefile2 external/glfw-3.2.1/docs/preinstall
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(MAKE) -f CMakeFiles/Makefile2 external/glfw-3.2.1/docs/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(MAKE) -f CMakeFiles/Makefile2 external/glfw-3.2.1/docs/preinstall
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(MAKE) -f CMakeFiles/Makefile2 external/glfw-3.2.1/docs/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 external/glfw-3.2.1/docs/CMakeFiles/docs.dir/rule:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(MAKE) -f CMakeFiles/Makefile2 external/glfw-3.2.1/docs/CMakeFiles/docs.dir/rule
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(MAKE) -f CMakeFiles/Makefile2 external/glfw-3.2.1/docs/CMakeFiles/docs.dir/rule
 .PHONY : external/glfw-3.2.1/docs/CMakeFiles/docs.dir/rule
 
 # Convenience name for target.
@@ -166,7 +166,7 @@ docs: external/glfw-3.2.1/docs/CMakeFiles/docs.dir/rule
 
 # fast build rule for target.
 docs/fast:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(MAKE) -f external/glfw-3.2.1/docs/CMakeFiles/docs.dir/build.make external/glfw-3.2.1/docs/CMakeFiles/docs.dir/build
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(MAKE) -f external/glfw-3.2.1/docs/CMakeFiles/docs.dir/build.make external/glfw-3.2.1/docs/CMakeFiles/docs.dir/build
 .PHONY : docs/fast
 
 # Help Target
@@ -193,6 +193,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

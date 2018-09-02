@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp
+CMAKE_SOURCE_DIR = /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build
+CMAKE_BINARY_DIR = /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build
 
 # Include any dependencies generated for this target.
 include source/CMakeFiles/prog.dir/depend.make
@@ -59,16 +59,16 @@ include source/CMakeFiles/prog.dir/flags.make
 
 source/CMakeFiles/prog.dir/prog.cpp.o: source/CMakeFiles/prog.dir/flags.make
 source/CMakeFiles/prog.dir/prog.cpp.o: ../source/prog.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object source/CMakeFiles/prog.dir/prog.cpp.o"
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build/source && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/prog.dir/prog.cpp.o -c /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/source/prog.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object source/CMakeFiles/prog.dir/prog.cpp.o"
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build/source && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/prog.dir/prog.cpp.o -c /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/source/prog.cpp
 
 source/CMakeFiles/prog.dir/prog.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/prog.dir/prog.cpp.i"
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build/source && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/source/prog.cpp > CMakeFiles/prog.dir/prog.cpp.i
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build/source && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/source/prog.cpp > CMakeFiles/prog.dir/prog.cpp.i
 
 source/CMakeFiles/prog.dir/prog.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/prog.dir/prog.cpp.s"
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build/source && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/source/prog.cpp -o CMakeFiles/prog.dir/prog.cpp.s
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build/source && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/source/prog.cpp -o CMakeFiles/prog.dir/prog.cpp.s
 
 source/CMakeFiles/prog.dir/prog.cpp.o.requires:
 
@@ -103,8 +103,8 @@ source/prog: /usr/lib/x86_64-linux-gnu/libXinerama.so
 source/prog: /usr/lib/x86_64-linux-gnu/libXxf86vm.so
 source/prog: /usr/lib/x86_64-linux-gnu/libXcursor.so
 source/prog: source/CMakeFiles/prog.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable prog"
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build/source && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/prog.dir/link.txt --verbose=$(VERBOSE)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable prog"
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build/source && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/prog.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 source/CMakeFiles/prog.dir/build: source/prog
@@ -116,10 +116,10 @@ source/CMakeFiles/prog.dir/requires: source/CMakeFiles/prog.dir/prog.cpp.o.requi
 .PHONY : source/CMakeFiles/prog.dir/requires
 
 source/CMakeFiles/prog.dir/clean:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build/source && $(CMAKE_COMMAND) -P CMakeFiles/prog.dir/cmake_clean.cmake
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build/source && $(CMAKE_COMMAND) -P CMakeFiles/prog.dir/cmake_clean.cmake
 .PHONY : source/CMakeFiles/prog.dir/clean
 
 source/CMakeFiles/prog.dir/depend:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/source /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build/source /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build/source/CMakeFiles/prog.dir/DependInfo.cmake --color=$(COLOR)
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/source /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build/source /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build/source/CMakeFiles/prog.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : source/CMakeFiles/prog.dir/depend
 

@@ -1,6 +1,4 @@
 #include "Scene.hpp"
-#include "Shape.hpp"
-#include "Box.hpp"
 #include "material.hpp"
 
 #include <renderer.hpp>
@@ -15,14 +13,23 @@
 int main(int argc, char *argv[])
 {
 
-    Scene scene2;
+    /* Scene scene1{};
+    load_sdf("scene1.sdf", scene1);
+ */
+    Scene scene2{};
     load_sdf("scene2.sdf", scene2);
 
-    Renderer renderer(scene2);
-    std::thread render_thread([&renderer]() {
+    Renderer renderer{scene2._width, scene2._height, scene2._name};
+    /* std::thread render_thread([&renderer]() {
         renderer.render();
-    });
+    }); */
 
+    for (std::shared_ptr<Shape> shape : scene2.shape_vector)
+    {
+        cout << *shape << std::endl;
+    }
+
+    renderer.render(scene2);
     Window window{{scene2._width, scene2._height}};
 
     while (!window.should_close())
@@ -33,6 +40,7 @@ int main(int argc, char *argv[])
         }
         window.show(renderer.color_buffer());
     }
-    render_thread.join();
+    /*     render_thread.join();
+ */
     return 0;
 }

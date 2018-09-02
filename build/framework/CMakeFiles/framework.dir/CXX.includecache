@@ -932,9 +932,9 @@ iosfwd
 color.hpp
 -
 
-/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/framework/Box.cpp
+/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/framework/Box.cpp
 Box.hpp
-/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/framework/Box.hpp
+/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/framework/Box.hpp
 cmath
 -
 algorithm
@@ -942,53 +942,55 @@ algorithm
 catch.hpp
 -
 
-/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/framework/Box.hpp
+/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/framework/Box.hpp
 Shape.hpp
-/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/framework/Shape.hpp
+/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/framework/Shape.hpp
 glm/vec3.hpp
 -
 material.hpp
-/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/framework/material.hpp
+/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/framework/material.hpp
 
-/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/framework/Camera.hpp
+/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/framework/Camera.hpp
 string
 -
 glm/vec3.hpp
 -
+Ray.hpp
+/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/framework/Ray.hpp
 
-/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/framework/Hit.hpp
+/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/framework/Hit.hpp
 glm/vec3.hpp
 -
 Shape.hpp
 -
 
-/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/framework/Light.hpp
+/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/framework/Light.hpp
 glm/glm.hpp
 -
 string
 -
 color.hpp
-/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/framework/color.hpp
+/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/framework/color.hpp
 
-/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/framework/Ray.hpp
+/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/framework/Ray.hpp
 glm/glm.hpp
 -
 glm/vec3.hpp
 -
 
-/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/framework/Scene.hpp
+/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/framework/Scene.hpp
 vector
 -
 Shape.hpp
-/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/framework/Shape.hpp
+/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/framework/Shape.hpp
 Box.hpp
-/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/framework/Box.hpp
+/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/framework/Box.hpp
 Sphere.hpp
-/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/framework/Sphere.hpp
+/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/framework/Sphere.hpp
 fstream
 -
 material.hpp
-/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/framework/material.hpp
+/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/framework/material.hpp
 algorithm
 -
 string
@@ -1000,15 +1002,17 @@ set
 sstream
 -
 Light.hpp
-/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/framework/Light.hpp
+/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/framework/Light.hpp
 Camera.hpp
-/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/framework/Camera.hpp
+/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/framework/Camera.hpp
+ambient.hpp
+/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/framework/ambient.hpp
 
-/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/framework/Shape.cpp
+/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/framework/Shape.cpp
 Shape.hpp
-/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/framework/Shape.hpp
+/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/framework/Shape.hpp
 
-/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/framework/Shape.hpp
+/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/framework/Shape.hpp
 string
 -
 glm/vec3.hpp
@@ -1016,9 +1020,9 @@ glm/vec3.hpp
 iostream
 -
 color.hpp
-/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/framework/color.hpp
+/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/framework/color.hpp
 Ray.hpp
-/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/framework/Ray.hpp
+/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/framework/Ray.hpp
 glm/glm.hpp
 -
 glm/gtx/intersect.hpp
@@ -1026,55 +1030,59 @@ glm/gtx/intersect.hpp
 memory
 -
 material.hpp
-/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/framework/material.hpp
+/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/framework/material.hpp
 Hit.hpp
-/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/framework/Hit.hpp
+/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/framework/Hit.hpp
 Light.hpp
-/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/framework/Light.hpp
+/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/framework/Light.hpp
 
-/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/framework/Sphere.cpp
+/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/framework/Sphere.cpp
 Sphere.hpp
-/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/framework/Sphere.hpp
+/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/framework/Sphere.hpp
 cmath
 -
 
-/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/framework/Sphere.hpp
+/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/framework/Sphere.hpp
 Shape.hpp
-/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/framework/Shape.hpp
+/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/framework/Shape.hpp
 glm/glm.hpp
 -
 glm/vec3.hpp
 -
 material.hpp
-/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/framework/material.hpp
+/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/framework/material.hpp
 
-/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/framework/color.hpp
+/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/framework/ambient.hpp
+color.hpp
+/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/framework/color.hpp
+
+/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/framework/color.hpp
 iostream
 -
 
-/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/framework/material.hpp
+/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/framework/material.hpp
 ostream
 -
 color.hpp
-/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/framework/color.hpp
+/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/framework/color.hpp
 string
 -
 
-/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/framework/pixel.cpp
+/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/framework/pixel.cpp
 pixel.hpp
-/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/framework/pixel.hpp
+/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/framework/pixel.hpp
 ostream
 -
 
-/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/framework/pixel.hpp
+/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/framework/pixel.hpp
 iosfwd
 -
 color.hpp
 -
 
-/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/framework/ppmwriter.cpp
+/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/framework/ppmwriter.cpp
 ppmwriter.hpp
-/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/framework/ppmwriter.hpp
+/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/framework/ppmwriter.hpp
 iostream
 -
 fstream
@@ -1084,7 +1092,7 @@ cmath
 algorithm
 -
 
-/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/framework/ppmwriter.hpp
+/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/framework/ppmwriter.hpp
 string
 -
 vector
@@ -1092,31 +1100,29 @@ vector
 pixel.hpp
 -
 
-/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/framework/renderer.cpp
+/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/framework/renderer.cpp
 renderer.hpp
-/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/framework/renderer.hpp
+/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/framework/renderer.hpp
 
-/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/framework/renderer.hpp
+/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/framework/renderer.hpp
 Scene.hpp
-/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/framework/Scene.hpp
+/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/framework/Scene.hpp
 color.hpp
-/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/framework/color.hpp
-Ray.hpp
-/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/framework/Ray.hpp
+/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/framework/color.hpp
 pixel.hpp
-/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/framework/pixel.hpp
+/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/framework/pixel.hpp
 ppmwriter.hpp
-/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/framework/ppmwriter.hpp
+/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/framework/ppmwriter.hpp
 Scene.hpp
-/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/framework/Scene.hpp
+/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/framework/Scene.hpp
 string
 -
 glm/glm.hpp
 -
 
-/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/framework/window.cpp
+/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/framework/window.cpp
 window.hpp
-/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/framework/window.hpp
+/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/framework/window.hpp
 utility
 -
 cstring
@@ -1128,9 +1134,9 @@ cassert
 exception
 -
 
-/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/framework/window.hpp
+/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/framework/window.hpp
 color.hpp
-/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/framework/color.hpp
+/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/framework/color.hpp
 GL/glew.h
 -
 GLFW/glfw3.h

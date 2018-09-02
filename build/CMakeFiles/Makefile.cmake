@@ -80,5 +80,4 @@ set(CMAKE_DEPEND_INFO_FILES
   "source/CMakeFiles/example.dir/DependInfo.cmake"
   "source/CMakeFiles/prog.dir/DependInfo.cmake"
   "source/CMakeFiles/raytracer.dir/DependInfo.cmake"
-  "source/CMakeFiles/test_r.dir/DependInfo.cmake"
   )

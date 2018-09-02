@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp
+CMAKE_SOURCE_DIR = /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build
+CMAKE_BINARY_DIR = /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build
 
 # Utility rule file for docs.
 
@@ -54,8 +54,8 @@ CMAKE_BINARY_DIR = /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Prog
 include external/glfw-3.2.1/docs/CMakeFiles/docs.dir/progress.make
 
 external/glfw-3.2.1/docs/CMakeFiles/docs:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating HTML documentation"
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build/external/glfw-3.2.1/docs && /usr/bin/doxygen
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating HTML documentation"
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build/external/glfw-3.2.1/docs && /usr/bin/doxygen
 
 docs: external/glfw-3.2.1/docs/CMakeFiles/docs
 docs: external/glfw-3.2.1/docs/CMakeFiles/docs.dir/build.make
@@ -68,10 +68,10 @@ external/glfw-3.2.1/docs/CMakeFiles/docs.dir/build: docs
 .PHONY : external/glfw-3.2.1/docs/CMakeFiles/docs.dir/build
 
 external/glfw-3.2.1/docs/CMakeFiles/docs.dir/clean:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build/external/glfw-3.2.1/docs && $(CMAKE_COMMAND) -P CMakeFiles/docs.dir/cmake_clean.cmake
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build/external/glfw-3.2.1/docs && $(CMAKE_COMMAND) -P CMakeFiles/docs.dir/cmake_clean.cmake
 .PHONY : external/glfw-3.2.1/docs/CMakeFiles/docs.dir/clean
 
 external/glfw-3.2.1/docs/CMakeFiles/docs.dir/depend:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/external/glfw-3.2.1/docs /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build/external/glfw-3.2.1/docs /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build/external/glfw-3.2.1/docs/CMakeFiles/docs.dir/DependInfo.cmake --color=$(COLOR)
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/external/glfw-3.2.1/docs /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build/external/glfw-3.2.1/docs /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build/external/glfw-3.2.1/docs/CMakeFiles/docs.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : external/glfw-3.2.1/docs/CMakeFiles/docs.dir/depend
 

@@ -11,41 +11,20 @@
 
 #define PRINT_DEBUG_INFO 0
 
-Renderer::Renderer(Scene const &scene)
+/* Renderer::Renderer(Scene const &scene)
     : scene_(scene),
       width_(scene._width),
       height_(scene._height),
       color_buffer_(scene._width * scene._height, Color(0.0, 0.0, 0.0)),
       filename_(scene._name),
       ppm_(scene._width, scene._height){};
-
-/* void Renderer::render()
-void Renderer::render()
+ */
+Renderer::Renderer(unsigned w, unsigned h, std::string const &file)
+    : width_(w), height_(h), color_buffer_(w * h, Color(0.0, 0.0, 0.0)), filename_(file), ppm_(width_, height_)
 {
-  std::size_t const checker_pattern_size = 20;
-
-  for (unsigned y = 0; y < height_; ++y)
-  {
-    for (unsigned x = 0; x < width_; ++x)
-    {
-      Pixel p(x, y);
-      if (((x / checker_pattern_size) % 2) != ((y / checker_pattern_size) % 2))
-      {
-        p.color = Color(0.0, 1.0, float(x) / height_);
-      }
-      else
-      {
-        p.color = Color(1.0, 0.0, float(y) / width_);
-      }
-
-      write(p);
-    }
-  }
-  ppm_.save(filename_);
-} */
-
+}
 //Aufgabe 7.1 - von Scene gefundenen Shapes zu rendern
-void Renderer::render()
+void Renderer::render(Scene const& scene_)
 {
 
   for (unsigned y = 0; y < height_; ++y)
@@ -54,8 +33,7 @@ void Renderer::render()
     {
       Pixel p(x, y);
       Ray ray = scene_._camera.rayThroughPixel(x, y, width_, height_);
-      p.color = trace(ray);
-
+      p.color = trace(scene_, ray);
       write(p);
     }
   }
@@ -64,25 +42,11 @@ void Renderer::render()
 
 //Aufgabe 7.1 - raytrace
 
-Color Renderer::trace(Ray const &ray) const
+Color Renderer::trace(Scene const& scene_, Ray const &ray) const
 {
   Camera cam1 = {scene_._camera};
 
-  Color background{0.0, 0.0, 0.0};
-
-  Hit hit = get_closest(scene_, ray);
-
-  if (hit.isHit_)
-  {
-    Color current_color = (hit.obj_)->get_material_()->ka_;
-    return current_color;
-  }
-  else
-  {
-    return background;
-  }
-
-  /*   float dist = 0;
+  float dist;
   float dmin = 1000;
 
   bool is_intersect = true;
@@ -92,53 +56,46 @@ Color Renderer::trace(Ray const &ray) const
   for (int i = 0; i < scene_.shape_vector.size(); ++i)
   {
     is_intersect = (*scene_.shape_vector[i]).intersect(ray, dist);
-    //cout<<distance<<endl;
-    if (is_intersect)
+    if (is_intersect && dist < dmin)
     {
-#if PRINT_DEBUG_INFO
-      cout << "true" << endl;
-#endif
-
-      if (dist < dmin)
-      {
-        dmin = dist;
-        closest_object_index = i;
-      }
+      dmin = dist;
+      closest_object_index = i;
     }
   }
 
   if (closest_object_index != -1)
   {
-#if PRINT_DEBUG_INFO
-    cout << "nicht intersection" << endl;
-#endif
-
-    return (scene_.shape_vector[closest_object_index])->get_material_()->ka_;
+    Color col = shade(scene_, ray, *scene_.light_vector[0], closest_object_index);
+    Color temp = (scene_.shape_vector[closest_object_index])->get_material_()->ka_;
+    return col;
   }
 
   else
   {
-    return Color{0, 0, 0};
-  } */
+    return Color{0.4f, 0.4f, 0.4f};
+  }
 }
 
-Hit Renderer::get_closest(Scene const &scene_, Ray const &ray) const
+Color Renderer::shade(Scene const& scene_, Ray const &ray, Light const &light, int &closest) const
 {
+  // Difusse Refektion
+  Hit h = scene_.shape_vector[closest]->intersect_hit(ray);
+  glm::vec3 light_vector = glm::normalize(light._origin - h.coor_);
+  float cosPhi = std::max(glm::dot(light_vector, h.normal_), 0.0f);
+  Color lightIntensity{light._color.r * light._brightness, light._color.g * light._brightness, light._color.b * light._brightness};
+  // Color lightIntensity = light._color;
+  Color diffuColor = (lightIntensity) * (scene_.shape_vector[closest]->get_material_()->kd_) * cosPhi;
 
-  Hit current_hit;
-  Hit closest_hit;
+  // Ambiente Color
+  Color ambColor = (scene_._ambient.color_) * (scene_.shape_vector[closest]->get_material_()->ka_);
 
-  for (std::shared_ptr<Shape> shapes_ptr : scene_.shape_vector)
-  {
-    current_hit = (*shapes_ptr).intersect(ray);
+  // Spekulare Licht
+  glm::vec3 reflekLichtVektor = glm::normalize(2 * glm::dot(h.normal_, light_vector) * (h.normal_) - light_vector);
+  float cosBeta = std::max(glm::dot(reflekLichtVektor, -ray.direction), 0.0f);
+  Color spekColor = (scene_.shape_vector[closest]->get_material_()->ks_) * std::pow(cosBeta, scene_.shape_vector[closest]->get_material_()->m_);
 
-    if (current_hit.distance_ < closest_hit.distance_)
-    {
-      closest_hit = current_hit;
-    }
-  }
-
-  return closest_hit;
+  Color endColor = diffuColor + ambColor + spekColor;
+  return endColor;
 }
 
 void Renderer::write(Pixel const &p)
@@ -160,21 +117,22 @@ void Renderer::write(Pixel const &p)
   ppm_.write(p);
 }
 
-Color Renderer::shade(std::shared_ptr<Shape> const &shape, Ray const &ray, float &distance) const
+//Checkerboard
+void Renderer::render()
 {
-  glm::vec3 x_point = get_point(distance,ray);
+  std::size_t const checker_pattern_size = 20;
 
-  return Color{1.0, 1.0, 1.0};
-}
+  for (unsigned y = 0; y < height_; ++y) {
+    for (unsigned x = 0; x < width_; ++x) {
+      Pixel p(x,y);
+      if ( ((x/checker_pattern_size)%2) != ((y/checker_pattern_size)%2)) {
+        p.color = Color(0.0, 1.0, float(x)/height_);
+      } else {
+        p.color = Color(1.0, 0.0, float(y)/width_);
+      }
 
-Color Renderer::evaluate_diffusion(Light const &light, std::shared_ptr<Shape> const &shape, Ray const &ray, float &distance) const
-{
-  glm::vec3 normal = get_point(distance,ray);
-  return Color{1.0, 1.0, 1.0};
-}
-
-Color Renderer::evaluate_color(std::shared_ptr<Shape> const &shape, glm::vec3 const &cut, glm::vec3 const &normal, Scene const &scene, Ray const &ray) const
-{
-  Color result{1.0f, 1.0f, 1.0f};
-  return result;
+      write(p);
+    }
+  }
+  ppm_.save(filename_);
 }

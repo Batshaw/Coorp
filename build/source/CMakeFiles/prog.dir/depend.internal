@@ -95,6 +95,7 @@ source/CMakeFiles/prog.dir/prog.cpp.o
  ../framework/Scene.hpp
  ../framework/Shape.hpp
  ../framework/Sphere.hpp
+ ../framework/ambient.hpp
  ../framework/color.hpp
  ../framework/findmaterial.hpp
  ../framework/material.hpp
@@ -103,4 +104,4 @@ source/CMakeFiles/prog.dir/prog.cpp.o
  ../framework/renderer.hpp
  ../framework/sdfloader.hpp
  ../framework/window.hpp
- /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/source/prog.cpp
+ /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/source/prog.cpp

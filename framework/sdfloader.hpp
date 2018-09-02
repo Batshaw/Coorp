@@ -50,8 +50,6 @@ void load_sdf(std::string filename, Scene &scene)
                                                                                         material_koof[9]);
 
                     scene.material_vector.push_back(neu_material);
-                    /*                     scene.material_map.insert(make_pair(neu_material->name_, neu_material));
-                    scene.material_set.insert(neu_material); */
                 }
 
                 else if ("shape" == variable_name)
@@ -136,6 +134,20 @@ void load_sdf(std::string filename, Scene &scene)
                     current_line_stream >> temp._fov_x;
 
                     scene._camera = temp;
+                }
+
+                else if ("ambient" == variable_name){
+                    float ambient_att[3];
+
+                    for (int i = 0; i < 3; i++)
+                    {
+                        current_line_stream >> ambient_att[i];
+                    }
+
+                    Ambient temp{Color(ambient_att[0], ambient_att[1], ambient_att[2])};
+
+                    scene._ambient = temp;
+
                 }
             }
 

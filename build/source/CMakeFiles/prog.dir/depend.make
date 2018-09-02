@@ -94,6 +94,7 @@ source/CMakeFiles/prog.dir/prog.cpp.o: ../framework/Ray.hpp
 source/CMakeFiles/prog.dir/prog.cpp.o: ../framework/Scene.hpp
 source/CMakeFiles/prog.dir/prog.cpp.o: ../framework/Shape.hpp
 source/CMakeFiles/prog.dir/prog.cpp.o: ../framework/Sphere.hpp
+source/CMakeFiles/prog.dir/prog.cpp.o: ../framework/ambient.hpp
 source/CMakeFiles/prog.dir/prog.cpp.o: ../framework/color.hpp
 source/CMakeFiles/prog.dir/prog.cpp.o: ../framework/findmaterial.hpp
 source/CMakeFiles/prog.dir/prog.cpp.o: ../framework/material.hpp

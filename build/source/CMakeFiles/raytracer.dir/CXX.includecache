@@ -703,6 +703,8 @@ string
 -
 glm/vec3.hpp
 -
+Ray.hpp
+../framework/Ray.hpp
 
 ../framework/Hit.hpp
 glm/vec3.hpp
@@ -751,6 +753,8 @@ Light.hpp
 ../framework/Light.hpp
 Camera.hpp
 ../framework/Camera.hpp
+ambient.hpp
+../framework/ambient.hpp
 
 ../framework/Shape.hpp
 string
@@ -786,6 +790,10 @@ glm/vec3.hpp
 material.hpp
 ../framework/material.hpp
 
+../framework/ambient.hpp
+color.hpp
+../framework/color.hpp
+
 ../framework/color.hpp
 iostream
 -
@@ -817,8 +825,6 @@ Scene.hpp
 ../framework/Scene.hpp
 color.hpp
 ../framework/color.hpp
-Ray.hpp
-../framework/Ray.hpp
 pixel.hpp
 ../framework/pixel.hpp
 ppmwriter.hpp
@@ -850,7 +856,7 @@ array
 string
 -
 
-/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/source/raytracer.cpp
+/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/source/raytracer.cpp
 renderer.hpp
 -
 window.hpp
@@ -864,7 +870,7 @@ utility
 cmath
 -
 Scene.hpp
-/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/source/Scene.hpp
+/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/source/Scene.hpp
 Camera.hpp
-/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/source/Camera.hpp
+/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/source/Camera.hpp
 

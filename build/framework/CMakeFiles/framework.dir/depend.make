@@ -370,6 +370,7 @@ framework/CMakeFiles/framework.dir/renderer.cpp.o: ../framework/Ray.hpp
 framework/CMakeFiles/framework.dir/renderer.cpp.o: ../framework/Scene.hpp
 framework/CMakeFiles/framework.dir/renderer.cpp.o: ../framework/Shape.hpp
 framework/CMakeFiles/framework.dir/renderer.cpp.o: ../framework/Sphere.hpp
+framework/CMakeFiles/framework.dir/renderer.cpp.o: ../framework/ambient.hpp
 framework/CMakeFiles/framework.dir/renderer.cpp.o: ../framework/color.hpp
 framework/CMakeFiles/framework.dir/renderer.cpp.o: ../framework/material.hpp
 framework/CMakeFiles/framework.dir/renderer.cpp.o: ../framework/pixel.hpp

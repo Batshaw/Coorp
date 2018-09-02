@@ -12,7 +12,6 @@
 
 #include "Scene.hpp"
 #include "color.hpp"
-#include "Ray.hpp"
 #include "pixel.hpp"
 #include "ppmwriter.hpp"
 #include "Scene.hpp"
@@ -22,17 +21,17 @@
 class Renderer
 {
 public:
-  //Renderer(unsigned w, unsigned h, std::string const& file);
-  Renderer(Scene const &scene);
+  Renderer(unsigned w, unsigned h, std::string const &file);
+  //Renderer(Scene const &scene);
 
+  void render(Scene const &scene_);
+
+  //Checkerboard
   void render();
 
-  Color trace(Ray const &ray) const;
+  Color trace(Scene const &scene_, Ray const &ray) const;
   void write(Pixel const &p);
-  Hit get_closest(Scene const &scene, Ray const &ray) const;
-  Color shade(std::shared_ptr<Shape> const &shape, Ray const &ray, float &distance) const;
-  Color evaluate_diffusion(Light const &light, std::shared_ptr<Shape> const &shape, Ray const &ray, float &distance) const;
-  Color evaluate_color(std::shared_ptr<Shape> const& shape, glm::vec3 const& cut, glm::vec3 const& normal, Scene const& scene, Ray const& ray) const;
+  Color shade(Scene const &scene_, Ray const &ray, Light const &light, int &closest) const;
 
   inline std::vector<Color> const &color_buffer() const
   {
@@ -40,7 +39,6 @@ public:
   }
 
 private:
-  Scene scene_;
   unsigned width_;
   unsigned height_;
   std::vector<Color> color_buffer_;

@@ -3,6 +3,7 @@
 
 #include <string>
 #include <glm/vec3.hpp>
+#include "Ray.hpp"
 
 struct Camera
 {
@@ -27,11 +28,9 @@ struct Camera
     Ray rayThroughPixel(float x, float y, float width_, float height_) const{
         glm::vec3 origin{0.0f, 0.0f, 0.0f};
         glm::vec3 direction{x-width_/2, y-height_/2, -(width_/2)/tan(_fov_x/2)};   //tan(Öffnungswinkel/2)=(width/2)/distance von Camera zum Bildebene.
-        Ray rayCamera{origin, glm::normalize(direction) };
+        Ray rayCamera{origin, direction};
         return rayCamera;
     }
-    
-
     
 };
 

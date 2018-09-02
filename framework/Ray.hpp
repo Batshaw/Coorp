@@ -4,6 +4,7 @@
 #include <glm/glm.hpp>
 #include <glm/vec3.hpp>
 
+
 struct Ray
 {
     glm::vec3 origin = {0.0f, 0.0f, 0.0f};
@@ -14,12 +15,10 @@ struct Ray
     Ray(glm::vec3 origin_, glm::vec3 direction_) : origin{origin_}, direction{glm::normalize(direction_)} {}
 };
 
-glm::vec3 get_point(float t_, Ray const &ray)
-{
-    return ray.origin + ray.direction * t_;
-}
+#endif
 
-Ray transformRay(glm::mat4 const &mat, Ray const &ray)
+
+/* Ray transformRay(glm::mat4 const &mat, Ray const &ray)
 {
     glm::vec4 o_{ray.origin, 1.0f};    //Punkte
     glm::vec4 d_{ray.direction, 0.0f}; //Vector
@@ -30,5 +29,4 @@ Ray transformRay(glm::mat4 const &mat, Ray const &ray)
 
     return Ray{origin_, direction_};
 }
-
-#endif
+ */

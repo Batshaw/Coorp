@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp
+CMAKE_SOURCE_DIR = /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build
+CMAKE_BINARY_DIR = /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -88,17 +88,6 @@ list_install_components/fast: list_install_components
 
 .PHONY : list_install_components/fast
 
-# Special rule for the target install/local
-install/local: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
-	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
-.PHONY : install/local
-
-# Special rule for the target install/local
-install/local/fast: install/local
-
-.PHONY : install/local/fast
-
 # Special rule for the target install/strip
 install/strip: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
@@ -122,16 +111,27 @@ install/fast: preinstall/fast
 	/usr/bin/cmake -P cmake_install.cmake
 .PHONY : install/fast
 
+# Special rule for the target install/local
+install/local: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local
+
+# Special rule for the target install/local
+install/local/fast: install/local
+
+.PHONY : install/local/fast
+
 # The main all target
 all: cmake_check_build_system
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(CMAKE_COMMAND) -E cmake_progress_start /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build/CMakeFiles /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build/source/CMakeFiles/progress.marks
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(MAKE) -f CMakeFiles/Makefile2 source/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build/CMakeFiles 0
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(CMAKE_COMMAND) -E cmake_progress_start /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build/CMakeFiles /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build/source/CMakeFiles/progress.marks
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(MAKE) -f CMakeFiles/Makefile2 source/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(MAKE) -f CMakeFiles/Makefile2 source/clean
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(MAKE) -f CMakeFiles/Makefile2 source/clean
 .PHONY : clean
 
 # The main clean target
@@ -141,22 +141,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(MAKE) -f CMakeFiles/Makefile2 source/preinstall
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(MAKE) -f CMakeFiles/Makefile2 source/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(MAKE) -f CMakeFiles/Makefile2 source/preinstall
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(MAKE) -f CMakeFiles/Makefile2 source/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 source/CMakeFiles/example.dir/rule:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(MAKE) -f CMakeFiles/Makefile2 source/CMakeFiles/example.dir/rule
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(MAKE) -f CMakeFiles/Makefile2 source/CMakeFiles/example.dir/rule
 .PHONY : source/CMakeFiles/example.dir/rule
 
 # Convenience name for target.
@@ -166,12 +166,12 @@ example: source/CMakeFiles/example.dir/rule
 
 # fast build rule for target.
 example/fast:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(MAKE) -f source/CMakeFiles/example.dir/build.make source/CMakeFiles/example.dir/build
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(MAKE) -f source/CMakeFiles/example.dir/build.make source/CMakeFiles/example.dir/build
 .PHONY : example/fast
 
 # Convenience name for target.
 source/CMakeFiles/prog.dir/rule:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(MAKE) -f CMakeFiles/Makefile2 source/CMakeFiles/prog.dir/rule
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(MAKE) -f CMakeFiles/Makefile2 source/CMakeFiles/prog.dir/rule
 .PHONY : source/CMakeFiles/prog.dir/rule
 
 # Convenience name for target.
@@ -181,12 +181,12 @@ prog: source/CMakeFiles/prog.dir/rule
 
 # fast build rule for target.
 prog/fast:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(MAKE) -f source/CMakeFiles/prog.dir/build.make source/CMakeFiles/prog.dir/build
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(MAKE) -f source/CMakeFiles/prog.dir/build.make source/CMakeFiles/prog.dir/build
 .PHONY : prog/fast
 
 # Convenience name for target.
 source/CMakeFiles/raytracer.dir/rule:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(MAKE) -f CMakeFiles/Makefile2 source/CMakeFiles/raytracer.dir/rule
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(MAKE) -f CMakeFiles/Makefile2 source/CMakeFiles/raytracer.dir/rule
 .PHONY : source/CMakeFiles/raytracer.dir/rule
 
 # Convenience name for target.
@@ -196,23 +196,8 @@ raytracer: source/CMakeFiles/raytracer.dir/rule
 
 # fast build rule for target.
 raytracer/fast:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(MAKE) -f source/CMakeFiles/raytracer.dir/build.make source/CMakeFiles/raytracer.dir/build
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(MAKE) -f source/CMakeFiles/raytracer.dir/build.make source/CMakeFiles/raytracer.dir/build
 .PHONY : raytracer/fast
-
-# Convenience name for target.
-source/CMakeFiles/test_r.dir/rule:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(MAKE) -f CMakeFiles/Makefile2 source/CMakeFiles/test_r.dir/rule
-.PHONY : source/CMakeFiles/test_r.dir/rule
-
-# Convenience name for target.
-test_r: source/CMakeFiles/test_r.dir/rule
-
-.PHONY : test_r
-
-# fast build rule for target.
-test_r/fast:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(MAKE) -f source/CMakeFiles/test_r.dir/build.make source/CMakeFiles/test_r.dir/build
-.PHONY : test_r/fast
 
 example.o: example.cpp.o
 
@@ -220,7 +205,7 @@ example.o: example.cpp.o
 
 # target to build an object file
 example.cpp.o:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(MAKE) -f source/CMakeFiles/example.dir/build.make source/CMakeFiles/example.dir/example.cpp.o
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(MAKE) -f source/CMakeFiles/example.dir/build.make source/CMakeFiles/example.dir/example.cpp.o
 .PHONY : example.cpp.o
 
 example.i: example.cpp.i
@@ -229,7 +214,7 @@ example.i: example.cpp.i
 
 # target to preprocess a source file
 example.cpp.i:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(MAKE) -f source/CMakeFiles/example.dir/build.make source/CMakeFiles/example.dir/example.cpp.i
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(MAKE) -f source/CMakeFiles/example.dir/build.make source/CMakeFiles/example.dir/example.cpp.i
 .PHONY : example.cpp.i
 
 example.s: example.cpp.s
@@ -238,7 +223,7 @@ example.s: example.cpp.s
 
 # target to generate assembly for a file
 example.cpp.s:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(MAKE) -f source/CMakeFiles/example.dir/build.make source/CMakeFiles/example.dir/example.cpp.s
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(MAKE) -f source/CMakeFiles/example.dir/build.make source/CMakeFiles/example.dir/example.cpp.s
 .PHONY : example.cpp.s
 
 prog.o: prog.cpp.o
@@ -247,7 +232,7 @@ prog.o: prog.cpp.o
 
 # target to build an object file
 prog.cpp.o:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(MAKE) -f source/CMakeFiles/prog.dir/build.make source/CMakeFiles/prog.dir/prog.cpp.o
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(MAKE) -f source/CMakeFiles/prog.dir/build.make source/CMakeFiles/prog.dir/prog.cpp.o
 .PHONY : prog.cpp.o
 
 prog.i: prog.cpp.i
@@ -256,7 +241,7 @@ prog.i: prog.cpp.i
 
 # target to preprocess a source file
 prog.cpp.i:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(MAKE) -f source/CMakeFiles/prog.dir/build.make source/CMakeFiles/prog.dir/prog.cpp.i
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(MAKE) -f source/CMakeFiles/prog.dir/build.make source/CMakeFiles/prog.dir/prog.cpp.i
 .PHONY : prog.cpp.i
 
 prog.s: prog.cpp.s
@@ -265,7 +250,7 @@ prog.s: prog.cpp.s
 
 # target to generate assembly for a file
 prog.cpp.s:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(MAKE) -f source/CMakeFiles/prog.dir/build.make source/CMakeFiles/prog.dir/prog.cpp.s
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(MAKE) -f source/CMakeFiles/prog.dir/build.make source/CMakeFiles/prog.dir/prog.cpp.s
 .PHONY : prog.cpp.s
 
 raytracer.o: raytracer.cpp.o
@@ -274,7 +259,7 @@ raytracer.o: raytracer.cpp.o
 
 # target to build an object file
 raytracer.cpp.o:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(MAKE) -f source/CMakeFiles/raytracer.dir/build.make source/CMakeFiles/raytracer.dir/raytracer.cpp.o
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(MAKE) -f source/CMakeFiles/raytracer.dir/build.make source/CMakeFiles/raytracer.dir/raytracer.cpp.o
 .PHONY : raytracer.cpp.o
 
 raytracer.i: raytracer.cpp.i
@@ -283,7 +268,7 @@ raytracer.i: raytracer.cpp.i
 
 # target to preprocess a source file
 raytracer.cpp.i:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(MAKE) -f source/CMakeFiles/raytracer.dir/build.make source/CMakeFiles/raytracer.dir/raytracer.cpp.i
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(MAKE) -f source/CMakeFiles/raytracer.dir/build.make source/CMakeFiles/raytracer.dir/raytracer.cpp.i
 .PHONY : raytracer.cpp.i
 
 raytracer.s: raytracer.cpp.s
@@ -292,35 +277,8 @@ raytracer.s: raytracer.cpp.s
 
 # target to generate assembly for a file
 raytracer.cpp.s:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(MAKE) -f source/CMakeFiles/raytracer.dir/build.make source/CMakeFiles/raytracer.dir/raytracer.cpp.s
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(MAKE) -f source/CMakeFiles/raytracer.dir/build.make source/CMakeFiles/raytracer.dir/raytracer.cpp.s
 .PHONY : raytracer.cpp.s
-
-test_r.o: test_r.cpp.o
-
-.PHONY : test_r.o
-
-# target to build an object file
-test_r.cpp.o:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(MAKE) -f source/CMakeFiles/test_r.dir/build.make source/CMakeFiles/test_r.dir/test_r.cpp.o
-.PHONY : test_r.cpp.o
-
-test_r.i: test_r.cpp.i
-
-.PHONY : test_r.i
-
-# target to preprocess a source file
-test_r.cpp.i:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(MAKE) -f source/CMakeFiles/test_r.dir/build.make source/CMakeFiles/test_r.dir/test_r.cpp.i
-.PHONY : test_r.cpp.i
-
-test_r.s: test_r.cpp.s
-
-.PHONY : test_r.s
-
-# target to generate assembly for a file
-test_r.cpp.s:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(MAKE) -f source/CMakeFiles/test_r.dir/build.make source/CMakeFiles/test_r.dir/test_r.cpp.s
-.PHONY : test_r.cpp.s
 
 # Help Target
 help:
@@ -331,13 +289,12 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... list_install_components"
-	@echo "... install/local"
 	@echo "... example"
 	@echo "... prog"
 	@echo "... raytracer"
 	@echo "... install/strip"
-	@echo "... test_r"
 	@echo "... install"
+	@echo "... install/local"
 	@echo "... example.o"
 	@echo "... example.i"
 	@echo "... example.s"
@@ -347,9 +304,6 @@ help:
 	@echo "... raytracer.o"
 	@echo "... raytracer.i"
 	@echo "... raytracer.s"
-	@echo "... test_r.o"
-	@echo "... test_r.i"
-	@echo "... test_r.s"
 .PHONY : help
 
 
@@ -361,6 +315,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

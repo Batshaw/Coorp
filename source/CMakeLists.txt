@@ -25,11 +25,3 @@ target_link_libraries(prog ${FRAMEWORK_NAME} ${LIBRARIES}
 add_dependencies(prog glfw ${FRAMEWORK_NAME} ${COPY_BINARY})
 
 install(TARGETS prog DESTINATION .)
-
-# Build test_r
-add_executable(test_r
-test_r.cpp)
-target_link_libraries(test_r
-  ${GLFW_LIBRARIES}
-  ${FRAMEWORK_NAME}
-  )

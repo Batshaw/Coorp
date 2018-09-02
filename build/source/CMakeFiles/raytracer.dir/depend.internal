@@ -95,10 +95,11 @@ source/CMakeFiles/raytracer.dir/raytracer.cpp.o
  ../framework/Scene.hpp
  ../framework/Shape.hpp
  ../framework/Sphere.hpp
+ ../framework/ambient.hpp
  ../framework/color.hpp
  ../framework/material.hpp
  ../framework/pixel.hpp
  ../framework/ppmwriter.hpp
  ../framework/renderer.hpp
  ../framework/window.hpp
- /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/Coorp/source/raytracer.cpp
+ /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/source/raytracer.cpp
