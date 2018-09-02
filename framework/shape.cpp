@@ -15,6 +15,9 @@ Shape::Shape(std::string const& name, std::shared_ptr<Material> const& material)
         // std::cout<< "Constructor of Shape!"<< std::endl;
     }
 
+    Shape::Shape(std::string const& name, std::shared_ptr<Material> const& material, glm::mat4 worldTransform):
+        name_{name}, material_{material}, world_transformation_{worldTransform}, world_transformation_inv_{glm::inverse(worldTransform)} {}
+
 // Destruktor (Aufgabe8):
 Shape::~Shape() {
     // std::cout<< "Destruction of Shape!"<< std::endl;
