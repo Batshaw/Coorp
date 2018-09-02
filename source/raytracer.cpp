@@ -1,25 +1,35 @@
+#include "Scene.hpp"
+#include "material.hpp"
+
 #include <renderer.hpp>
 #include <window.hpp>
+#include "sdfloader.hpp"
 
 #include <GLFW/glfw3.h>
 #include <thread>
 #include <utility>
 #include <cmath>
-#include "Scene.hpp"
-#include "Camera.hpp"
 
 int main(int argc, char *argv[])
 {
-  unsigned const image_width = 800;
-  unsigned const image_height = 600;
-  std::string const filename = "./checkerboard.ppm";
 
-  Renderer renderer{image_width, image_height, filename};
+  /* Scene scene1{};
+    load_sdf("scene1.sdf", scene1);
+ */
+  Scene scene2{};
+  load_sdf("scene2.sdf", scene2);
 
-  //create separate thread to see updates of pixels while rendering
-  std::thread render_thread([&renderer]() { renderer.render();});
+  Renderer renderer{scene2};
+  std::thread render_thread([&renderer]() {
+    renderer.render();
+  });
 
-  Window window{{image_width, image_height}};
+  for (std::shared_ptr<Shape> shape : scene2.shape_vector)
+  {
+    cout << *shape << std::endl;
+  }
+
+  Window window{{scene2._width, scene2._height}};
 
   while (!window.should_close())
   {
@@ -28,9 +38,8 @@ int main(int argc, char *argv[])
       window.close();
     }
     window.show(renderer.color_buffer());
-  };
-
-  //"join" threads, i.e. synchronize main thread with render_thread
+  }
   render_thread.join();
+
   return 0;
 }

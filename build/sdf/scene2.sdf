@@ -1,8 +1,8 @@
 # materials
 define material red 1 0 0 1 0 0 1 0 0 1
 define material blue 0 0 1 0 0 1 0 0 1 1
-define material test1 1 0 1 0 1 1 0 0 1 1
-define material test2 0 1 1 1 0 1 0 1 1 1
+define material test1 1 0 1 0 1 1 0 1 1 1
+define material test2 0 1 1 1 0 1 1 1 1 1
 # geometry
 define shape box rbottom -25 -20 -70 15 5 -60 blue
 define shape box run -35 20 -100 -25 35 -70 test1

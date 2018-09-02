@@ -78,6 +78,5 @@ set(CMAKE_DEPEND_INFO_FILES
   "external/glfw-3.2.1/docs/CMakeFiles/docs.dir/DependInfo.cmake"
   "framework/CMakeFiles/framework.dir/DependInfo.cmake"
   "source/CMakeFiles/example.dir/DependInfo.cmake"
-  "source/CMakeFiles/prog.dir/DependInfo.cmake"
   "source/CMakeFiles/raytracer.dir/DependInfo.cmake"
   )

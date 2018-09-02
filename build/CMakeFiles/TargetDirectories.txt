@@ -34,10 +34,9 @@
 /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build/framework/CMakeFiles/list_install_components.dir
 /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build/source/CMakeFiles/rebuild_cache.dir
 /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build/source/CMakeFiles/edit_cache.dir
-/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build/source/CMakeFiles/list_install_components.dir
 /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build/source/CMakeFiles/example.dir
-/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build/source/CMakeFiles/prog.dir
 /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build/source/CMakeFiles/raytracer.dir
 /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build/source/CMakeFiles/install/strip.dir
 /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build/source/CMakeFiles/install.dir
 /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build/source/CMakeFiles/install/local.dir
+/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build/source/CMakeFiles/list_install_components.dir

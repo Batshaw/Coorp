@@ -11,20 +11,20 @@
 
 #define PRINT_DEBUG_INFO 0
 
-/* Renderer::Renderer(Scene const &scene)
+Renderer::Renderer(Scene const &scene)
     : scene_(scene),
       width_(scene._width),
       height_(scene._height),
       color_buffer_(scene._width * scene._height, Color(0.0, 0.0, 0.0)),
       filename_(scene._name),
       ppm_(scene._width, scene._height){};
- */
-Renderer::Renderer(unsigned w, unsigned h, std::string const &file)
+
+/* Renderer::Renderer(unsigned w, unsigned h, std::string const &file)
     : width_(w), height_(h), color_buffer_(w * h, Color(0.0, 0.0, 0.0)), filename_(file), ppm_(width_, height_)
 {
-}
+} */
 //Aufgabe 7.1 - von Scene gefundenen Shapes zu rendern
-void Renderer::render(Scene const& scene_)
+void Renderer::render()
 {
 
   for (unsigned y = 0; y < height_; ++y)
@@ -33,7 +33,7 @@ void Renderer::render(Scene const& scene_)
     {
       Pixel p(x, y);
       Ray ray = scene_._camera.rayThroughPixel(x, y, width_, height_);
-      p.color = trace(scene_, ray);
+      p.color = trace(ray);
       write(p);
     }
   }
@@ -42,7 +42,7 @@ void Renderer::render(Scene const& scene_)
 
 //Aufgabe 7.1 - raytrace
 
-Color Renderer::trace(Scene const& scene_, Ray const &ray) const
+Color Renderer::trace(Ray const &ray) const
 {
   Camera cam1 = {scene_._camera};
 
@@ -65,7 +65,7 @@ Color Renderer::trace(Scene const& scene_, Ray const &ray) const
 
   if (closest_object_index != -1)
   {
-    Color col = shade(scene_, ray, *scene_.light_vector[0], closest_object_index);
+    Color col = shade(ray, *scene_.light_vector[0], closest_object_index);
     Color temp = (scene_.shape_vector[closest_object_index])->get_material_()->ka_;
     return col;
   }
@@ -76,7 +76,7 @@ Color Renderer::trace(Scene const& scene_, Ray const &ray) const
   }
 }
 
-Color Renderer::shade(Scene const& scene_, Ray const &ray, Light const &light, int &closest) const
+Color Renderer::shade(Ray const &ray, Light const &light, int &closest) const
 {
   // Difusse Refektion
   Hit h = scene_.shape_vector[closest]->intersect_hit(ray);
@@ -118,7 +118,7 @@ void Renderer::write(Pixel const &p)
 }
 
 //Checkerboard
-void Renderer::render()
+/* void Renderer::render()
 {
   std::size_t const checker_pattern_size = 20;
 
@@ -135,4 +135,4 @@ void Renderer::render()
     }
   }
   ppm_.save(filename_);
-}
+} */

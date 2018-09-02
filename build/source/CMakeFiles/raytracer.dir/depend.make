@@ -96,10 +96,12 @@ source/CMakeFiles/raytracer.dir/raytracer.cpp.o: ../framework/Shape.hpp
 source/CMakeFiles/raytracer.dir/raytracer.cpp.o: ../framework/Sphere.hpp
 source/CMakeFiles/raytracer.dir/raytracer.cpp.o: ../framework/ambient.hpp
 source/CMakeFiles/raytracer.dir/raytracer.cpp.o: ../framework/color.hpp
+source/CMakeFiles/raytracer.dir/raytracer.cpp.o: ../framework/findmaterial.hpp
 source/CMakeFiles/raytracer.dir/raytracer.cpp.o: ../framework/material.hpp
 source/CMakeFiles/raytracer.dir/raytracer.cpp.o: ../framework/pixel.hpp
 source/CMakeFiles/raytracer.dir/raytracer.cpp.o: ../framework/ppmwriter.hpp
 source/CMakeFiles/raytracer.dir/raytracer.cpp.o: ../framework/renderer.hpp
+source/CMakeFiles/raytracer.dir/raytracer.cpp.o: ../framework/sdfloader.hpp
 source/CMakeFiles/raytracer.dir/raytracer.cpp.o: ../framework/window.hpp
 source/CMakeFiles/raytracer.dir/raytracer.cpp.o: ../source/raytracer.cpp
 

@@ -78,16 +78,6 @@ edit_cache/fast: edit_cache
 
 .PHONY : edit_cache/fast
 
-# Special rule for the target list_install_components
-list_install_components:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
-.PHONY : list_install_components
-
-# Special rule for the target list_install_components
-list_install_components/fast: list_install_components
-
-.PHONY : list_install_components/fast
-
 # Special rule for the target install/strip
 install/strip: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
@@ -121,6 +111,16 @@ install/local: preinstall
 install/local/fast: install/local
 
 .PHONY : install/local/fast
+
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
+.PHONY : list_install_components
+
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
+
+.PHONY : list_install_components/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -170,21 +170,6 @@ example/fast:
 .PHONY : example/fast
 
 # Convenience name for target.
-source/CMakeFiles/prog.dir/rule:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(MAKE) -f CMakeFiles/Makefile2 source/CMakeFiles/prog.dir/rule
-.PHONY : source/CMakeFiles/prog.dir/rule
-
-# Convenience name for target.
-prog: source/CMakeFiles/prog.dir/rule
-
-.PHONY : prog
-
-# fast build rule for target.
-prog/fast:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(MAKE) -f source/CMakeFiles/prog.dir/build.make source/CMakeFiles/prog.dir/build
-.PHONY : prog/fast
-
-# Convenience name for target.
 source/CMakeFiles/raytracer.dir/rule:
 	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(MAKE) -f CMakeFiles/Makefile2 source/CMakeFiles/raytracer.dir/rule
 .PHONY : source/CMakeFiles/raytracer.dir/rule
@@ -226,33 +211,6 @@ example.cpp.s:
 	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(MAKE) -f source/CMakeFiles/example.dir/build.make source/CMakeFiles/example.dir/example.cpp.s
 .PHONY : example.cpp.s
 
-prog.o: prog.cpp.o
-
-.PHONY : prog.o
-
-# target to build an object file
-prog.cpp.o:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(MAKE) -f source/CMakeFiles/prog.dir/build.make source/CMakeFiles/prog.dir/prog.cpp.o
-.PHONY : prog.cpp.o
-
-prog.i: prog.cpp.i
-
-.PHONY : prog.i
-
-# target to preprocess a source file
-prog.cpp.i:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(MAKE) -f source/CMakeFiles/prog.dir/build.make source/CMakeFiles/prog.dir/prog.cpp.i
-.PHONY : prog.cpp.i
-
-prog.s: prog.cpp.s
-
-.PHONY : prog.s
-
-# target to generate assembly for a file
-prog.cpp.s:
-	cd /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/build && $(MAKE) -f source/CMakeFiles/prog.dir/build.make source/CMakeFiles/prog.dir/prog.cpp.s
-.PHONY : prog.cpp.s
-
 raytracer.o: raytracer.cpp.o
 
 .PHONY : raytracer.o
@@ -288,19 +246,15 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
-	@echo "... list_install_components"
 	@echo "... example"
-	@echo "... prog"
 	@echo "... raytracer"
 	@echo "... install/strip"
 	@echo "... install"
 	@echo "... install/local"
+	@echo "... list_install_components"
 	@echo "... example.o"
 	@echo "... example.i"
 	@echo "... example.s"
-	@echo "... prog.o"
-	@echo "... prog.i"
-	@echo "... prog.s"
 	@echo "... raytracer.o"
 	@echo "... raytracer.i"
 	@echo "... raytracer.s"

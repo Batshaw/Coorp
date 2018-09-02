@@ -220,19 +220,6 @@ example/fast:
 .PHONY : example/fast
 
 #=============================================================================
-# Target rules for targets named prog
-
-# Build rule for target.
-prog: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 prog
-.PHONY : prog
-
-# fast build rule for target.
-prog/fast:
-	$(MAKE) -f source/CMakeFiles/prog.dir/build.make source/CMakeFiles/prog.dir/build
-.PHONY : prog/fast
-
-#=============================================================================
 # Target rules for targets named raytracer
 
 # Build rule for target.
@@ -289,7 +276,6 @@ help:
 	@echo "... docs"
 	@echo "... framework"
 	@echo "... example"
-	@echo "... prog"
 	@echo "... raytracer"
 	@echo "... external/nanovg/src/nanovg.o"
 	@echo "... external/nanovg/src/nanovg.i"

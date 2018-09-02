@@ -21,17 +21,14 @@
 class Renderer
 {
 public:
-  Renderer(unsigned w, unsigned h, std::string const &file);
-  //Renderer(Scene const &scene);
+  //Renderer(unsigned w, unsigned h, std::string const &file);
+  Renderer(Scene const &scene);
 
-  void render(Scene const &scene_);
-
-  //Checkerboard
   void render();
 
-  Color trace(Scene const &scene_, Ray const &ray) const;
+  Color trace(Ray const &ray) const;
   void write(Pixel const &p);
-  Color shade(Scene const &scene_, Ray const &ray, Light const &light, int &closest) const;
+  Color shade(Ray const &ray, Light const &light, int &closest) const;
 
   inline std::vector<Color> const &color_buffer() const
   {
@@ -39,6 +36,7 @@ public:
   }
 
 private:
+  Scene scene_;
   unsigned width_;
   unsigned height_;
   std::vector<Color> color_buffer_;

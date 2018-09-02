@@ -798,6 +798,18 @@ color.hpp
 iostream
 -
 
+../framework/findmaterial.hpp
+vector
+-
+material.hpp
+../framework/material.hpp
+string
+-
+memory
+-
+algorithm
+-
+
 ../framework/material.hpp
 ostream
 -
@@ -836,6 +848,12 @@ string
 glm/glm.hpp
 -
 
+../framework/sdfloader.hpp
+findmaterial.hpp
+../framework/findmaterial.hpp
+Scene.hpp
+../framework/Scene.hpp
+
 ../framework/window.hpp
 color.hpp
 ../framework/color.hpp
@@ -857,10 +875,16 @@ string
 -
 
 /media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/source/raytracer.cpp
+Scene.hpp
+/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/source/Scene.hpp
+material.hpp
+/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/source/material.hpp
 renderer.hpp
 -
 window.hpp
 -
+sdfloader.hpp
+/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/source/sdfloader.hpp
 GLFW/glfw3.h
 -
 thread
@@ -869,8 +893,4 @@ utility
 -
 cmath
 -
-Scene.hpp
-/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/source/Scene.hpp
-Camera.hpp
-/media/mapotoufu/DATA/Documents/00lesson/Universitaet/MI/Programiersprachen/programmiersprachen-raytracer/source/Camera.hpp
 
