@@ -14,7 +14,9 @@ transform rbottom translate 3 0 2
 transform rbottom rotate 45 1 0 0
 # light - from right above
 define light sun 500 800 0 1.0 1.0 1.0 10
-define ambient 0.5 0.5 0.5
+define light spot1 -500 -800 0 1.0 1.0 0.2 10
+define light spot2 -450 0 0 0.2 0.8 0.2 10
+#define ambient 0.1 0.2 0.2
 # camera
 define camera eye 45.0
 # ... and go

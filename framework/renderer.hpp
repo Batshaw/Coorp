@@ -28,7 +28,7 @@ public:
 
   Color trace(Ray const &ray) const;
   void write(Pixel const &p);
-  Color shade(Ray const &ray, Light const &light, int &closest) const;
+  Color shade(Ray const &ray, int &closest) const;
 
   inline std::vector<Color> const &color_buffer() const
   {

@@ -136,7 +136,8 @@ void load_sdf(std::string filename, Scene &scene)
                     scene._camera = temp;
                 }
 
-                else if ("ambient" == variable_name){
+                else if ("ambient" == variable_name)
+                {
                     float ambient_att[3];
 
                     for (int i = 0; i < 3; i++)
@@ -147,7 +148,6 @@ void load_sdf(std::string filename, Scene &scene)
                     Ambient temp{Color(ambient_att[0], ambient_att[1], ambient_att[2])};
 
                     scene._ambient = temp;
-
                 }
             }
 
@@ -194,10 +194,37 @@ void load_sdf(std::string filename, Scene &scene)
                         shape->scale(read_scale);
                         shape->rotate(read_float, read_rotate);
                         shape->translate(read_translate);
-
                     }
                 }
-                
+
+                if (scene._camera._name == obj_name)
+                {
+                    std::string transform;
+                    current_line_stream >> transform;
+
+                    glm::vec3 read_scale;
+                    glm::vec3 read_translate;
+                    float read_float;
+                    glm::vec3 read_rotate;
+
+                    if ("translate" == transform)
+                    {
+                        current_line_stream >> read_translate.x;
+                        current_line_stream >> read_translate.y;
+                        current_line_stream >> read_translate.z;
+                    }
+
+                    else if ("rotate" == transform)
+                    {
+                        current_line_stream >> read_float;
+                        current_line_stream >> read_rotate.x;
+                        current_line_stream >> read_rotate.y;
+                        current_line_stream >> read_rotate.z;
+                    }
+
+                    scene._camera.camera_rotate(read_float, read_rotate);
+                    scene._camera.camera_translate(read_translate);
+                }
             }
 
             else if ("render" == first_symbol)
@@ -207,17 +234,18 @@ void load_sdf(std::string filename, Scene &scene)
 
                 if (camera_name == scene._camera._name)
                 {
+                    std::string file_ext(".sdf");
                     std::string type;
                     current_line_stream >> type;
                     std::string extension;
                     current_line_stream >> extension;
+                    filename = filename.substr(0, filename.size() - file_ext.size());
 
                     scene._name = filename + "_" + type + extension;
 
                     current_line_stream >> scene._width;
                     current_line_stream >> scene._height;
                 }
-
             }
         }
     }
