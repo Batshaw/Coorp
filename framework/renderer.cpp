@@ -55,7 +55,7 @@ Color Renderer::trace(Scene const& scene, Ray const& ray){
   Camera camera = {scene.camera};
   Color temp{1.0f, 1.0f, 1.0f};
   float distance;
-  float dmin = 1000;
+  float dmin = std::numeric_limits<float>::max();
 
   bool is_intersect = true;
   int closetObjectIndex = -1;
@@ -63,7 +63,7 @@ Color Renderer::trace(Scene const& scene, Ray const& ray){
   for(int i = 0; i < scene.shape_vector.size(); ++i){
     is_intersect = (*scene.shape_vector[i]).intersect(ray, distance);
     if(is_intersect){
-      if( distance < dmin){
+      if(distance < dmin){
         dmin = distance;
         closetObjectIndex = i;
         // return (scene.shape_vector[closetObjectIndex])->getMaterial()->ka_;
@@ -109,18 +109,27 @@ Color Renderer::shade(Scene const& scene, Ray const& ray, int const closest){
   // Fuer beliebig vielen Lichtquellen
   for(int i = 0; i < scene.light_vector.size(); ++i){
     glm::vec3 lightVec = glm::normalize(scene.light_vector[i]->_origin - h.schnittPunkt_);
-    Ray lightHitRay{scene.light_vector[i]->_origin, lightVec};
+    Ray lightHitRay{h.schnittPunkt_, lightVec};
     bool imSchatten = false;
+    float t;
     // Check if lightVec have intersection with another Shape
     for(int a = 0; a < scene.shape_vector.size(); ++a){
       if(a != closest && imSchatten != true){
-        float t = 0;
         imSchatten = scene.shape_vector[a]->intersect(lightHitRay, t);
+        if(t < 0) {
+          imSchatten = false;
+        }
       }
+      // if(a != closest){
+      //   if(imSchatten != true){
+      //     imSchatten = scene.shape_vector[a]->intersect(lightHitRay, t);
+      //   }
+      // }
     }
+
     // When no intersect, put light :D
     if(imSchatten == false){
-      float cosPhi = std::max(glm::dot(lightVec, h.normalVector_), 0.0f);
+      float cosPhi = std::max(glm::dot(h.normalVector_, lightVec), 0.0f);
       Color lightIntensity{scene.light_vector[i]->_color.r*scene.light_vector[i]->_brightness, scene.light_vector[i]->_color.g*scene.light_vector[i]->_brightness, scene.light_vector[i]->_color.b*scene.light_vector[i]->_brightness};
       // Color lightIntensity = light._color;
       diffuColor += (lightIntensity)*(scene.shape_vector[closest]->getMaterial()->kd_)*cosPhi;

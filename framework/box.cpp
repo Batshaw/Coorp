@@ -169,7 +169,7 @@ Hit Box::intersectHit(Ray const& ray){
         if(schnittPunkt.z == Approx(max_.z)){
             normalVec = glm::vec3{0.0f, 0.0f, 1.0f};
         }
-        return Hit{true, t, this, normalVec, schnittPunkt};
+        return Hit{true, t, this, glm::normalize(normalVec), schnittPunkt};
     }
 
     return Hit{};

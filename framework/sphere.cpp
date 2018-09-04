@@ -75,7 +75,7 @@ Hit Sphere::intersectHit(Ray const& ray){
     auto squaredRadius = std::pow(radius_, 2);
     bool result = glm::intersectRaySphere(ray.origin, v, mittel_, squaredRadius, distance);
     if(result == true){
-        glm::vec3 schnittPunkt = ray.origin + distance*ray.direction;
+        glm::vec3 schnittPunkt = ray.origin + (distance*ray.direction);
         glm::vec3 normalVector = glm::normalize(schnittPunkt - mittel_);
         return Hit{true, distance, this, normalVector, schnittPunkt};
     }
