@@ -34,6 +34,7 @@ public:
   void render(Scene const& scene);
   Color trace(Scene const& scene, Ray const& ray);
   Color shade(Scene const& scene, Ray const& ray, int closest);
+  Color toneMapping(Color const& color);
   void write(Pixel const& p);
 
   inline std::vector<Color> const& color_buffer() const

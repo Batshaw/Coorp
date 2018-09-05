@@ -74,6 +74,7 @@ Color Renderer::trace(Scene const& scene, Ray const& ray){
   if(closetObjectIndex != -1){
     // cout << "nicht intersection" << endl;
     // return (scene.shape_vector[closetObjectIndex])->getMaterial()->ka_;
+    // Color cl = toneMapping(shade(scene, ray, closetObjectIndex));  Tone Mapping but ugly :((((
     Color cl = shade(scene, ray, closetObjectIndex);
     return cl;
   }
@@ -146,6 +147,15 @@ Color Renderer::shade(Scene const& scene, Ray const& ray, int const closest){
   // End color
   Color endColor = diffuColor + ambColor + spekColor;
   return endColor;
+}
+
+Color Renderer::toneMapping(Color const& color){
+  Color outColor = {0.0f, 0.0f, 0.0f};
+  outColor.r = color.r/(color.r + 1);
+  outColor.g = color.g/(color.g + 1);
+  outColor.b = color.b/(color.b + 1);
+  
+  return outColor;
 }
 
 void Renderer::write(Pixel const& p)
