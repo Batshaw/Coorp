@@ -2,7 +2,7 @@
 define material red 1 0 0 1 0 0 1 0 0 1
 define material blue 0 0 1 0 0 1 0 0 1 1
 # geometry
-define shape box rbottom -20 30 -200 20 -30 -300 red
+define shape box rbottom -20 40 -60 60 -10 -90 red
 define shape sphere bsphere 0 0 -50 5 blue
 # light - from right above
 define light sun 1000 700 0 .2 .2 .2 100

@@ -1,6 +1,7 @@
 #include "Box.hpp"
 #include <cmath>
 #include <algorithm>
+#include <catch.hpp>
 
 Box::Box() : Shape(),
              _minimum{glm::vec3(0.0, 0.0, 0.0)},
@@ -207,21 +208,51 @@ Hit Box::intersect(Ray const &_r) const
             if (is_inBox(_schnittPunkt))
             {
                 _result = true;
-
             }
         }
     }
-    //Zum testen mit side index 5
     glm::vec3 _normal = get_normal(5);
 
-    return Hit{_t,_result,_schnittPunkt,_normal,this};
+    Hit hit{_t, _result, _schnittPunkt, _normal, this};
+
+    return hit;
 }
 
 //old get_normal
-glm::vec3 Box::get_normal(Hit const &hit) const
+glm::vec3 Box::get_normal(glm::vec3 const& coor_) const
 {
+    glm::vec3 point = coor_;
+
+    if (coor_.x == Approx(_minimum.x))
+    {
+        return glm::vec3{-1.0, 0.0, 0.0};
+    }
+    else if (coor_.x == Approx(_maximum.x))
+    {
+        return glm::vec3{1.0, 0.0, 0.0};
+    }
+    else if (coor_.y == Approx(_minimum.y))
+    {
+        return glm::vec3{0.0, -1.0, 0.0};
+    }
+    else if (coor_.y == Approx(_maximum.x))
+    {
+        return glm::vec3{0.0, 1.0, 0.0};
+    }
+    else if (coor_.z == Approx(_minimum.z))
+    {
+        return glm::vec3{0.0, -1.0, 0.0};
+    }
+    else if (coor_.z == Approx(_maximum.z))
+    {
+        return glm::vec3{0.0, -1.0, 0.0};
+    }
+}
+
+glm::vec3 Box::get_normal(Hit const& hit) const{
     return hit.normal_;
 }
+
 
 glm::vec3 Box::get_normal(int _side) const
 {
