@@ -77,7 +77,7 @@ Color Renderer::trace(Scene const& scene, Ray const& ray){
     Color cl = shade(scene, ray, closetObjectIndex);
     return cl;
   }
-  else return Color{0.4f, 0.4f, 0.4f};
+  else return Color{0.0f, 0.0f, 0.0f};
 }
 
 // Color Renderer::shade(Scene const& scene, Ray const& ray, Light const& light, int const closest){
