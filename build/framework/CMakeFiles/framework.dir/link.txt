@@ -1,2 +1,0 @@
-/usr/bin/ar qc libframework.a  CMakeFiles/framework.dir/glew.c.o CMakeFiles/framework.dir/Box.cpp.o CMakeFiles/framework.dir/pixel.cpp.o CMakeFiles/framework.dir/ppmwriter.cpp.o CMakeFiles/framework.dir/renderer.cpp.o CMakeFiles/framework.dir/Shape.cpp.o CMakeFiles/framework.dir/Sphere.cpp.o CMakeFiles/framework.dir/window.cpp.o
-/usr/bin/ranlib libframework.a
