@@ -1,189 +1,189 @@
-#include "Box.hpp"
+#define CATCH_CONFIG_RUNNER
+
+#include "box.hpp"
 #include <cmath>
+#include <memory>
+#include <vector>
 #include <algorithm>
-#include <catch.hpp>
+#include <limits>
+#include <catch-1.5/catch.hpp>
 
-Box::Box() : Shape{},
-             _minimum{glm::vec3(0.0f, 0.0f, 0.0f)},
-             _maximum{glm::vec3(1.0f, 1.0f, 1.0f)}
-{
+// Konstruktor
+Box::Box():
+    Shape{}, min_{glm::vec3{0.0f}}, max_{glm::vec3{5.0f}}   {}
+
+Box::Box(glm::vec3 const& min, glm::vec3 const& max):
+    min_{min}, max_{max}    {}
+
+/*Box::Box(glm::vec3 const min, glm::vec3 const& max, std::string const& name):
+    min_{min}, max_{max}, Shape{name}   {}
+
+Box::Box(glm::vec3 const& min, glm::vec3 const& max, Color const& color):
+    min_{min}, max_{max}, Shape{color}   {}*/
+
+Box::Box(glm::vec3 const min, glm::vec3 const& max, std::string const& name, std::shared_ptr<Material> const& material):
+    Shape{name, material}, min_{min}, max_{max}   {}
+
+Box::~Box()   {
+    std::cout<< "Destructor of Sphere!"<< std::endl;
 }
 
-Box::Box(glm::vec3 const &_p1, glm::vec3 const &_p2) : Shape{},
-                                                       _minimum{set_min(_p1.x, _p2.x), set_min(_p1.y, _p2.y), set_min(_p1.z, _p2.z)},
-                                                       _maximum{set_max(_p1.x, _p2.x), set_max(_p1.y, _p2.y), set_max(_p1.z, _p2.z)}
-{
+// get-Methode
+glm::vec3 Box::getMin() const{
+    return min_;
+}
+glm::vec3 Box::getMax() const{
+    return max_;
 }
 
-Box::Box(std::string const &n, std::shared_ptr<Material> const &material) : Shape{n, material},
-                                                                            _minimum{glm::vec3(0.0f, 0.0f, 0.0f)},
-                                                                            _maximum{glm::vec3(1.0f, 1.0f, 1.0f)} {};
-
-Box::Box(glm::vec3 const &_p1, glm::vec3 const &_p2, std::string const &n, std::shared_ptr<Material> const &material) : Shape{n, material},
-                                                                                                                        _minimum{set_min(_p1.x, _p2.x), set_min(_p1.y, _p2.y), set_min(_p1.z, _p2.z)},
-                                                                                                                        _maximum{set_max(_p1.x, _p2.x), set_max(_p1.y, _p2.y), set_max(_p1.z, _p2.z)}
-{
+// area und volumen
+float Box::area() const{
+    float a = fabs(max_.x - min_.x);
+    float b = fabs(max_.y - min_.y);
+    float c = fabs(max_.z - min_.z);
+    return 2*(a*b + a*c + b*c);
 }
-
-Box::~Box(){};
-
-float Box::set_max(float coor1, float coor2) const
-{
-    return std::max(coor1, coor2);
+float Box::volumen() const{
+    float x = fabs(max_.x - min_.x);
+    float y = fabs(max_.y - min_.y);
+    float z = fabs(max_.z - min_.z);
+    return x*y*z;
 }
-
-float Box::set_min(float coor1, float coor2) const
-{
-    return std::min(coor1, coor2);
-}
-
-float Box::length() const
-{
-    return std::fabs(_maximum.x - _minimum.x);
-}
-
-float Box::width() const
-{
-    return std::fabs(_maximum.y - _minimum.y);
-}
-
-float Box::height() const
-{
-    return std::fabs(_maximum.z - _minimum.z);
-}
-
-float Box::area() const
-{
-    return 2 * (length() * width() +
-                height() * width() +
-                length() * height());
-};
-
-float Box::volume() const
-{
-    return length() *
-           width() *
-           height();
-};
-
-std::ostream &Box::print(std::ostream &os) const
-{
-    Shape::print(os);
-    os << "pmin : (" << _minimum.x << "; " << _minimum.y << "; " << _minimum.z << ")" << std::endl;
-    os << "pmax : (" << _maximum.x << "; " << _maximum.y << "; " << _maximum.z << ")" << std::endl;
-
-    return os;
-};
 
 // in Box???
-bool Box::is_inBox(glm::vec3 const &punkt) const
-{
-    if (_minimum.x <= punkt.x && punkt.x <= _maximum.x && _minimum.y <= punkt.y && punkt.y <= _maximum.y && _minimum.z <= punkt.z && punkt.z <= _maximum.z)
-    {
+bool Box::is_inBox(glm::vec3 const& punkt){
+    if(min_.x <= punkt.x && punkt.x <= max_.x && min_.y <= punkt.y && punkt.y <= max_.y && min_.z <= punkt.z && punkt.z <= max_.z){
         return true;
     }
-    else
-    {
-        return false;
-    }
+    else return false;
 }
 
-bool Box::intersect(Ray const &_r, float &_t)
-{
+bool Box::intersect(Ray const& r, float& t){
     bool result = false;
-    if (_r.direction.x == 0 &&
-        _r.direction.y == 0 &&
-        _r.direction.z == 0)
-    {
-        std::cout << "add another direction (!= 0)";
+    glm::vec3 schnittPunkt;
+    // if(r.direction.x != 0){
+    //     if(r.direction.x > 0){
+    //         t = (min_.x - r.origin.x)/r.direction.x;
+    //     }
+    //     else t = (max_.x - r.origin.x)/r.direction.x;
+    //     if(t > 0){
+    //         schnittPunkt = r.origin + t*r.direction;
+    //         // std::cout<<schnittPunkt.x<< " "<< schnittPunkt.y<< " "<< schnittPunkt.z<< " \n";
+    //         if(is_inBox(schnittPunkt)){
+    //             result = true;
+    //             // std::cout<< "t = "<< t<< "\n";
+    //         }
+    //     }
+    // }
+    // if(r.direction.y != 0){
+    //     if(r.direction.y > 0){
+    //         t = (min_.y - r.origin.y)/r.direction.y;
+    //     }
+    //     else t = (max_.y - r.origin.y)/r.direction.y;
+    //     if(t > 0){
+    //         schnittPunkt = r.origin + t*r.direction;
+    //         // std::cout<<schnittPunkt.x<< " "<< schnittPunkt.y<< " "<< schnittPunkt.z<< " \n";
+    //         if(is_inBox(schnittPunkt)){
+    //             result = true;
+    //             // std::cout<< "t = "<< t<< "\n";
+    //         }
+    //     }
+    // }
+    // if(r.direction.z != 0){
+    //     if(r.direction.z > 0){
+    //         t = (min_.z - r.origin.z)/r.direction.z;
+    //     }
+    //     else t = (max_.z - r.origin.z)/r.direction.z;
+    //     if(t > 0){
+    //         schnittPunkt = r.origin + t*r.direction;
+    //         // std::cout<<schnittPunkt.x<< " "<< schnittPunkt.y<< " "<< schnittPunkt.z<< " \n";
+    //         if(is_inBox(schnittPunkt)){
+    //             result = true;
+    //             // std::cout<< "t = "<< t<< "\n";
+    //         }
+    //     }
+    // }
+    // return result;
+    if(r.direction.x == 0 && r.direction.y == 0 && r.direction.z == 0){
+        std::cout<< "add another direction (!= 0)";
     }
-    else
-    {
-        std::vector<float> distance_vec;
-        float minX = (_minimum.x - _r.origin.x) / _r.direction.x;
-        float maxX = (_maximum.x - _r.origin.x) / _r.direction.x;
-        distance_vec.push_back(minX);
-        distance_vec.push_back(maxX);
+    else{
+        std::vector<float> distanceVec;
+        float minX = (min_.x - r.origin.x)/r.direction.x;
+        float maxX = (max_.x - r.origin.x)/r.direction.x;
+        distanceVec.push_back(minX);
+        distanceVec.push_back(maxX);
 
-        float minY = (_minimum.y - _r.origin.y) / _r.direction.y;
-        float maxY = (_maximum.y - _r.origin.y) / _r.direction.y;
-        distance_vec.push_back(minY);
-        distance_vec.push_back(maxY);
+        float minY = (min_.y - r.origin.y)/r.direction.y;
+        float maxY = (max_.y - r.origin.y)/r.direction.y;
+        distanceVec.push_back(minY);
+        distanceVec.push_back(maxY);
 
-        float minZ = (_minimum.z - _r.origin.z) / _r.direction.z;
-        float maxZ = (_maximum.z - _r.origin.z) / _r.direction.z;
-        distance_vec.push_back(minZ);
-        distance_vec.push_back(maxZ);
+        float minZ = (min_.z - r.origin.z)/r.direction.z;
+        float maxZ = (max_.z - r.origin.z)/r.direction.z;
+        distanceVec.push_back(minZ);
+        distanceVec.push_back(maxZ);
 
-        std::sort(distance_vec.begin(), distance_vec.end());
+        std::sort(distanceVec.begin(), distanceVec.end());
 
-        for (auto i : distance_vec)
-        {
-            if (!std::isinf(i))
-            {
-                glm::vec3 schnittPunkt{(_r.origin + (i * _r.direction))};
-                if ((schnittPunkt.x <= _maximum.x && schnittPunkt.x >= _minimum.x) &&
-                    (schnittPunkt.y <= _maximum.y && schnittPunkt.y >= _minimum.y) &&
-                    (schnittPunkt.z <= _maximum.z && schnittPunkt.z >= _minimum.z))
-                {
-                    _t = i;
-                    result = true;
-                    return result;
-                }
+        for(auto i : distanceVec){
+            if(!std::isinf(i)){
+                schnittPunkt = r.origin + (i * r.direction);
+                if((schnittPunkt.x <= max_.x && schnittPunkt.x >= min_.x)
+                    && (schnittPunkt.y <= max_.y && schnittPunkt.y >= min_.y)
+                    && (schnittPunkt.z <= max_.z && schnittPunkt.z >= min_.z)){
+                        t = i;
+                        result = true;
+                        return result;
+                    }
             }
         }
 
-        return false;
-    };
+    }
+    return result;
 }
 
-Hit Box::intersect_hit(Ray const &_r)
-{
-    float distance;
-    bool is_hit = intersect(_r, distance);
+Hit Box::intersectHit(Ray const& ray){
+    float t;
+    glm::vec3 schnittPunkt;
+    glm::vec3 normalVec;
+    bool isHit = intersect(ray, t);
+    schnittPunkt = ray.origin + (t * ray.direction);
+    if(isHit == true){
+        // schnittPunkt = ray.origin + t*ray.direction;
+        if(schnittPunkt.x == Approx(min_.x)){
+            normalVec = glm::vec3{-1.0f, 0.0f, 0.0f};
+        }
+        if(schnittPunkt.y == Approx(min_.y)){
+            normalVec = glm::vec3{0.0f, -1.0f, 0.0f};
+        }
+        if(schnittPunkt.z == Approx(min_.z)){
+            normalVec = glm::vec3{0.0f, 0.0f, -1.0f};
+        }
+        if(schnittPunkt.x == Approx(max_.x)){
+            normalVec = glm::vec3{1.0f, 0.0f, 0.0f};
+        }
+        if(schnittPunkt.y == Approx(max_.y)){
+            normalVec = glm::vec3{0.0f, 1.0f, 0.0f};
+        }
+        if(schnittPunkt.z == Approx(max_.z)){
+            normalVec = glm::vec3{0.0f, 0.0f, 1.0f};
+        }
+        return Hit{true, t, this, glm::normalize(normalVec), schnittPunkt};
+    }
 
-    if (is_hit)
-    {
-        glm::vec3 schnitt_punkt{(_r.origin + (distance * _r.direction))};
-        glm::vec3 normal_vector{get_normal(schnitt_punkt)};
-        return Hit{distance, is_hit, schnitt_punkt, normal_vector, this};
-    }
-    else
-    {
-        return Hit{};
-    }
+    return Hit{};
 }
 
-//old get_normal
-glm::vec3 Box::get_normal(glm::vec3 const &coor_) const
-{
-    if (coor_.x == Approx(_minimum.x))
-    {
-        return glm::vec3{-1.0, 0.0, 0.0};
-    }
-    else if (coor_.x == Approx(_maximum.x))
-    {
-        return glm::vec3{1.0, 0.0, 0.0};
-    }
-    else if (coor_.y == Approx(_minimum.y))
-    {
-        return glm::vec3{0.0, -1.0, 0.0};
-    }
-    else if (coor_.y == Approx(_maximum.x))
-    {
-        return glm::vec3{0.0, 1.0, 0.0};
-    }
-    else if (coor_.z == Approx(_minimum.z))
-    {
-        return glm::vec3{0.0, 0.0, -1.0};
-    }
-    else if (coor_.z == Approx(_maximum.z))
-    {
-        return glm::vec3{0.0, 0.0, 1.0};
-    }
+// print-Methode
+std::ostream& Box::print(std::ostream& os) const{
+    Shape::print(os);
+    os<< "MaxPoint of the Box is: ("<< max_.x<< ", "<< max_.y<< ", "<<
+    max_.z<< ").\n";
+    os<< "MinPoint of the Box is: ("<< min_.x<< ", "<< min_.y<< ", "<<
+    min_.z<< ")."<< std::endl;
+    return os;
 }
-
-glm::vec3 Box::get_vector_to_light(Hit const &_inter, Light const &_light) const
-{
-    return glm::normalize(glm::vec3{_inter.coor_ - _light._origin});
+std::ostream& operator<<(std::ostream& os, Box const& b){
+    return b.print(os);
 }

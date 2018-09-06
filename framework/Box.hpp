@@ -1,52 +1,41 @@
 #ifndef BOX_HPP
 #define BOX_HPP
 
-#include "Shape.hpp"
+#include "shape.hpp"
+
 #include <glm/vec3.hpp>
-#include "material.hpp"
+#include <memory>
 
-class Box : public Shape
-{
-private:
-  glm::vec3 _minimum;
-  glm::vec3 _maximum;
+class Box : public Shape{
+    public:
+        // Konstruktor
+        Box();
+        Box(glm::vec3 const& min, glm::vec3 const& max);
+        /*Box(glm::vec3 const min, glm::vec3 const& max, std::string const& name);
+        Box(glm::vec3 const& min, glm::vec3 const& max, Color const& color);*/
+        Box(glm::vec3 const min, glm::vec3 const& max, std::string const& name, std::shared_ptr<Material> const& material);
+        ~Box();
 
-public:
-  Box();
-  Box(glm::vec3 const &_pmin, glm::vec3 const &_pmax);
+        // Methode
+        float area() const override;
+        float volumen() const override;
+        glm::vec3 getMax() const;
+        glm::vec3 getMin() const;
+        // std::string getName() const override;
+        // Color getColor() const override;
+        bool is_inBox(glm::vec3 const& punkt);
+        bool intersect(Ray const& r, float& t) override;
+        Hit intersectHit(Ray const& ray) override;
 
-  Box(std::string const &n, std::shared_ptr<Material> const &material);
-  Box(glm::vec3 const &_pmin, glm::vec3 const &_pmax, std::string const &n, std::shared_ptr<Material> const &material);
-  ~Box();
+        std::ostream& print(std::ostream& os) const override;
 
-  float length() const;
-  float width() const;
-  float height() const;
+    private:
+        glm::vec3 min_;
+        glm::vec3 max_;
 
-  float area() const override;
-  float volume() const override;
-
-  std::ostream &print(std::ostream &os) const override;
-
-  bool is_inBox(glm::vec3 const &punkt) const;
-
-  bool intersect(Ray const &_r, float& _t) override;
-  Hit intersect_hit(Ray const &_r) override;
-
-  glm::vec3 get_normal(glm::vec3 const &coor_) const;
-  glm::vec3 get_vector_to_light(Hit const &_inter, Light const &_light) const;
-
-  float set_max(float coor1, float coor2) const;
-  float set_min(float coor1, float coor2) const;
-
-
-  /*vec3 nearest_corner(glm::vec3 const &min, glm::vec3 const &max, glm::vec3 const &origin) const;
-  vec3 furthest_corner(glm::vec3 const &min, glm::vec3 const &max, glm::vec3 const &origin) const;
-
-  float nearest_komponent(float const &min, float const &max, float const &origin) const;
-  float furthest_komponent(float const &min, float const &max, float const &origin) const;
-
-  bool is_on_surface(glm::vec3 const &input) const;*/
 };
 
-#endif //BOX_HPP
+std::ostream& operator<<(std::ostream& os, Box const& b);
+
+
+#endif  //BOX_HPP

@@ -1,19 +1,49 @@
-#ifndef SDFLOADER_HPP
-#define SDFLOADER_HPP
+#include "scene.hpp"
+#include <memory>
+#include <map>
+#include <vector>
+#include <set>
+#include "shape.hpp"
+#include "material.hpp"
+#include "light.hpp"
+#include "box.hpp"
+#include "sphere.hpp"
 
-#include "findmaterial.hpp"
-#include "Scene.hpp"
+std::shared_ptr<Material> findMaterialVector(std::string const &findName, vector<std::shared_ptr<Material>> const &material_vector)
+{   
+    // Default material to return
+    std::shared_ptr<Material> defaultMaterial(new Material);
 
-void load_sdf(std::string filename, Scene &scene)
+    // find_if with a lambda that capture the needed name
+    auto iterLambda = find_if(material_vector.begin(), material_vector.end(), [findName](std::shared_ptr<Material> const &material) { //capture findName by reference
+        return material->name_ == findName;
+    });
+
+    // scope to show the material that was founded
+    if (iterLambda == material_vector.end())
+    {
+        // std::cout << "Do not exist!!!!!!! Use default Material\n"; //Material nicht gefunden wird, wird DefaultKonstruktor genutzt!
+        std::cout << *defaultMaterial;
+        return defaultMaterial;
+    }
+    else
+    {
+        // std::cout << "Here's what u need from vector: \n";
+        std::cout << *(*iterLambda) << "\n"; // show the value of the value of the lambda that is the material.
+        return *iterLambda;
+    }
+}
+
+void load_sdf(std::string const& filename, Scene &scene)
 {
-
+    // Scene scene;
     std::ifstream ifs;
-    std::string dir = "../sdf/" + filename;
+    std::string dir = "../sdf/"+ filename;
     ifs.open(dir);
 
     if (ifs)
     {
-        std::cout << "Sdf file loaded from: " << dir << endl;
+        std::cout <<"Sdf file loaded from: "<< dir << endl;
         std::string line_buffer;
 
         while (std::getline(ifs, line_buffer))
@@ -50,6 +80,8 @@ void load_sdf(std::string filename, Scene &scene)
                                                                                         material_koof[9]);
 
                     scene.material_vector.push_back(neu_material);
+                    // scene.material_map.insert(make_pair(neu_material->name_, neu_material));
+                    // scene.material_set.insert(neu_material);
                 }
 
                 else if ("shape" == variable_name)
@@ -60,8 +92,8 @@ void load_sdf(std::string filename, Scene &scene)
                     if ("box" == shape_type)
                     {
 
-                        std::string obj_name;
-                        current_line_stream >> obj_name;
+                        std::string shape_name;
+                        current_line_stream >> shape_name;
 
                         float shape_points[6];
 
@@ -75,7 +107,7 @@ void load_sdf(std::string filename, Scene &scene)
 
                         std::shared_ptr<Shape> neu_box = std::make_shared<Box>(glm::vec3(shape_points[0], shape_points[1], shape_points[2]),
                                                                                glm::vec3(shape_points[3], shape_points[4], shape_points[5]),
-                                                                               obj_name,
+                                                                               shape_name,
                                                                                findMaterialVector(mat_name, scene.material_vector));
 
                         scene.shape_vector.push_back(neu_box);
@@ -83,8 +115,8 @@ void load_sdf(std::string filename, Scene &scene)
 
                     else if ("sphere" == shape_type)
                     {
-                        std::string obj_name;
-                        current_line_stream >> obj_name;
+                        std::string shape_name;
+                        current_line_stream >> shape_name;
 
                         float shape_points[4];
 
@@ -99,7 +131,7 @@ void load_sdf(std::string filename, Scene &scene)
                         std::shared_ptr<Shape> neu_sphere = std::make_shared<Sphere>(glm::vec3(shape_points[0], shape_points[1], shape_points[2]),
                                                                                      shape_points[3],
                                                                                      findMaterialVector(mat_name, scene.material_vector),
-                                                                                     obj_name);
+                                                                                     shape_name);
 
                         scene.shape_vector.push_back(neu_sphere);
                     }
@@ -112,7 +144,7 @@ void load_sdf(std::string filename, Scene &scene)
 
                     float light_att[7];
 
-                    for (int i = 0; i < 4; i++)
+                    for (int i = 0; i < 7; i++)
                     {
                         current_line_stream >> light_att[i];
                     }
@@ -124,20 +156,17 @@ void load_sdf(std::string filename, Scene &scene)
 
                     scene.light_vector.push_back(neu_light);
                 }
-
-                else if ("camera" == variable_name)
-                {
+                else if ("camera" == variable_name){
                     Camera temp;
                     std::string camera_name;
 
                     current_line_stream >> temp._name;
                     current_line_stream >> temp._fov_x;
 
-                    scene._camera = temp;
-                }
+                    scene.camera = temp;
 
-                else if ("ambient" == variable_name)
-                {
+                }
+                else if ("ambient" == variable_name){
                     float ambient_att[3];
 
                     for (int i = 0; i < 3; i++)
@@ -147,104 +176,8 @@ void load_sdf(std::string filename, Scene &scene)
 
                     Ambient temp{Color(ambient_att[0], ambient_att[1], ambient_att[2])};
 
-                    scene._ambient = temp;
-                }
-            }
+                    scene.ambient = temp;
 
-            else if ("transform" == first_symbol)
-            {
-                std::string obj_name;
-                current_line_stream >> obj_name;
-
-                for (std::shared_ptr<Shape> shape : scene.shape_vector)
-                {
-
-                    if (shape->name() == obj_name)
-                    {
-                        std::string transform;
-                        current_line_stream >> transform;
-
-                        glm::vec3 read_scale;
-                        glm::vec3 read_translate;
-                        float read_float;
-                        glm::vec3 read_rotate;
-
-                        if ("scale" == transform)
-                        {
-                            current_line_stream >> read_scale.x;
-                            current_line_stream >> read_scale.y;
-                            current_line_stream >> read_scale.z;
-                        }
-
-                        else if ("translate" == transform)
-                        {
-                            current_line_stream >> read_translate.x;
-                            current_line_stream >> read_translate.y;
-                            current_line_stream >> read_translate.z;
-                        }
-
-                        else if ("rotate" == transform)
-                        {
-                            current_line_stream >> read_float;
-                            current_line_stream >> read_rotate.x;
-                            current_line_stream >> read_rotate.y;
-                            current_line_stream >> read_rotate.z;
-                        }
-
-                        shape->scale(read_scale);
-                        shape->rotate(read_float, read_rotate);
-                        shape->translate(read_translate);
-                    }
-                }
-
-                if (scene._camera._name == obj_name)
-                {
-                    std::string transform;
-                    current_line_stream >> transform;
-
-                    glm::vec3 read_scale;
-                    glm::vec3 read_translate;
-                    float read_float;
-                    glm::vec3 read_rotate;
-
-                    if ("translate" == transform)
-                    {
-                        current_line_stream >> read_translate.x;
-                        current_line_stream >> read_translate.y;
-                        current_line_stream >> read_translate.z;
-                    }
-
-                    else if ("rotate" == transform)
-                    {
-                        current_line_stream >> read_float;
-                        current_line_stream >> read_rotate.x;
-                        current_line_stream >> read_rotate.y;
-                        current_line_stream >> read_rotate.z;
-                    }
-
-                    scene._camera.camera_rotate(read_float, read_rotate);
-                    scene._camera.camera_translate(read_translate);
-                }
-            }
-
-            else if ("render" == first_symbol)
-            {
-                std::string camera_name;
-                current_line_stream >> camera_name;
-
-                if (camera_name == scene._camera._name)
-                {
-                    std::string file_ext(".sdf");
-                    std::string type;
-                    current_line_stream >> type;
-                    std::string extension;
-                    current_line_stream >> extension;
-                    filename = filename.substr(0, filename.size() - file_ext.size());
-
-                    scene._name = filename + "_" + type + extension;
-
-                    current_line_stream >> scene._width;
-                    current_line_stream >> scene._height;
                 }
             }
         }
@@ -254,8 +187,6 @@ void load_sdf(std::string filename, Scene &scene)
     {
         cout << "file not found" << endl;
     }
-
     ifs.close();
-};
-
-#endif
+    // return scene;
+}

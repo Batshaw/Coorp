@@ -1,85 +1,83 @@
-#include "Sphere.hpp"
+#include "sphere.hpp"
 #include <cmath>
+#include <glm/glm.hpp>
+#include <glm/gtx/intersect.hpp>
 
-Sphere::Sphere() : Shape{},
-                   _mpunkt{glm::vec3(0.0, 0.0, 0.0)},
-                   _radius{1.0} {};
+// Konstruktor
+Sphere::Sphere():
+    mittel_{glm::vec3{0.0f}}, radius_{5.0f}, Shape{}    {}
 
-Sphere::Sphere(glm::vec3 const &_p, float _r) : _mpunkt{_p},
-                                                _radius{_r} {};
+Sphere::Sphere(glm::vec3 const& m, float const& r):
+    mittel_{m}, radius_{r}, Shape{} {}
 
-Sphere::Sphere(float _x, float _y, float _z, float _r) : _mpunkt{glm::vec3(_x, _y, _z)},
-                                                         _radius{_r} {};
+Sphere::Sphere(float _x, float _y, float _z, float _r) : 
+    mittel_{glm::vec3(_x, _y, _z)}, radius_{_r}    {}
 
-Sphere::Sphere(glm::vec3 const &_p, float _r, std::shared_ptr<Material> const &material, std::string const &_n) : Shape{_n, material},
-                                                                                                                  _mpunkt{_p},
-                                                                                                                  _radius{_r} {};
+Sphere::Sphere(glm::vec3 const &_p, float _r, std::shared_ptr<Material> const& material, std::string const &_n) : 
+    Shape(_n, material), mittel_{_p}, radius_{_r}   {}
 
-Sphere::~Sphere(){};
+/*Sphere::Sphere(glm::vec3 const& m, float const& r, std::string const& name):
+    mittel_{m}, radius_{r}, Shape{name} {}
 
-glm::vec3 Sphere::center() const
-{
-    return _mpunkt;
+Sphere::Sphere(glm::vec3 const& m, float const& r, Color const& color):
+    mittel_{m}, radius_{r}, Shape{color} {}*/
+
+Sphere::Sphere(glm::vec3 const& m, float const& r, std::string const& name, std::shared_ptr<Material> const& material):
+    mittel_{m}, radius_{r}, Shape{name, material} {
+        std::cout<< "Constuctor of Sphere!"<< std::endl;
+    }
+
+Sphere::~Sphere()   {
+    std::cout<< "Destructor of Sphere!"<< std::endl;
 }
 
-float Sphere::radius() const
-{
-    return _radius;
+// get-Methode
+glm::vec3 Sphere::getMittel() const{
+    return mittel_;
 }
-float const PI = atan(1.0f) * 4;
+float Sphere::getRadius() const{
+    return radius_;
+}
 
-float Sphere::area() const
-{
-    return PI * std::pow(_radius, 2) * 4;
-};
+// area und volumen
+float const PI = atan(1.0f)*4;
+float Sphere::area() const{
+    return 4*PI*std::pow(radius_, 2);
+}
+float Sphere::volumen() const{
+    return 4*PI*std::pow(radius_, 3)/3;
+}
 
-float Sphere::volume() const
-{
-    return PI * std::pow(_radius, 3) * 4 / 3;
-};
-
-std::ostream &Sphere::print(std::ostream &os) const
-{
+// print-Methode
+std::ostream& Sphere::print(std::ostream& os) const{
     Shape::print(os);
-    os << "center :(" << _mpunkt.x << "; " << _mpunkt.y << "; " << _mpunkt.z << ")" << std::endl;
-    os << "radius : " << _radius<<std::endl;
-    
+    os<< "Coordinates of the middle point: ("<< mittel_.x;
+    os<< ", "<< mittel_.y<< ", "<< mittel_.z<< ").\n";
+    os<< " Radius of the Sphere is: "<< radius_<<"."<< std::endl;
     return os;
 }
+std::ostream& operator<<(std::ostream& os, Sphere const& s){
+    return s.print(os);
+}
 
-bool Sphere::intersect(Ray const &_r, float &_t)
-{
-    auto ndirection = glm::normalize(_r.direction);
-
-    auto result = glm::intersectRaySphere(_r.origin,
-                                          ndirection,
-                                          _mpunkt,
-                                          std::pow(_radius, 2),
-                                          _t);
-
+// intersect-Methode
+bool Sphere::intersect(Ray const& r, float& t){
+     // from the ray_origin to the intersectPosition
+    glm::vec3 v = glm::normalize(r.direction);   //convert to the unit vector with same direction
+    auto squaredRadius = std::pow(radius_, 2);
+    bool result = glm::intersectRaySphere(r.origin, v, mittel_, squaredRadius, t);
     return result;
 }
 
-Hit Sphere::intersect_hit(Ray const &_r)
-{
+Hit Sphere::intersectHit(Ray const& ray){
     float distance;
-    bool is_hit = intersect(_r, distance);
-    if (is_hit)
-    {
-        glm::vec3 schnitt_punkt = _r.origin + (distance * _r.direction);
-        glm::vec3 normal_vector = get_normal(schnitt_punkt);
-        return Hit{distance, is_hit, schnitt_punkt, normal_vector, this};
+    glm::vec3 v = glm::normalize(ray.direction);
+    auto squaredRadius = std::pow(radius_, 2);
+    bool result = glm::intersectRaySphere(ray.origin, v, mittel_, squaredRadius, distance);
+    if(result == true){
+        glm::vec3 schnittPunkt = ray.origin + (distance*ray.direction);
+        glm::vec3 normalVector = glm::normalize(schnittPunkt - mittel_);
+        return Hit{true, distance, this, normalVector, schnittPunkt};
     }
-
     return Hit{};
-};
-
-glm::vec3 Sphere::get_normal(glm::vec3 const &_cut) const
-{
-    return glm::normalize((_cut - _mpunkt));
-}
-
-glm::vec3 Sphere::get_vector_to_light(Hit const &_inter, Light const &_light) const
-{
-    return glm::normalize(glm::vec3{_inter.coor_ - _light._origin});
 }

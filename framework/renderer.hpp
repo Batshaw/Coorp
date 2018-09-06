@@ -10,33 +10,39 @@
 #ifndef BUW_RENDERER_HPP
 #define BUW_RENDERER_HPP
 
-#include "Scene.hpp"
 #include "color.hpp"
 #include "pixel.hpp"
+#include "Hit.hpp"
+#include "ray.hpp"
+#include "shape.hpp"
+#include "light.hpp"
+// #include "sphere.hpp"
+#include "scene.hpp"
 #include "ppmwriter.hpp"
-#include "Scene.hpp"
 #include <string>
+#include <cmath>
 #include <glm/glm.hpp>
+#include <glm/vec3.hpp>
+#include <iostream>
 
 class Renderer
 {
 public:
-  //Renderer(unsigned w, unsigned h, std::string const &file);
-  Renderer(Scene const &scene);
+  Renderer(unsigned w, unsigned h, std::string const& file);
 
-  void render();
+  // void render();
+  void render(Scene const& scene);
+  Color trace(Scene const& scene, Ray const& ray);
+  Color shade(Scene const& scene, Ray const& ray, int closest);
+  Color toneMapping(Color const& color);
+  void write(Pixel const& p);
 
-  Color trace(Ray const &ray) const;
-  void write(Pixel const &p);
-  Color shade(Ray const &ray, int &closest) const;
-
-  inline std::vector<Color> const &color_buffer() const
+  inline std::vector<Color> const& color_buffer() const
   {
     return color_buffer_;
   }
 
 private:
-  Scene scene_;
   unsigned width_;
   unsigned height_;
   std::vector<Color> color_buffer_;

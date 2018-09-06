@@ -1,36 +1,26 @@
 #ifndef HIT_HPP
 #define HIT_HPP
-
 #include <glm/vec3.hpp>
-#include <Shape.hpp>
 
 class Shape;
 
-struct Hit
-{
-        float distance_;
-        bool isHit_;
-        glm::vec3 coor_;
-        glm::vec3 normal_;
-        Shape const *obj_;
+struct Hit{
 
-        Hit() : distance_{10000.0f},
-                isHit_{false},
-                coor_{0.0f, 0.0f, 0.0f},
-                normal_{0.0f, 0.0f, 0.0f},
-                obj_{nullptr} {};
+    Hit():
+        hit_{false}, distance_{10000.0f}, closestShape_{nullptr}, normalVector_{}, schnittPunkt_{}  {}
 
-        Hit(Hit const &input_) : distance_{input_.distance_},
-                                 isHit_{input_.isHit_},
-                                 coor_{input_.coor_},
-                                 normal_{input_.normal_},
-                                 obj_{input_.obj_} {};
+    Hit(Hit const &input):
+        hit_{input.hit_}, distance_{input.distance_}, closestShape_{input.closestShape_}, normalVector_{input.normalVector_}, schnittPunkt_{input.schnittPunkt_}   {}
 
-        Hit(float distance, bool is_hit, glm::vec3 const &point, glm::vec3 const &normal, Shape const *obj) : distance_{distance},
-                                                                                                              isHit_{is_hit},
-                                                                                                              coor_{point},
-                                                                                                              normal_{normal},
-                                                                                                              obj_{obj} {};
+
+    Hit(bool hit, float distance, Shape const *closestShape, glm::vec3 normalVector, glm::vec3 schnittPunkt):
+        hit_{hit}, distance_{distance},closestShape_{closestShape}, normalVector_{normalVector}, schnittPunkt_{schnittPunkt}   {}
+         
+    bool hit_;
+    float distance_;
+    Shape const *closestShape_;
+    glm::vec3 normalVector_;
+    glm::vec3 schnittPunkt_;
 };
 
-#endif //HIT_HPP
+#endif  // HIT_HPP

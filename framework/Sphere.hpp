@@ -1,38 +1,44 @@
 #ifndef SPHERE_HPP
 #define SPHERE_HPP
 
-#include "Shape.hpp"
-#include <glm/glm.hpp>
+#include "shape.hpp"
 #include <glm/vec3.hpp>
-#include "material.hpp"
+#include "ray.hpp"
 
-class Sphere : public Shape
-{
-private:
-  glm::vec3 _mpunkt;
-  float _radius;
+class Sphere : public Shape{
+    public:
+        // Konstruktor
+        Sphere();
+        Sphere(glm::vec3 const& m, float const& r);
+        /*Sphere(glm::vec3 const& m, float const& r, std::string const& name);
+        Sphere(glm::vec3 const& m, float const& r, Color const& color);*/
+        Sphere(glm::vec3 const& m, float const& r, std::string const& name, std::shared_ptr<Material> const& material);
+        Sphere(float _x, float _y, float _z, float _r = 1.0);
+        Sphere(glm::vec3 const &_p, float _r, std::shared_ptr<Material> const& material, std::string const &_n);
 
-public:
-  Sphere();
+        //Destruktor (Aufgabe8):
+        ~Sphere();        
 
-  Sphere(glm::vec3 const &_p, float _r = 1.0);
-  Sphere(float _x, float _y, float _z, float _r = 1.0);
-  Sphere(glm::vec3 const &_p, float _r, std::shared_ptr<Material> const &material, std::string const &_n);
+        // Methode
+        float area() const override;
+        float volumen() const override;
+        glm::vec3 getMittel() const;
+        float getRadius() const;
+        // std::string getName() const override;
+        // Color getColor() const override;
 
-  ~Sphere();
-  glm::vec3 center() const;
-  float radius() const;
+        std::ostream& print(std::ostream& os) const override;
 
-  float area() const override;
-  float volume() const override;
+        // intersect-Methode
+        bool intersect(Ray const& r, float& t) override;
+        Hit intersectHit(Ray const& ray) override;
 
-  std::ostream &print(std::ostream &os) const override;
+    protected:
+        glm::vec3 mittel_;
+        float radius_;
 
-  bool intersect(Ray const &_r, float &_t) override;
-  Hit intersect_hit(Ray const &_r) override;
-
-  glm::vec3 get_normal(glm::vec3 const &_cut) const;
-  glm::vec3 get_vector_to_light(Hit const &_inter, Light const &_light) const;
 };
 
-#endif //SPHERE_HPP
+std::ostream& operator<<(std::ostream& os, Sphere const& s);
+
+#endif  //SPHERE_HPP

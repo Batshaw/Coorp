@@ -2,55 +2,55 @@
 #define SHAPE_HPP
 
 #include <string>
-#include <glm/vec3.hpp>
-#include <iostream>
 #include "color.hpp"
-#include "Ray.hpp"
-#include <glm/glm.hpp>
-#include <glm/gtx/intersect.hpp>
-#include <memory>
+#include <ostream>
 #include "material.hpp"
+#include "ray.hpp"
+#include "glm/vec3.hpp"
 #include "Hit.hpp"
-#include "Light.hpp"
+#include <memory>
 
+class Shape{
+    public:
+        Shape();
+        /*Shape(std::string const& name);
+        Shape(std::shared_ptr<Material> material);*/
+        Shape(std::string const& name, std::shared_ptr<Material> const& material);
+        Shape(std::string const& name, std::shared_ptr<Material> const& material, glm::mat4 worldTransform);
+        virtual ~Shape();
 
-class Shape
-{
-private:
-public:
-  Shape();
-  Shape(std::string const &n, std::shared_ptr<Material> const &material);
-  
-  Shape(std::string const &n, std::shared_ptr<Material> const &material, glm::mat4 const& world_trans_);
-  //ohne virtual wird der Destruktor die abgeleitene Klasse nicht aufgerufen
-  ~Shape();
+        std::string getName() const;
+        Color getColor() const;
+        std::shared_ptr<Material> getMaterial() const;
 
-  virtual float area() const = 0;
-  virtual float volume() const = 0;
-  virtual std::ostream &print(std::ostream &os) const;
+        virtual float area() const = 0;
+        virtual float volumen() const = 0;
+        
+        virtual bool intersect(Ray const& r, float& t) = 0;
+        virtual Hit intersectHit(Ray const& ray) = 0;
 
-  virtual bool intersect(Ray const& _r, float& _t) = 0 ;
-  virtual Hit intersect_hit(Ray const &_r) = 0 ;
+        // virtual void translate(glm::vec3 const& p);
+        // virtual void scale(glm::vec3 const& s);
+        // virtual void rotate(float const& fi, glm::vec3 const& roVec);
+        
+        virtual std::ostream& print(std::ostream& os) const;
 
-  std::string name() const;
-  std::shared_ptr<Material> get_material_() const;
+    protected:
+        std::string name_;
+        std::shared_ptr<Material> material_;
 
-  //Transformation rechnen
-  virtual void translate(glm::vec3 const &a_);
-  virtual void scale(glm::vec3 const &b_);
-  virtual void rotate(float rad_, glm::vec3 const &c_);
-  virtual void rotate_x(float rad_);
-  virtual void rotate_y(float rad_);
-  virtual void rotate_z(float rad_);
+        glm::mat4 world_transformation_{1, 0, 0, 0,
+                                        0, 1, 0, 0,
+                                        0, 0, 1, 0,
+                                        0, 0, 0, 1};
+        
+        glm::mat4 world_transformation_inv_{1, 0, 0, 0,
+                                        0, 1, 0, 0,
+                                        0, 0, 1, 0,
+                                        0, 0, 0, 1};
 
-protected:
-  std::string name_;
-  // Color color_;
-  std::shared_ptr<Material> material_;
-  glm::mat4 world_transformation_;
-  glm::mat4 world_transformation_inv_;
 };
 
-std::ostream &operator<<(std::ostream &os, Shape const &s);
+std::ostream& operator<<(std::ostream&os, Shape const& s);
 
-#endif //SHAPE_HPP
+#endif  //SHAPE_HPP

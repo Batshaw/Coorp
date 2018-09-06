@@ -1,8 +1,6 @@
 #ifndef AMBIENT_HPP
 #define AMBIENT_HPP
 
-#include "color.hpp"
-
 struct Ambient{
 
     Ambient():
