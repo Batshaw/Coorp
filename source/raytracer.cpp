@@ -15,16 +15,16 @@ int main(int argc, char *argv[])
   Scene newScene{};
   load_sdf("scene1.sdf", newScene);
   
-  unsigned const image_width = newScene.width_;
-  unsigned const image_height = newScene.height_;
+  unsigned const image_width {newScene.width_};
+  unsigned const image_height {newScene.height_};
 
-  Renderer renderer{800, 800, newScene.name_};
+  Renderer renderer{image_width, image_height, newScene.name_};
 
   renderer.render(newScene);
 
   //create separate thread to see updates of pixels while rendering
 
-  Window window{{800, 800}};
+  Window window{{image_width, image_height}};
 
   while (!window.should_close())
   {

@@ -180,6 +180,100 @@ void load_sdf(std::string const &filename, Scene &scene)
                     scene.ambient_ = temp;
                 }
             }
+            else if ("transform" == first_symbol)
+            {
+                std::string obj_name;
+                current_line_stream >> obj_name;
+
+                for (std::shared_ptr<Shape> shape : scene.shape_vector_)
+                {
+
+                    if (shape->get_name() == obj_name)
+                    {
+                        std::string transform;
+                        current_line_stream >> transform;
+
+                        glm::vec3 read_scale;
+                        glm::vec3 read_translate;
+                        float read_float;
+                        glm::vec3 read_rotate;
+
+                        if ("scale" == transform)
+                        {
+                            current_line_stream >> read_scale.x;
+                            current_line_stream >> read_scale.y;
+                            current_line_stream >> read_scale.z;
+                        }
+
+                        else if ("translate" == transform)
+                        {
+                            current_line_stream >> read_translate.x;
+                            current_line_stream >> read_translate.y;
+                            current_line_stream >> read_translate.z;
+                        }
+
+                        else if ("rotate" == transform)
+                        {
+                            current_line_stream >> read_float;
+                            current_line_stream >> read_rotate.x;
+                            current_line_stream >> read_rotate.y;
+                            current_line_stream >> read_rotate.z;
+                        }
+
+                        //shape->transform(read_translate,read_scale,read_float,read_rotate);
+                    }
+                }
+
+                if (scene.camera_.name_ == obj_name)
+                {
+                    std::string transform;
+                    current_line_stream >> transform;
+
+                    glm::vec3 read_scale;
+                    glm::vec3 read_translate;
+                    float read_float;
+                    glm::vec3 read_rotate;
+
+                    if ("translate" == transform)
+                    {
+                        current_line_stream >> read_translate.x;
+                        current_line_stream >> read_translate.y;
+                        current_line_stream >> read_translate.z;
+                    }
+
+                    else if ("rotate" == transform)
+                    {
+                        current_line_stream >> read_float;
+                        current_line_stream >> read_rotate.x;
+                        current_line_stream >> read_rotate.y;
+                        current_line_stream >> read_rotate.z;
+                    }
+
+                    scene.camera_.camera_rotate(read_float, read_rotate);
+                    scene.camera_.camera_translate(read_translate);
+                }
+            }
+
+            else if ("render" == first_symbol)
+            {
+                std::string camera_name;
+                current_line_stream >> camera_name;
+
+                if (camera_name == scene.camera_.name_)
+                {
+                    std::string file_ext(".sdf");
+                    std::string type;
+                    current_line_stream >> type;
+                    std::string extension;
+                    current_line_stream >> extension;
+                    std::string string = filename.substr(0, filename.size() - file_ext.size());
+
+                    scene.name_ = string + "_" + type + extension;
+
+                    current_line_stream >> scene.width_;
+                    current_line_stream >> scene.height_;
+                }
+            }
         }
     }
 
