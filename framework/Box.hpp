@@ -23,18 +23,22 @@ public:
   float width() const;
   float height() const;
 
-  float area() override;
-  float volume() override;
+  float area() const override;
+  float volume() const override;
 
-  ostream &print(std::ostream &os) const override;
+  std::ostream &print(std::ostream &os) const override;
 
-  //bool intersect(Ray const &_r) const override;
-  bool is_inBox(glm::vec3 const& punkt) const;
-  bool intersect(Ray const& _r, float& _t) const override;
-  Hit intersection (Ray const &_r, float &_t) const override;
+  bool is_inBox(glm::vec3 const &punkt) const;
 
-  float set_max(float const &coor1, float const &coor2);
-  float set_min(float const &coor1, float const &coor2);
+  bool intersect(Ray const &_r, float& _t) override;
+  Hit intersect_hit(Ray const &_r) override;
+
+  glm::vec3 get_normal(glm::vec3 const &coor_) const;
+  glm::vec3 get_vector_to_light(Hit const &_inter, Light const &_light) const;
+
+  float set_max(float coor1, float coor2) const;
+  float set_min(float coor1, float coor2) const;
+
 
   /*vec3 nearest_corner(glm::vec3 const &min, glm::vec3 const &max, glm::vec3 const &origin) const;
   vec3 furthest_corner(glm::vec3 const &min, glm::vec3 const &max, glm::vec3 const &origin) const;

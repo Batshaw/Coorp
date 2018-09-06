@@ -1,39 +1,36 @@
 #ifndef HIT_HPP
 #define HIT_HPP
 
-#include <glm/glm.hpp>
-#include <memory>
-#include "Shape.hpp"
-#include "Ray.hpp"
-#include "material.hpp"
+#include <glm/vec3.hpp>
+#include <Shape.hpp>
+
+class Shape;
 
 struct Hit
 {
+        float distance_;
+        bool isHit_;
+        glm::vec3 coor_;
+        glm::vec3 normal_;
+        Shape const *obj_;
 
-    float distance_;
-    bool isHit_;
-    glm::vec3 coor_;
-    glm::vec3 normal_;
+        Hit() : distance_{10000.0f},
+                isHit_{false},
+                coor_{0.0f, 0.0f, 0.0f},
+                normal_{0.0f, 0.0f, 0.0f},
+                obj_{nullptr} {};
 
-    std::shared_ptr<Shape> closest_;
+        Hit(Hit const &input_) : distance_{input_.distance_},
+                                 isHit_{input_.isHit_},
+                                 coor_{input_.coor_},
+                                 normal_{input_.normal_},
+                                 obj_{input_.obj_} {};
 
-    Hit() : distance_{2000},
-            isHit_{false},
-            coor_{0.0f, 0.0f, 0.0f},
-            normal_{0.0, 0.0, 0.0},
-            closest_{nullptr} {};
-
-    Hit(Hit const &input_) : distance_{input_.distance_},
-                             isHit_{input_.isHit_},
-                             coor_{input_.coor_},
-                             normal_{input_.normal_},
-                             closest_{input_.closest_} {};
-
-    Hit(std::shared_ptr<Shape> input_) : distance_{2000},
-                                         isHit_{false},
-                                         coor_{0.0f, 0.0f, 0.0f},
-                                         normal_{0.0, 0.0, 0.0},
-                                         closest_{input_} {};
+        Hit(float distance, bool is_hit, glm::vec3 const &point, glm::vec3 const &normal, Shape const *obj) : distance_{distance},
+                                                                                                              isHit_{is_hit},
+                                                                                                              coor_{point},
+                                                                                                              normal_{normal},
+                                                                                                              obj_{obj} {};
 };
 
-#endif
+#endif //HIT_HPP

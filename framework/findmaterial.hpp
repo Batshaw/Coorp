@@ -19,14 +19,10 @@ std::shared_ptr<Material> findMaterialVector(std::string const &findName, std::v
     // scope to show the material that was founded
     if (iterLambda == material_vector.end())
     {
-        std::cout << "Do not exist!!!!!!! Use default Material\n"; //Material nicht gefunden wird, wird DefaultKonstruktor genutzt!
-        std::cout << *defaultMaterial;
         return defaultMaterial;
     }
     else
     {
-        std::cout << "Here's what u need from vector: \n";
-        std::cout << *(*iterLambda) << "\n"; // show the value of the value of the lambda that is the material.
         return *iterLambda;
     }
 };
