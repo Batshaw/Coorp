@@ -42,7 +42,9 @@
         "tuple": "cpp",
         "typeinfo": "cpp",
         "utility": "cpp",
-        "string": "cpp"
+        "string": "cpp",
+        "list": "cpp",
+        "xstring": "cpp"
     },
     "cmake.configureOnOpen": false,
     "C_Cpp.intelliSenseEngineFallback": "Enabled"

@@ -1,24 +1,32 @@
 #include <renderer.hpp>
 #include <window.hpp>
 
+#include "util.hpp"
+//#include "mingw-std-threads/mingw.thread.h"
 #include <GLFW/glfw3.h>
 #include <thread>
 #include <utility>
 #include <cmath>
-#include "Scene.hpp"
-#include "Camera.hpp"
+#include <string>
+
 
 int main(int argc, char *argv[])
 {
-  unsigned const image_width = 800;
-  unsigned const image_height = 600;
-  std::string const filename = "./checkerboard.ppm";
 
-  //Renderer renderer{image_width, image_height, filename};
+  // New Scene:
+  Scene newScene{};
+  load_sdf("scene1.sdf",newScene);
+
+  unsigned const image_width = newScene.width_;
+  unsigned const image_height = newScene.height_;
+
+  Renderer renderer{image_width, image_height, newScene.name_};
+
+  renderer.render(newScene);
 
   //create separate thread to see updates of pixels while rendering
-  /*std::thread render_thread([&renderer]() {*/ //renderer.render(); /*});*/
-/* 
+  // renderer.render();
+
   Window window{{image_width, image_height}};
 
   while (!window.should_close())
@@ -28,9 +36,7 @@ int main(int argc, char *argv[])
       window.close();
     }
     window.show(renderer.color_buffer());
-  } */
+  }
 
-  //"join" threads, i.e. synchronize main thread with render_thread
-  /*render_thread.join();*/
   return 0;
 }

@@ -15,7 +15,7 @@ struct Material{
 
     // friend makes operator<< a non-Memberfunction but can acces to Material.variablen
     friend std::ostream& operator<<(std::ostream& os, Material const& m){
-        os<< "Material: "<< m.name_<< " Materialkoeffizienten: ("
+        os<< "Material: "<< m.name_<< ". Materialkoeffizienten: ("
         << m.ka_<< ", "<< m.kd_<< ", "<< m.ks_<< ").\n"
         << "Spekularreflexionsexponenten: "<< m.m_<< ". \n";
         return os;
