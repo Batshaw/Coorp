@@ -4,23 +4,14 @@
 #include <memory>
 
 // Konstruktor
-Shape::Shape() : name_{"unknown"} {}
-/*Shape::Shape(std::string const& name):
-    name_{name}, color_{Color(0.0f, 0.0f, 0.0f)}    {}
-Shape::Shape(Color const& color):
-    name_{"unknown"}, color_{color} {}*/
-Shape::Shape(std::string const& name, std::shared_ptr<Material> const& material) : name_{name}, material_{material}
-{
-    // std::cout<< "Constructor of Shape!"<< std::endl;
-}
+Shape::Shape() : name_{"unknown"} {};
 
-Shape::Shape(std::string const& name, std::shared_ptr<Material> const& material, glm::mat4 const& worldTransform) : name_{name}, material_{material}, world_transformation_{worldTransform}, world_transformation_inv_{glm::inverse(worldTransform)} {}
+Shape::Shape(std::string const &name, std::shared_ptr<Material> const &material) : name_{name}, material_{material} {};
+
+Shape::Shape(std::string const &name, std::shared_ptr<Material> const &material, glm::mat4 const &worldTransform) : name_{name}, material_{material}, world_transformation_{worldTransform}, world_transformation_inv_{glm::inverse(worldTransform)} {}
 
 // Destruktor (Aufgabe8):
-Shape::~Shape()
-{
-    // std::cout<< "Destruction of Shape!"<< std::endl;
-}
+Shape::~Shape(){};
 
 // get-Methode
 std::string Shape::get_name() const
@@ -32,12 +23,12 @@ std::shared_ptr<Material> Shape::get_material() const
     return material_;
 }
 
-std::ostream &Shape::print(std::ostream& os) const
+std::ostream &Shape::print(std::ostream &os) const
 {
     os << "The Shape: " << name_ << " has color: " << material_ << "\n";
     return os;
 }
-std::ostream &operator<<(std::ostream& os, Shape const& s)
+std::ostream &operator<<(std::ostream &os, Shape const &s)
 {
     return s.print(os);
 }
@@ -53,6 +44,13 @@ glm::mat4 Shape::world_transformation_inv() const
 };
 
 //transform Methoden
+void Shape::transform(glm::vec3 const &translation, glm::vec3 const &scaling, float angle, glm::vec3 const &rotation)
+{
+    scale(scaling);
+    rotate(angle, rotation);
+    translate(translation);
+}
+
 void Shape::translate(glm::vec3 const &a)
 {
     glm::mat4 trans_mat; // = glm::make_translation;
@@ -79,6 +77,9 @@ void Shape::scale(glm::vec3 const &b)
 
 void Shape::rotate(float rad, glm::vec3 const &c)
 {
+    float const PI = atan(1.0f) * 4;
+    rad = rad * PI / 180;
+
     rotate_x(rad * c.x);
     rotate_y(rad * c.y);
     rotate_z(rad * c.z);

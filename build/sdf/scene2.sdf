@@ -6,6 +6,13 @@ define shape box rbottom -20 40 -60 60 -10 -90 red
 define shape sphere bsphere 0 0 -50 5 blue
 # light - from right above
 define light sun 1000 700 0 .2 .2 .2 100
+# transform name tranformation parameter
+transform rbottom scale 2 4 2
+transform rbottom translate 3 0 2
+transform rbottom rotate 45 1 0 0
+transform bsphere scale 2 4 2
+transform bsphere translate 3 0 2
+transform bsphere rotate 45 1 0 0
 # camera
 define camera eye 45.0
 # ... and go
