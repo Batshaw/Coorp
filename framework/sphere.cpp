@@ -71,11 +71,13 @@ bool Sphere::intersect(Ray const& r, float& t){
 
 Hit Sphere::intersectHit(Ray const& ray){
     float distance;
-    glm::vec3 v = glm::normalize(ray.direction_);
+    Ray transform_ray = transformRay(world_transformation_,ray);
+
+    glm::vec3 v = glm::normalize(transform_ray.direction_);
     auto squaredRadius = std::pow(radius_, 2);
-    bool result = glm::intersectRaySphere(ray.origin_, v, mittel_, squaredRadius, distance);
+    bool result = intersect(transform_ray, distance);
     if(result == true){
-        glm::vec3 schnittPunkt = ray.origin_ + (distance*ray.direction_);
+        glm::vec3 schnittPunkt = transform_ray.origin_ + (distance*transform_ray.direction_);
         glm::vec3 normalVector = glm::normalize(schnittPunkt - mittel_);
         return Hit{true, distance, this, normalVector, schnittPunkt};
     }
