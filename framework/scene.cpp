@@ -184,7 +184,6 @@ void load_sdf(std::string const &filename, Scene &scene)
             {
                 std::string obj_name;
                 current_line_stream >> obj_name;
-
                 for (std::shared_ptr<Shape> shape : scene.shape_vector_)
                 {
 
@@ -192,35 +191,35 @@ void load_sdf(std::string const &filename, Scene &scene)
                     {
                         std::string transform;
                         current_line_stream >> transform;
-
-                        glm::vec3 read_scale;
-                        glm::vec3 read_translate;
-                        float read_float;
-                        glm::vec3 read_rotate;
+                        cout << "transforming " << shape->get_name() << std::endl;
 
                         if ("scale" == transform)
                         {
-                            current_line_stream >> read_scale.x;
-                            current_line_stream >> read_scale.y;
-                            current_line_stream >> read_scale.z;
+                            current_line_stream >> shape->scaling_.x;
+                            current_line_stream >> shape->scaling_.y;
+                            current_line_stream >> shape->scaling_.z;
+                            std::cout << "Scale: " << shape->scaling_.x << "; " << shape->scaling_.y << "; " << shape->scaling_.z << std::endl;
                         }
 
                         else if ("translate" == transform)
                         {
-                            current_line_stream >> read_translate.x;
-                            current_line_stream >> read_translate.y;
-                            current_line_stream >> read_translate.z;
+                            current_line_stream >> shape->translation_.x;
+                            current_line_stream >> shape->translation_.y;
+                            current_line_stream >> shape->translation_.z;
+                            std::cout << "Translate: " << shape->translation_.x << "; " << shape->translation_.y << "; " << shape->translation_.z << std::endl;
                         }
 
                         else if ("rotate" == transform)
                         {
-                            current_line_stream >> read_float;
-                            current_line_stream >> read_rotate.x;
-                            current_line_stream >> read_rotate.y;
-                            current_line_stream >> read_rotate.z;
+                            float raw;
+                            float const PI = atan(1.0f) * 4;
+                            current_line_stream >> raw;
+                            shape->rotation_angle_ = raw * PI /180;
+                            current_line_stream >> shape->rotation_.x;
+                            current_line_stream >> shape->rotation_.y;
+                            current_line_stream >> shape->rotation_.z;
+                            std::cout << "Rotate: " << shape->rotation_.x << "; " << shape->rotation_.y << "; " << shape->rotation_.z << std::endl;
                         }
-
-                        //shape->transform(read_translate,read_scale,read_float,read_rotate);
                     }
                 }
 

@@ -34,13 +34,18 @@ public:
 
   virtual std::ostream &print(std::ostream &os) const;
 
-  void transform(glm::vec3 const &translation, glm::vec3 const &scaling, float angle, glm::vec3 const &rotation);
-  void translate(glm::vec3 const &a);
-  void scale(glm::vec3 const &b);
-  void rotate(float rad, glm::vec3 const &c);
-  void rotate_x(float rad);
-  void rotate_y(float rad);
-  void rotate_z(float rad);
+  void transform();
+  /*  glm::mat4 translate(glm::vec3 const &a);
+  glm::mat4 scale(glm::vec3 const &b);
+  glm::mat4 rotate(glm::vec3 const &c);
+  glm::mat4 rotate_x(float rad);
+  glm::mat4 rotate_y(float rad);
+  glm::mat4 rotate_z(float rad);
+ */
+  glm::vec3 scaling_{1.0f, 1.0f, 1.0f};
+  glm::vec3 translation_{0.0f, 0.0f, 0.0f};
+  glm::vec3 rotation_{0.0f, 0.0f, 0.0f};
+  float rotation_angle_{0};
 
 protected:
   std::string name_;

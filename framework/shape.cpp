@@ -2,6 +2,8 @@
 #include "glm/vec3.hpp"
 #include <ostream>
 #include <memory>
+#include <glm/gtx/string_cast.hpp>
+#include <glm/gtx/transform.hpp>
 
 // Konstruktor
 Shape::Shape() : name_{"unknown"} {};
@@ -25,7 +27,7 @@ std::shared_ptr<Material> Shape::get_material() const
 
 std::ostream &Shape::print(std::ostream &os) const
 {
-    os << "The Shape: " << name_ << " has color: " << material_ << "\n";
+    os << "The Shape: " << name_ << " has color: " << *material_ << "\n";
     return os;
 }
 std::ostream &operator<<(std::ostream &os, Shape const &s)
@@ -44,14 +46,18 @@ glm::mat4 Shape::world_transformation_inv() const
 };
 
 //transform Methoden
-void Shape::transform(glm::vec3 const &translation, glm::vec3 const &scaling, float angle, glm::vec3 const &rotation)
+void Shape::transform()
 {
-    scale(scaling);
-    rotate(angle, rotation);
-    translate(translation);
+    world_transformation_ = glm::translate(translation_) * glm::rotate(rotation_angle_, rotation_) * glm::scale(scaling_) * world_transformation_;
+    world_transformation_inv_ = glm::inverse(world_transformation_);
+    std::cout << "This shape: " << name_ << std::endl;
+    std::cout << "transform: " << std::endl;
+    std::cout << glm::to_string(world_transformation_) << std::endl;
+    std::cout << "inverse: " << std::endl;
+    std::cout << glm::to_string(world_transformation_inv_) << std::endl;
 }
-
-void Shape::translate(glm::vec3 const &a)
+/* 
+glm::mat4 Shape::translate(glm::vec3 const &a)
 {
     glm::mat4 trans_mat; // = glm::make_translation;
     trans_mat[0] = glm::vec4{1.0f, 0.0f, 0.0f, a[0]};
@@ -59,11 +65,12 @@ void Shape::translate(glm::vec3 const &a)
     trans_mat[2] = glm::vec4{0.0f, 0.0f, 1.0f, a[2]};
     trans_mat[3] = glm::vec4{0.0f, 0.0f, 0.0f, 1.0f};
 
+    return trans_mat;
     world_transformation_ = trans_mat * world_transformation_;
     world_transformation_inv_ = glm::inverse(world_transformation_);
 }
 
-void Shape::scale(glm::vec3 const &b)
+glm::mat4 Shape::scale(glm::vec3 const &b)
 {
     glm::mat4 scale_mat;
     scale_mat[0] = glm::vec4{b.x, 0.0f, 0.0f, 0.0f};
@@ -71,21 +78,24 @@ void Shape::scale(glm::vec3 const &b)
     scale_mat[2] = glm::vec4{0.0f, 0.0f, b.z, 0.0f};
     scale_mat[3] = glm::vec4{0.0f, 0.0f, 0.0f, 1.0f};
 
+    return scale_mat;
+
     world_transformation_ = scale_mat * world_transformation_;
     world_transformation_inv_ = glm::inverse(world_transformation_);
 }
 
-void Shape::rotate(float rad, glm::vec3 const &c)
+glm::mat4 Shape::rotate(glm::vec3 const &c)
 {
-    float const PI = atan(1.0f) * 4;
-    rad = rad * PI / 180;
 
-    rotate_x(rad * c.x);
-    rotate_y(rad * c.y);
-    rotate_z(rad * c.z);
+    glm::mat4 rotate_mat = rotate_x(c.x)* rotate_y(c.y)
+    rotate_z(c.z);;
+
+    rotate_x(c.x);
+    rotate_y(c.y);
+    rotate_z(c.z);
 }
 
-void Shape::rotate_x(float rad)
+glm::mat4 Shape::rotate_x(float rad)
 {
     glm::mat4 rotate_mat;
 
@@ -94,11 +104,10 @@ void Shape::rotate_x(float rad)
     rotate_mat[2] = glm::vec4{0.0f, sin(rad), cos(rad), 0.0f};
     rotate_mat[3] = glm::vec4{0.0f, 0.0f, 0.0f, 1.0f};
 
-    world_transformation_ = rotate_mat * world_transformation_;
-    world_transformation_inv_ = glm::inverse(world_transformation_);
+    return rotate_mat;
 }
 
-void Shape::rotate_y(float rad)
+glm::mat4 Shape::rotate_y(float rad)
 {
     glm::mat4 rotate_mat;
 
@@ -107,11 +116,10 @@ void Shape::rotate_y(float rad)
     rotate_mat[2] = glm::vec4{sin(rad), 0.0f, cos(rad), 0.0f};
     rotate_mat[3] = glm::vec4{0.0f, 0.0f, 0.0f, 1.0f};
 
-    world_transformation_ = rotate_mat * world_transformation_;
-    world_transformation_inv_ = glm::inverse(world_transformation_);
+    return rotate_mat;
 }
 
-void Shape::rotate_z(float rad)
+glm::mat4 Shape::rotate_z(float rad)
 {
     glm::mat4 rotate_mat;
 
@@ -120,6 +128,5 @@ void Shape::rotate_z(float rad)
     rotate_mat[2] = glm::vec4{0.0f, 0.0f, 1.0f, 0.0f};
     rotate_mat[3] = glm::vec4{0.0f, sin(rad), 0.0f, cos(rad)};
 
-    world_transformation_ = rotate_mat * world_transformation_;
-    world_transformation_inv_ = glm::inverse(world_transformation_);
-}
+    return rotate_mat;
+} */
