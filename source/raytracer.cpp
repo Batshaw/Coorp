@@ -1,4 +1,3 @@
-#define GLM_FORCE_RADIANS
 
 #include <renderer.hpp>
 #include <window.hpp>
@@ -16,11 +15,6 @@ int main(int argc, char *argv[])
   // New Scene:
   Scene newScene{};
   load_sdf("scene1.sdf", newScene);
-
-  for (std::shared_ptr<Shape> shape : newScene.shape_vector_)
-  {
-    //shape->transform();
-  }
 
   unsigned const image_width{newScene.width_};
   unsigned const image_height{newScene.height_};

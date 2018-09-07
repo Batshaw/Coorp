@@ -1,14 +1,17 @@
 #ifndef SHAPE_HPP
 #define SHAPE_HPP
 
+#include <memory>
+#include <ostream>
 #include <string>
 #include "color.hpp"
 #include <ostream>
 #include "material.hpp"
 #include "ray.hpp"
-#include "glm/vec3.hpp"
 #include "hit.hpp"
-#include <memory>
+#include "glm/vec3.hpp"
+#include <glm/gtx/string_cast.hpp>
+#include <glm/gtx/transform.hpp>
 
 class Shape
 {
@@ -44,7 +47,7 @@ public:
  */
   glm::vec3 scaling_{1.0f, 1.0f, 1.0f};
   glm::vec3 translation_{0.0f, 0.0f, 0.0f};
-  glm::vec3 rotation_{0.0f, 0.0f, 0.0f};
+  glm::vec3 rotation_{1.0f, 1.0f, 1.0f};
   float rotation_angle_{0};
 
 protected:
@@ -56,10 +59,7 @@ protected:
                                   0, 0, 1, 0,
                                   0, 0, 0, 1};
 
-  glm::mat4 world_transformation_inv_{1, 0, 0, 0,
-                                      0, 1, 0, 0,
-                                      0, 0, 1, 0,
-                                      0, 0, 0, 1};
+  glm::mat4 world_transformation_inv_{glm::inverse(world_transformation_)};
 };
 
 std::ostream &operator<<(std::ostream &os, Shape const &s);

@@ -170,7 +170,7 @@ Hit Box::intersectHit(Ray const &ray)
         glm::vec4 transformed_normal = glm::transpose(world_transformation_inv_) * glm::vec4{raw_normal, 1.0f};
         glm::vec3 normalVec{transformed_normal};
 
-        return Hit{true, t, this, glm::normalize(normalVec), schnittPunkt};
+        return Hit{true, t, this, glm::normalize(raw_normal), raw_point};
     }
 
     return Hit{};

@@ -80,14 +80,14 @@ Hit Sphere::intersectHit(Ray const &ray)
     {
 
         glm::vec3 raw_point = (transform_ray.origin_ + (distance * transform_ray.direction_));
-        glm::vec4 transformed_point = glm::transpose(world_transformation_inv_) * glm::vec4{raw_point, 1.0f};
+        glm::vec4 transformed_point = world_transformation_inv_ * glm::vec4{raw_point, 1.0f};
         glm::vec3 schnittPunkt{transformed_point};
 
         glm::vec3 raw_normal = glm::normalize(schnittPunkt - mittel_);
-        glm::vec4 transformed_normal = glm::transpose(world_transformation_inv_) * glm::vec4{raw_normal, 1.0f};
+        glm::vec4 transformed_normal = world_transformation_inv_ * glm::vec4{raw_normal, 1.0f};
         glm::vec3 normalVector{transformed_normal};
 
-        return Hit{true, distance, this, glm::normalize(normalVector), schnittPunkt};
+        return Hit{true, distance, this, glm::normalize(raw_normal), raw_point};
     }
     return Hit{};
 }

@@ -37,7 +37,6 @@ Renderer::Renderer(unsigned w, unsigned h, std::string const &file)
 
 void Renderer::render(Scene const &scene)
 {
-
   for (unsigned y = 0; y < height_; ++y)
   {
     for (unsigned x = 0; x < width_; ++x)

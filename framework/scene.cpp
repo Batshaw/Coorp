@@ -1,13 +1,4 @@
 #include "scene.hpp"
-#include <memory>
-#include <map>
-#include <vector>
-#include <set>
-#include "shape.hpp"
-#include "material.hpp"
-#include "light.hpp"
-#include "box.hpp"
-#include "sphere.hpp"
 
 std::shared_ptr<Material> findMaterialVector(std::string const &findName, vector<std::shared_ptr<Material>> const &material_vector)
 {
@@ -214,7 +205,7 @@ void load_sdf(std::string const &filename, Scene &scene)
                             float raw;
                             float const PI = atan(1.0f) * 4;
                             current_line_stream >> raw;
-                            shape->rotation_angle_ = raw * PI /180;
+                            shape->rotation_angle_ = raw * PI / 180;
                             current_line_stream >> shape->rotation_.x;
                             current_line_stream >> shape->rotation_.y;
                             current_line_stream >> shape->rotation_.z;
@@ -228,28 +219,24 @@ void load_sdf(std::string const &filename, Scene &scene)
                     std::string transform;
                     current_line_stream >> transform;
 
-                    glm::vec3 read_scale;
-                    glm::vec3 read_translate;
-                    float read_float;
-                    glm::vec3 read_rotate;
-
                     if ("translate" == transform)
                     {
-                        current_line_stream >> read_translate.x;
-                        current_line_stream >> read_translate.y;
-                        current_line_stream >> read_translate.z;
+                        current_line_stream >> scene.camera_.translation_.x;
+                        current_line_stream >> scene.camera_.translation_.y;
+                        current_line_stream >> scene.camera_.translation_.z;
                     }
 
                     else if ("rotate" == transform)
                     {
-                        current_line_stream >> read_float;
-                        current_line_stream >> read_rotate.x;
-                        current_line_stream >> read_rotate.y;
-                        current_line_stream >> read_rotate.z;
-                    }
+                        float raw;
+                        float const PI = atan(1.0f) * 4;
+                        current_line_stream >> raw;
+                        scene.camera_.rotation_angle_ = raw * PI / 180;
 
-                    scene.camera_.camera_rotate(read_float, read_rotate);
-                    scene.camera_.camera_translate(read_translate);
+                        current_line_stream >> scene.camera_.rotation_.x;
+                        current_line_stream >> scene.camera_.rotation_.y;
+                        current_line_stream >> scene.camera_.rotation_.z;
+                    }
                 }
             }
 
@@ -281,6 +268,12 @@ void load_sdf(std::string const &filename, Scene &scene)
         cout << "file not found" << endl;
     }
     ifs.close();
+
+    for (std::shared_ptr<Shape> shape : scene.shape_vector_)
+    {
+        shape->transform();
+    }
+
     // return scene;
 };
 
