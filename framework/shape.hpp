@@ -29,7 +29,7 @@ class Shape{
         virtual float volumen() const = 0;
         
         virtual bool intersect(Ray const& r, float& t) = 0;
-        virtual Hit intersectHit(Ray const& ray) = 0;
+        virtual Hit intersectHit(Ray const& ray, float& t) = 0;
 
         virtual void translate(glm::vec3 const& p);
         virtual void scale(glm::vec3 const& s);

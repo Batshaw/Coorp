@@ -31,7 +31,7 @@ class Sphere : public Shape{
 
         // intersect-Methode
         bool intersect(Ray const& r, float& t) override;
-        Hit intersectHit(Ray const& ray) override;
+        Hit intersectHit(Ray const& ray, float& t) override;
 
     protected:
         glm::vec3 mittel_;

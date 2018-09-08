@@ -1,13 +1,14 @@
 #ifndef HIT_HPP
 #define HIT_HPP
 #include <glm/vec3.hpp>
+#include <algorithm>
 
 class Shape;
 
 struct Hit{
 
     Hit():
-        hit_{false}, distance_{10000.0f}, closestShape_{nullptr}, normalVector_{}, schnittPunkt_{}  {}
+        hit_{false}, distance_{std::numeric_limits<float>::max()}, closestShape_{nullptr}, normalVector_{}, schnittPunkt_{}  {}
 
     Hit(Hit const &input):
         hit_{input.hit_}, distance_{input.distance_}, closestShape_{input.closestShape_}, normalVector_{input.normalVector_}, schnittPunkt_{input.schnittPunkt_}   {}

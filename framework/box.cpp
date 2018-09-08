@@ -143,8 +143,8 @@ bool Box::intersect(Ray const& r, float& t){
     return result;
 }
 
-Hit Box::intersectHit(Ray const& ray){
-    float t;
+Hit Box::intersectHit(Ray const& ray, float& t){
+    // float t;
     glm::vec3 schnittPunkt;
     glm::vec3 normalVec;
     bool isHit = intersect(ray, t);
@@ -169,6 +169,8 @@ Hit Box::intersectHit(Ray const& ray){
         if(schnittPunkt.z == Approx(max_.z)){
             normalVec = glm::vec3{0.0f, 0.0f, 1.0f};
         }
+        schnittPunkt = glm::vec3(world_transformation_*glm::vec4(schnittPunkt, 1.0f));
+        normalVec = glm::normalize(glm::vec3(world_transformation_*glm::vec4(normalVec, 0.0f)));
         return Hit{true, t, this, glm::normalize(normalVec), schnittPunkt};
     }
 

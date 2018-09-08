@@ -25,7 +25,7 @@ class Box : public Shape{
         // Color getColor() const override;
         bool is_inBox(glm::vec3 const& punkt);
         bool intersect(Ray const& r, float& t) override;
-        Hit intersectHit(Ray const& ray) override;
+        Hit intersectHit(Ray const& ray, float& t) override;
 
         std::ostream& print(std::ostream& os) const override;
 

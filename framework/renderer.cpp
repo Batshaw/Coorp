@@ -61,7 +61,7 @@ Color Renderer::trace(Scene const& scene, Ray const& ray, int depth){
   int closetObjectIndex = -1;
 
   for(int i = 0; i < scene.shape_vector.size(); ++i){
-    is_intersect = (*scene.shape_vector[i]).intersect(ray, distance);
+    is_intersect = (*scene.shape_vector[i]).intersectHit(ray, distance).hit_;
     if(is_intersect){
       if(distance < dmin){
         dmin = distance;
@@ -107,7 +107,8 @@ Color Renderer::trace(Scene const& scene, Ray const& ray, int depth){
 
 Color Renderer::shade(Scene const& scene, Ray const& ray, int closest, int depth){
   // Difusse Refektion
-  Hit h = scene.shape_vector[closest]->intersectHit(ray);
+  float t;
+  Hit h = scene.shape_vector[closest]->intersectHit(ray, t);
   Color diffuColor = {0.0, 0.0, 0.0};
   Color spekColor = {0.0, 0.0, 0.0};
   Color reflecColor = {0.0, 0.0, 0.0};
@@ -121,7 +122,7 @@ Color Renderer::shade(Scene const& scene, Ray const& ray, int closest, int depth
     // Check if lightVec have intersection with another Shape
     for(int a = 0; a < scene.shape_vector.size(); ++a){
       if(a != closest && imSchatten != true){
-        imSchatten = scene.shape_vector[a]->intersect(lightHitRay, t);
+        imSchatten = scene.shape_vector[a]->intersectHit(lightHitRay, t).hit_;
         if(t < 0) {
           imSchatten = false;
         }
