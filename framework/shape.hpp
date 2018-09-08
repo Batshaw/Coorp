@@ -22,6 +22,8 @@ class Shape{
         std::string getName() const;
         Color getColor() const;
         std::shared_ptr<Material> getMaterial() const;
+        virtual glm::mat4 getWorldMat() const;
+        virtual glm::mat4 getWorldMatInv() const;
 
         virtual float area() const = 0;
         virtual float volumen() const = 0;
@@ -29,9 +31,9 @@ class Shape{
         virtual bool intersect(Ray const& r, float& t) = 0;
         virtual Hit intersectHit(Ray const& ray) = 0;
 
-        // virtual void translate(glm::vec3 const& p);
-        // virtual void scale(glm::vec3 const& s);
-        // virtual void rotate(float const& fi, glm::vec3 const& roVec);
+        virtual void translate(glm::vec3 const& p);
+        virtual void scale(glm::vec3 const& s);
+        virtual void rotate(float fi, glm::vec3 const& roVec);
         
         virtual std::ostream& print(std::ostream& os) const;
 
