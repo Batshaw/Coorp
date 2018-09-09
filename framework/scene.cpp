@@ -179,6 +179,39 @@ void load_sdf(std::string const& filename, Scene &scene)
                     scene.ambient = temp;
 
                 }
+
+                else if("transform" == variable_name){
+                    std::string obj_name;
+                    current_line_stream >> obj_name;
+                    for(std::shared_ptr<Shape> shape : scene.shape_vector){
+                        if(shape->getName() == obj_name){
+                            std::string transForm;
+                            current_line_stream >> transForm;
+                            if("scale" == transForm){
+                                current_line_stream >> shape->scaling_.x;
+                                current_line_stream >> shape->scaling_.y;
+                                current_line_stream >> shape->scaling_.z;
+
+                            }
+                            else if("translate" == transForm){
+                                current_line_stream >> shape->translation_.x;
+                                current_line_stream >> shape->translation_.y;
+                                current_line_stream >> shape->translation_.z;
+
+                            }
+                            else if("rotate" == transForm){
+                                float raw;
+                                float const PI = atan(1.0f)*4;
+                                current_line_stream >> raw;
+                                shape->rotation_angle_ = raw*PI/180;
+                                current_line_stream >> shape->rotation_.x;
+                                current_line_stream >> shape->rotation_.y;
+                                current_line_stream >> shape->rotation_.z;
+
+                            }
+                        }
+                    }
+                }
             }
         }
     }
@@ -188,5 +221,10 @@ void load_sdf(std::string const& filename, Scene &scene)
         cout << "file not found" << endl;
     }
     ifs.close();
+        for (std::shared_ptr<Shape> shape : scene.shape_vector)
+    {
+        shape->transform();
+    }
     // return scene;
 }
+

@@ -28,14 +28,21 @@ class Shape{
         virtual float area() const = 0;
         virtual float volumen() const = 0;
         
-        virtual bool intersect(Ray const& r, float& t) = 0;
+        // virtual bool intersect(Ray const& r, float& t) = 0;
         virtual Hit intersectHit(Ray const& ray, float& t) = 0;
 
-        virtual void translate(glm::vec3 const& p);
-        virtual void scale(glm::vec3 const& s);
-        virtual void rotate(float fi, glm::vec3 const& roVec);
+        virtual glm::mat4 translate(glm::vec3 const& p);
+        virtual glm::mat4 scale(glm::vec3 const& s) const;
+        virtual glm::mat4 rotate(float fi, glm::vec3 const& roVec);
+        virtual void transform();
         
         virtual std::ostream& print(std::ostream& os) const;
+
+        glm::vec3 scaling_;
+        glm::vec3 translation_;
+        glm::vec3 rotation_;
+        float rotation_angle_;
+
 
     protected:
         std::string name_;

@@ -30,7 +30,7 @@ class Sphere : public Shape{
         std::ostream& print(std::ostream& os) const override;
 
         // intersect-Methode
-        bool intersect(Ray const& r, float& t) override;
+        // bool intersect(Ray const& r, float& t) override;
         Hit intersectHit(Ray const& ray, float& t) override;
 
     protected:

@@ -43,7 +43,7 @@ void Renderer::render(Scene const& scene){
   for(unsigned y = 0; y < height_; ++y){
     for(unsigned x = 0; x < width_; ++x){
       Pixel pixel(x, y);
-      Ray ray = scene.camera.rayThroughPixel(x, y, width_, height_);
+      Ray ray = transformRay(scene.camera.transformation_, scene.camera.rayThroughPixel(x, y, width_, height_));
       pixel.color = trace(scene, ray, 1);
       write(pixel);
     }
@@ -189,4 +189,19 @@ void Renderer::write(Pixel const& p)
   }
 
   ppm_.write(p);
+}
+
+Ray transformRay(glm::mat4 const &mat, Ray const &ray)
+{
+    glm::vec4 o{ray.origin, 1.0f};    //Punkte
+    glm::vec4 d{ray.direction, 0.0f}; //Vector
+
+    //Tranformierte
+    glm::vec4 a{mat * o};
+    glm::vec4 b{mat * d};
+
+    glm::vec3 origin{a};
+    glm::vec3 direction{b};
+
+    return Ray{origin, direction};
 }

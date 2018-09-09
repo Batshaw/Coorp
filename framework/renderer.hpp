@@ -50,4 +50,6 @@ private:
   PpmWriter ppm_;
 };
 
+Ray transformRay(glm::mat4 const& mat, Ray const& ray);
+
 #endif // #ifndef BUW_RENDERER_HPP

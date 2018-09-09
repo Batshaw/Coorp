@@ -1,6 +1,8 @@
 #define CATCH_CONFIG_RUNNER
 
 #include "box.hpp"
+#include "scene.hpp"
+#include "renderer.hpp"
 #include <cmath>
 #include <memory>
 #include <vector>
@@ -58,69 +60,114 @@ bool Box::is_inBox(glm::vec3 const& punkt){
     else return false;
 }
 
-bool Box::intersect(Ray const& r, float& t){
-    bool result = false;
+// bool Box::intersect(Ray const& ray, float& t){
+//     bool result = false;
+//     glm::vec3 schnittPunkt;
+//     // if(ray.direction.x != 0){
+//     //     if(ray.direction.x > 0){
+//     //         t = (min_.x - ray.origin.x)/ray.direction.x;
+//     //     }
+//     //     else t = (max_.x - ray.origin.x)/ray.direction.x;
+//     //     if(t > 0){
+//     //         schnittPunkt = ray.origin + t*ray.direction;
+//     //         // std::cout<<schnittPunkt.x<< " "<< schnittPunkt.y<< " "<< schnittPunkt.z<< " \n";
+//     //         if(is_inBox(schnittPunkt)){
+//     //             result = true;
+//     //             // std::cout<< "t = "<< t<< "\n";
+//     //         }
+//     //     }
+//     // }
+//     // if(ray.direction.y != 0){
+//     //     if(ray.direction.y > 0){
+//     //         t = (min_.y - ray.origin.y)/ray.direction.y;
+//     //     }
+//     //     else t = (max_.y - ray.origin.y)/ray.direction.y;
+//     //     if(t > 0){
+//     //         schnittPunkt = ray.origin + t*ray.direction;
+//     //         // std::cout<<schnittPunkt.x<< " "<< schnittPunkt.y<< " "<< schnittPunkt.z<< " \n";
+//     //         if(is_inBox(schnittPunkt)){
+//     //             result = true;
+//     //             // std::cout<< "t = "<< t<< "\n";
+//     //         }
+//     //     }
+//     // }
+//     // if(ray.direction.z != 0){
+//     //     if(ray.direction.z > 0){
+//     //         t = (min_.z - ray.origin.z)/ray.direction.z;
+//     //     }
+//     //     else t = (max_.z - ray.origin.z)/ray.direction.z;
+//     //     if(t > 0){
+//     //         schnittPunkt = ray.origin + t*ray.direction;
+//     //         // std::cout<<schnittPunkt.x<< " "<< schnittPunkt.y<< " "<< schnittPunkt.z<< " \n";
+//     //         if(is_inBox(schnittPunkt)){
+//     //             result = true;
+//     //             // std::cout<< "t = "<< t<< "\n";
+//     //         }
+//     //     }
+//     // }
+//     // return result;
+//     if(ray.direction.x == 0 && ray.direction.y == 0 && ray.direction.z == 0){
+//         std::cout<< "add another direction (!= 0)";
+//     }
+//     else{
+//         std::vector<float> distanceVec;
+//         float minX = (min_.x - ray.origin.x)/ray.direction.x;
+//         float maxX = (max_.x - ray.origin.x)/ray.direction.x;
+//         distanceVec.push_back(minX);
+//         distanceVec.push_back(maxX);
+
+//         float minY = (min_.y - ray.origin.y)/ray.direction.y;
+//         float maxY = (max_.y - ray.origin.y)/ray.direction.y;
+//         distanceVec.push_back(minY);
+//         distanceVec.push_back(maxY);
+
+//         float minZ = (min_.z - ray.origin.z)/ray.direction.z;
+//         float maxZ = (max_.z - ray.origin.z)/ray.direction.z;
+//         distanceVec.push_back(minZ);
+//         distanceVec.push_back(maxZ);
+
+//         std::sort(distanceVec.begin(), distanceVec.end());
+
+//         for(auto i : distanceVec){
+//             if(!std::isinf(i)){
+//                 schnittPunkt = ray.origin + (i * ray.direction);
+//                 if((schnittPunkt.x <= max_.x && schnittPunkt.x >= min_.x)
+//                     && (schnittPunkt.y <= max_.y && schnittPunkt.y >= min_.y)
+//                     && (schnittPunkt.z <= max_.z && schnittPunkt.z >= min_.z)){
+//                         t = i;
+//                         result = true;
+//                         return result;
+//                     }
+//             }
+//         }
+
+//     }
+//     return result;
+// }
+
+Hit Box::intersectHit(Ray const& ray, float& t){
+    // float t;
     glm::vec3 schnittPunkt;
-    // if(r.direction.x != 0){
-    //     if(r.direction.x > 0){
-    //         t = (min_.x - r.origin.x)/r.direction.x;
-    //     }
-    //     else t = (max_.x - r.origin.x)/r.direction.x;
-    //     if(t > 0){
-    //         schnittPunkt = r.origin + t*r.direction;
-    //         // std::cout<<schnittPunkt.x<< " "<< schnittPunkt.y<< " "<< schnittPunkt.z<< " \n";
-    //         if(is_inBox(schnittPunkt)){
-    //             result = true;
-    //             // std::cout<< "t = "<< t<< "\n";
-    //         }
-    //     }
-    // }
-    // if(r.direction.y != 0){
-    //     if(r.direction.y > 0){
-    //         t = (min_.y - r.origin.y)/r.direction.y;
-    //     }
-    //     else t = (max_.y - r.origin.y)/r.direction.y;
-    //     if(t > 0){
-    //         schnittPunkt = r.origin + t*r.direction;
-    //         // std::cout<<schnittPunkt.x<< " "<< schnittPunkt.y<< " "<< schnittPunkt.z<< " \n";
-    //         if(is_inBox(schnittPunkt)){
-    //             result = true;
-    //             // std::cout<< "t = "<< t<< "\n";
-    //         }
-    //     }
-    // }
-    // if(r.direction.z != 0){
-    //     if(r.direction.z > 0){
-    //         t = (min_.z - r.origin.z)/r.direction.z;
-    //     }
-    //     else t = (max_.z - r.origin.z)/r.direction.z;
-    //     if(t > 0){
-    //         schnittPunkt = r.origin + t*r.direction;
-    //         // std::cout<<schnittPunkt.x<< " "<< schnittPunkt.y<< " "<< schnittPunkt.z<< " \n";
-    //         if(is_inBox(schnittPunkt)){
-    //             result = true;
-    //             // std::cout<< "t = "<< t<< "\n";
-    //         }
-    //     }
-    // }
-    // return result;
-    if(r.direction.x == 0 && r.direction.y == 0 && r.direction.z == 0){
+    glm::vec3 normalVec;
+    Ray transformedRay{transformRay(getWorldMatInv(), ray)};
+    bool isHit = false;
+    if(ray.direction.x == 0 && ray.direction.y == 0 && ray.direction.z == 0){
         std::cout<< "add another direction (!= 0)";
     }
     else{
         std::vector<float> distanceVec;
-        float minX = (min_.x - r.origin.x)/r.direction.x;
-        float maxX = (max_.x - r.origin.x)/r.direction.x;
+        float minX = (min_.x - ray.origin.x)/ray.direction.x;
+        float maxX = (max_.x - ray.origin.x)/ray.direction.x;
         distanceVec.push_back(minX);
         distanceVec.push_back(maxX);
 
-        float minY = (min_.y - r.origin.y)/r.direction.y;
-        float maxY = (max_.y - r.origin.y)/r.direction.y;
+        float minY = (min_.y - ray.origin.y)/ray.direction.y;
+        float maxY = (max_.y - ray.origin.y)/ray.direction.y;
         distanceVec.push_back(minY);
         distanceVec.push_back(maxY);
 
-        float minZ = (min_.z - r.origin.z)/r.direction.z;
-        float maxZ = (max_.z - r.origin.z)/r.direction.z;
+        float minZ = (min_.z - ray.origin.z)/ray.direction.z;
+        float maxZ = (max_.z - ray.origin.z)/ray.direction.z;
         distanceVec.push_back(minZ);
         distanceVec.push_back(maxZ);
 
@@ -128,27 +175,19 @@ bool Box::intersect(Ray const& r, float& t){
 
         for(auto i : distanceVec){
             if(!std::isinf(i)){
-                schnittPunkt = r.origin + (i * r.direction);
+                schnittPunkt = ray.origin + (i * ray.direction);
                 if((schnittPunkt.x <= max_.x && schnittPunkt.x >= min_.x)
                     && (schnittPunkt.y <= max_.y && schnittPunkt.y >= min_.y)
                     && (schnittPunkt.z <= max_.z && schnittPunkt.z >= min_.z)){
                         t = i;
-                        result = true;
-                        return result;
+                        isHit = true;
                     }
             }
         }
 
     }
-    return result;
-}
-
-Hit Box::intersectHit(Ray const& ray, float& t){
-    // float t;
-    glm::vec3 schnittPunkt;
-    glm::vec3 normalVec;
-    bool isHit = intersect(ray, t);
-    schnittPunkt = ray.origin + (t * ray.direction);
+    
+    schnittPunkt = transformedRay.origin + (t * transformedRay.direction);
     if(isHit == true){
         // schnittPunkt = ray.origin + t*ray.direction;
         if(schnittPunkt.x == Approx(min_.x)){
@@ -169,8 +208,8 @@ Hit Box::intersectHit(Ray const& ray, float& t){
         if(schnittPunkt.z == Approx(max_.z)){
             normalVec = glm::vec3{0.0f, 0.0f, 1.0f};
         }
-        schnittPunkt = glm::vec3(world_transformation_*glm::vec4(schnittPunkt, 1.0f));
-        normalVec = glm::normalize(glm::vec3(world_transformation_*glm::vec4(normalVec, 0.0f)));
+        schnittPunkt = glm::vec3(getWorldMat()*glm::vec4(schnittPunkt, 1.0f));
+        normalVec = glm::vec3(glm::normalize(glm::transpose(getWorldMatInv())*glm::vec4(normalVec, 0.0f)));
         return Hit{true, t, this, glm::normalize(normalVec), schnittPunkt};
     }
 

@@ -4,6 +4,7 @@
 #include <string>
 #include <glm/vec3.hpp>
 #include "ray.hpp"
+#include "shape.hpp"
 
 struct Camera
 {
@@ -12,12 +13,19 @@ struct Camera
     glm::vec3 _eye;
     glm::vec3 _dir;
     glm::vec3 _up;
+    glm::mat4 transformation_;
 
     Camera():
         _name{"default camera"}, _fov_x{45.0f}  {}
     //Konstruktor mit Name und Öffnungswinkel: 
     Camera(std::string name_, float fov_x_):
-        _name{name_}, _fov_x{fov_x_}, _eye(glm::vec3{0.0f, 0.0f, 0.0f}), _dir(glm::vec3{0.0f, 0.0f, -1.0f}), _up(glm::vec3{1.0f, 0.0f, 0.0f})  {}
+        _name{name_}, _fov_x{fov_x_}, _eye(glm::vec3{0.0f, 0.0f, 0.0f}), _dir(glm::vec3{0.0f, 0.0f, -1.0f}), _up(glm::vec3{1.0f, 0.0f, 0.0f}) {
+            transformation_ = glm::mat4x4{ 
+			glm::vec4{1.0f,0.0f,0.0f,0.0f},
+			glm::vec4{0.0f,1.0f,0.0f,0.0f},
+			glm::vec4{0.0f,0.0f,1.0f,0.0f},
+			glm::vec4{0.0f,0.0f,0.0f,1.0f}};
+        }
 
     //Konstruktor für Aufgabe 7.3:
     Camera(std::string name_, float fov_x_, glm::vec3 eye_, glm::vec3 dir_, glm::vec3 up_):
