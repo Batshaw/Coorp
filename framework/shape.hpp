@@ -28,7 +28,7 @@ class Shape{
         virtual float area() const = 0;
         virtual float volumen() const = 0;
         
-        // virtual bool intersect(Ray const& r, float& t) = 0;
+        virtual bool intersect(Ray const& r, float& t) = 0;
         virtual Hit intersectHit(Ray const& ray, float& t) = 0;
 
         virtual glm::mat4 translate(glm::vec3 const& p);

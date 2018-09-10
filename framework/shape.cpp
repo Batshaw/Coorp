@@ -57,10 +57,13 @@ glm::mat4 Shape::scale(glm::vec3 const& p) const {
     //                     0, 0, 1.0f, 0,
     //                     0, 0, 0, 1.0f};
     glm::mat4 scaleMat{1.0f};
-    // scaleMat[0] = {p.x, 0.0f, 0.0f, 0.0f};
-    // scaleMat[1] = {0.0f, p.y, 0.0f, 0.0f};
-    // scaleMat[2] = {0.0f, 0.0f, p.z, 0.0f};
-    // scaleMat[3] = {0.0f, 0.0f, 0.0f, 1.0f};
+    float x = p.x;
+    float y = p.y;
+    float z = p.z;
+    scaleMat[0] = {x, 0.0f, 0.0f, 0.0f};
+    scaleMat[1] = {0.0f, y, 0.0f, 0.0f};
+    scaleMat[2] = {0.0f, 0.0f, z, 0.0f};
+    scaleMat[3] = {0.0f, 0.0f, 0.0f, 1.0f};
     // world_transformation_ = scaleMat * world_transformation_;
     // world_transformation_inv_ = glm::inverse(world_transformation_);
     return scaleMat;
@@ -94,11 +97,12 @@ glm::mat4 Shape::rotate(float fi, glm::vec3 const& roVec){
 
 void Shape::transform(){
     glm::mat4 trans{translate(translation_)};
+    glm::mat4 sca{scale(scaling_)};
     glm::mat4 rot{rotate(rotation_angle_, rotation_)};
-    glm::mat4 sc{scale(scaling_)};
+
 
     // world_transformation_ = trans * rot * sc * world_transformation_;
-    world_transformation_ = (((trans * rot)*sc)*world_transformation_);
+    world_transformation_ = ((trans * rot)*world_transformation_);
     world_transformation_inv_ = glm::inverse(world_transformation_);
 }
 

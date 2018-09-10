@@ -44,6 +44,7 @@ void Renderer::render(Scene const& scene){
     for(unsigned x = 0; x < width_; ++x){
       Pixel pixel(x, y);
       Ray ray = transformRay(scene.camera.transformation_, scene.camera.rayThroughPixel(x, y, width_, height_));
+      // Ray ray = scene.camera.rayThroughPixel(x, y, width_, height_);
       pixel.color = trace(scene, ray, 1);
       write(pixel);
     }
@@ -118,13 +119,14 @@ Color Renderer::shade(Scene const& scene, Ray const& ray, int closest, int depth
     Ray lightHitRay{h.schnittPunkt_, lightVec};
     lightHitRay.origin += lightHitRay.direction*(float)0.001;
     bool imSchatten = false;
-    float t;
+    // float t;
+    float t1;
     // Check if lightVec have intersection with another Shape
     for(int a = 0; a < scene.shape_vector.size(); ++a){
       if(a != closest && imSchatten != true){
-        imSchatten = scene.shape_vector[a]->intersectHit(lightHitRay, t).hit_;
-        if(t < 0) {
-          imSchatten = false;
+        imSchatten = scene.shape_vector[a]->intersectHit(lightHitRay, t1).hit_;
+        if(t1 < 0) {
+           imSchatten = false;
         }
       }
       // if(a != closest){

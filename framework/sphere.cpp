@@ -1,4 +1,6 @@
 #include "sphere.hpp"
+#include "scene.hpp"
+#include "renderer.hpp"
 #include <cmath>
 #include <glm/glm.hpp>
 #include <glm/gtx/intersect.hpp>
@@ -61,25 +63,28 @@ std::ostream& operator<<(std::ostream& os, Sphere const& s){
 }
 
 // intersect-Methode
-// bool Sphere::intersect(Ray const& r, float& t){
-//      // from the ray_origin to the intersectPosition
-//     glm::vec3 v = glm::normalize(r.direction);   //convert to the unit vector with same direction
-//     auto squaredRadius = std::pow(radius_, 2);
-//     bool result = glm::intersectRaySphere(r.origin, v, mittel_, squaredRadius, t);
-//     return result;
-// }
+bool Sphere::intersect(Ray const& r, float& t){
+     // from the ray_origin to the intersectPosition
+    glm::vec3 v = glm::normalize(r.direction);   //convert to the unit vector with same direction
+    auto squaredRadius = std::pow(radius_, 2);
+    bool result = glm::intersectRaySphere(r.origin, v, mittel_, squaredRadius, t);
+    return result;
+}
 
 Hit Sphere::intersectHit(Ray const& ray, float& t){
     // float distance;
-    glm::vec3 v = glm::normalize(ray.direction);
+    Ray transformedRay{transformRay(getWorldMatInv(), ray)};
+    glm::vec3 v = glm::normalize(transformedRay.direction);
     auto squaredRadius = std::pow(radius_, 2);
-    bool result = glm::intersectRaySphere(ray.origin, v, mittel_, squaredRadius, t);
+    bool result = glm::intersectRaySphere(transformedRay.origin, v, mittel_, squaredRadius, t);
     if(result == true){
-        glm::vec3 schnittPunkt = ray.origin + (t*ray.direction);
+        glm::vec3 schnittPunkt = transformedRay.origin + (t*transformedRay.direction);
         glm::vec3 normalVector = glm::normalize(schnittPunkt - mittel_);
         schnittPunkt = glm::vec3(world_transformation_*glm::vec4(schnittPunkt, 1.0f));
         normalVector = glm::normalize(glm::vec3(world_transformation_inv_*glm::vec4(normalVector, 0.0f)));
-        return Hit{true, t, this, normalVector, schnittPunkt};
+        glm::vec3 vector = schnittPunkt - transformedRay.origin;
+        float d = std::sqrt(std::pow(vector.x, 2) + std::pow(vector.y, 2) + std::pow(vector.z, 2));
+        return Hit{true, d, this, normalVector, schnittPunkt};
     }
     return Hit{};
 }
