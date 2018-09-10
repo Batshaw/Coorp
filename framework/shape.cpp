@@ -42,15 +42,11 @@ glm::mat4 Shape::world_transformation_inv() const
 };
 
 //transform Methoden
-void Shape::transform()
+void Shape::transform(glm::mat4 const &matrix)
 {
-    glm::mat4 const trans{glm::translate(translation_)};
-    glm::mat4 const rotat{glm::rotate(rotation_angle_, rotation_)};
-    glm::mat4 const scale{glm::scale(scaling_)};
-
-    world_transformation_ = trans * rotat * scale * world_transformation_;
+    world_transformation_ = matrix * world_transformation_;
     world_transformation_inv_ = glm::inverse(world_transformation_);
-
+    /* 
     std::cout << "This shape: " << name_ << std::endl;
     std::cout << "translate: " << std::endl;
     std::cout << glm::to_string(trans) << std::endl;
@@ -62,4 +58,5 @@ void Shape::transform()
     std::cout << glm::to_string(world_transformation_) << std::endl;
     std::cout << "inverse: " << std::endl;
     std::cout << glm::to_string(world_transformation_inv_) << std::endl;
+ */
 };

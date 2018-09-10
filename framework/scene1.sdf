@@ -16,15 +16,24 @@ define material darkGrey 0.2 0.2 0.2 0.2 0.2 0.2 0.3 0.3 0.3 1
 # geometry
 define shape box bottom 20 -15 -250 45 12 -150 violet
 define shape box rbottom -50 -10 -300 -20 30 -200 blue
+<<<<<<< HEAD
 define shape box platte -70 -21 -350 70 -20 -50 lightGrey
 #define shape box back -70 -20 -350 70 150 -349 backSkin
 #define shape box left -71 -21 -350 -70 150 -50 lightGrey
 #define shape box right 70 -21 -350 71 150 -50 lightGrey
 #define shape box ceil -71 100 -350 71 101 -50 grey
+=======
+define shape box platte -70 -21 -350 70 -20 -50 darkGrey
+define shape box back -70 -20 -350 70 150 -349 backSkin
+define shape box left -71 -21 -350 -70 150 -50 lightGrey
+define shape box right 70 -21 -350 71 150 -50 lightGrey
+define shape box ceil -71 100 -350 71 101 -50 grey
+>>>>>>> 83ddf33f54145868c576cc49175c87b973c4a5d9
 define shape sphere bsphere 0 5 -170 17 red
 define shape sphere asphere -30 -10 -170 8 green
 define shape sphere lampe 0 130 -250 40 white
 
+<<<<<<< HEAD
 # transform name tranformation parameter
 transform rbottom scale 2 4 2
 transform rbottom translate 3 0 2
@@ -33,12 +42,15 @@ transform bsphere scale 5 10 8
 transform bsphere translate 10 5 2
 transform bsphere rotate 45 1 0 0
 
+=======
+>>>>>>> 83ddf33f54145868c576cc49175c87b973c4a5d9
 # light
 define light sun 69 99 -50 1 1 1 0.7
 define light sun2 -60 0 -50 1 1 1 0.1
 define light licht 0 90 -250 1 1 1 0.5
 
 # ambient
+<<<<<<< HEAD
 define ambient 1.0 1.0 1.0
 
 # camera
@@ -48,3 +60,9 @@ define camera eye 45.0
 
 # ... and go
 render eye image .ppm 800 800
+=======
+define ambient 0.5 0.55 0.6
+
+# camera
+define camera eye 45.0
+>>>>>>> 83ddf33f54145868c576cc49175c87b973c4a5d9

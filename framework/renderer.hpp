@@ -32,8 +32,8 @@ public:
 
   // void render();
   void render(Scene const& scene);
-  Color trace(Scene const& scene, Ray const& ray);
-  Color shade(Scene const& scene, Ray const& ray, int closest);
+  Color trace(Scene const& scene, Ray const& ray, int depth);
+  Color shade(Scene const& scene, Ray const& ray, int closest, int depth);
   Color toneMapping(Color const& color);
   void write(Pixel const& p);
 

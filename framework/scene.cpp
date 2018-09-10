@@ -186,30 +186,31 @@ void load_sdf(std::string const &filename, Scene &scene)
 
                         if ("scale" == transform)
                         {
-                            current_line_stream >> shape->scaling_.x;
-                            current_line_stream >> shape->scaling_.y;
-                            current_line_stream >> shape->scaling_.z;
-                            std::cout << "Scale: " << shape->scaling_.x << "; " << shape->scaling_.y << "; " << shape->scaling_.z << std::endl;
+                            glm::vec3 scale;
+                            current_line_stream >> scale.x;
+                            current_line_stream >> scale.y;
+                            current_line_stream >> scale.z;
+                            shape->transform(glm::scale(scale));
                         }
 
                         else if ("translate" == transform)
                         {
-                            current_line_stream >> shape->translation_.x;
-                            current_line_stream >> shape->translation_.y;
-                            current_line_stream >> shape->translation_.z;
-                            std::cout << "Translate: " << shape->translation_.x << "; " << shape->translation_.y << "; " << shape->translation_.z << std::endl;
+                            glm::vec3 translate;
+                            current_line_stream >> translate.x;
+                            current_line_stream >> translate.y;
+                            current_line_stream >> translate.z;
+                            shape->transform(glm::translate(translate));
                         }
 
                         else if ("rotate" == transform)
                         {
                             float raw;
-                            float const PI = atan(1.0f) * 4;
+                            glm::vec3 rotate;
                             current_line_stream >> raw;
-                            shape->rotation_angle_ = raw * PI / 180;
-                            current_line_stream >> shape->rotation_.x;
-                            current_line_stream >> shape->rotation_.y;
-                            current_line_stream >> shape->rotation_.z;
-                            std::cout << "Rotate: " << shape->rotation_.x << "; " << shape->rotation_.y << "; " << shape->rotation_.z << std::endl;
+                            current_line_stream >> rotate.x;
+                            current_line_stream >> rotate.y;
+                            current_line_stream >> rotate.z;
+                            shape->transform(glm::rotate(raw, rotate));
                         }
                     }
                 }
@@ -221,21 +222,22 @@ void load_sdf(std::string const &filename, Scene &scene)
 
                     if ("translate" == transform)
                     {
-                        current_line_stream >> scene.camera_.translation_.x;
-                        current_line_stream >> scene.camera_.translation_.y;
-                        current_line_stream >> scene.camera_.translation_.z;
+                        glm::vec3 translate;
+                        current_line_stream >> translate.x;
+                        current_line_stream >> translate.y;
+                        current_line_stream >> translate.z;
+                        scene.camera_.transform(glm::translate(translate));
                     }
 
                     else if ("rotate" == transform)
                     {
                         float raw;
-                        float const PI = atan(1.0f) * 4;
+                        glm::vec3 rotate;
                         current_line_stream >> raw;
-                        scene.camera_.rotation_angle_ = raw * PI / 180;
-
-                        current_line_stream >> scene.camera_.rotation_.x;
-                        current_line_stream >> scene.camera_.rotation_.y;
-                        current_line_stream >> scene.camera_.rotation_.z;
+                        current_line_stream >> rotate.x;
+                        current_line_stream >> rotate.y;
+                        current_line_stream >> rotate.z;
+                        scene.camera_.transform(glm::rotate(raw, rotate));
                     }
                 }
             }
@@ -268,11 +270,6 @@ void load_sdf(std::string const &filename, Scene &scene)
         cout << "file not found" << endl;
     }
     ifs.close();
-
-    for (std::shared_ptr<Shape> shape : scene.shape_vector_)
-    {
-        shape->transform();
-    }
 
     // return scene;
 };

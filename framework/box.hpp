@@ -26,15 +26,15 @@ class Box : public Shape
     // Color getColor() const override;
     bool is_inBox(glm::vec3 const &punkt);
     bool intersect(Ray const &r, float &t) override;
-    Hit intersectHit(Ray const &ray) override;
+    Hit intersectHit(Ray const &ray, float& t) override;
 
     std::ostream &print(std::ostream &os) const override;
 
   private:
     glm::vec3 min_;
     glm::vec3 max_;
-    glm::vec3 set_max(glm::vec3 coor1, glm::vec3 coor2) const;
-    glm::vec3 set_min(glm::vec3 coor1, glm::vec3 coor2) const;
+    glm::vec3 set_max(glm::vec3 const& coor1, glm::vec3 const& coor2) const;
+    glm::vec3 set_min(glm::vec3 const& coor1, glm::vec3 const& coor2) const;
 };
 
 std::ostream &operator<<(std::ostream &os, Box const &b);

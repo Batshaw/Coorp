@@ -26,3 +26,5 @@ build
 cmake_out
 raytracer.cpp
 .vscode
+launch.json
+tasks.json

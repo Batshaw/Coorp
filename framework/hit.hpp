@@ -1,5 +1,6 @@
 #ifndef HIT_HPP
 #define HIT_HPP
+
 #include <glm/vec3.hpp>
 
 class Shape;

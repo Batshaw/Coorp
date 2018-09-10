@@ -9,9 +9,12 @@
 #include "material.hpp"
 #include "ray.hpp"
 #include "hit.hpp"
+
+#define GLM_FORCE_RADIANS
 #include "glm/vec3.hpp"
 #include <glm/gtx/string_cast.hpp>
 #include <glm/gtx/transform.hpp>
+
 
 class Shape
 {
@@ -33,11 +36,11 @@ public:
   virtual float volumen() const = 0;
 
   virtual bool intersect(Ray const &r, float &t) = 0;
-  virtual Hit intersectHit(Ray const &ray) = 0;
+  virtual Hit intersectHit(Ray const &ray, float& t) = 0;
 
   virtual std::ostream &print(std::ostream &os) const;
 
-  void transform();
+  void transform(glm::mat4 const& matrix);
   /*  glm::mat4 translate(glm::vec3 const &a);
   glm::mat4 scale(glm::vec3 const &b);
   glm::mat4 rotate(glm::vec3 const &c);
@@ -45,10 +48,6 @@ public:
   glm::mat4 rotate_y(float rad);
   glm::mat4 rotate_z(float rad);
  */
-  glm::vec3 scaling_{1.0f, 1.0f, 1.0f};
-  glm::vec3 translation_{0.0f, 0.0f, 0.0f};
-  glm::vec3 rotation_{1.0f, 1.0f, 1.0f};
-  float rotation_angle_{0};
 
 protected:
   std::string name_;

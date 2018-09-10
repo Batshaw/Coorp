@@ -20,12 +20,8 @@ struct Camera
                                     0, 1, 0, 0,
                                     0, 0, 1, 0,
                                     0, 0, 0, 1};
-    glm::mat4 transformation_inv_{glm::inverse(world_transformation_)};
-
-    glm::vec3 scaling_{1.0f, 1.0f, 1.0f};
-    glm::vec3 translation_{0.0f, 0.0f, 0.0f};
-    glm::vec3 rotation_{1.0f, 1.0f, 1.0f};
-    float rotation_angle_{0.0f};
+                                    
+    glm::mat4 world_transformation_inv_{glm::inverse(world_transformation_)};
 
     Camera() : name_{"default camera"},
                fov_x_{45},
@@ -33,7 +29,7 @@ struct Camera
                dir_{0.0f, 0.0f, -1.0f},
                up_{0.0f, 1.0f, 0.0f},
                world_transformation_{},
-               transformation_inv_{glm::inverse(world_transformation_)} {}
+               world_transformation_inv_{glm::inverse(world_transformation_)} {}
 
     //Konstruktor mit Name und Öffnungswinkel:
     Camera(std::string const &name, float fov_x) : name_{name},
@@ -42,7 +38,7 @@ struct Camera
                                                    dir_{0.0f, 0.0f, -1.0f},
                                                    up_{0.0f, 1.0f, 0.0f},
                                                    world_transformation_{},
-                                                   transformation_inv_{glm::inverse(world_transformation_)} {}
+                                                   world_transformation_inv_{glm::inverse(world_transformation_)} {}
 
     //Konstruktor für Aufgabe 7.3:
     Camera(std::string const &name, float fov_x, glm::vec3 const &eye, glm::vec3 const &dir, glm::vec3 const &up, glm::mat4 const &world_transformation) : name_{name},
@@ -51,7 +47,7 @@ struct Camera
                                                                                                                                                            dir_{dir},
                                                                                                                                                            up_{up},
                                                                                                                                                            world_transformation_{world_transformation},
-                                                                                                                                                           transformation_inv_{glm::inverse(world_transformation)} {}
+                                                                                                                                                           world_transformation_inv_{glm::inverse(world_transformation)} {}
 
     Ray rayThroughPixel(float x, float y, float width, float height) const
     {
@@ -61,16 +57,15 @@ struct Camera
         return rayCamera;
     }
 
-    void transform()
+    void transform(glm::mat4 const &matrix)
     {
-        world_transformation_ = glm::translate(translation_) * glm::rotate(rotation_angle_, rotation_) * glm::scale(scaling_) * world_transformation_;
-        transformation_inv_ = glm::inverse(world_transformation_);
+        world_transformation_ = matrix * world_transformation_;
+        world_transformation_inv_ = glm::inverse(world_transformation_);
         std::cout << "This camera: " << name_ << std::endl;
         std::cout << "transform: " << std::endl;
         std::cout << glm::to_string(world_transformation_) << std::endl;
         std::cout << "inverse: " << std::endl;
-        std::cout << glm::to_string(transformation_inv_) << std::endl;
+        std::cout << glm::to_string(world_transformation_inv_) << std::endl;
     }
-
 };
 #endif

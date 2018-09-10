@@ -59,35 +59,28 @@ std::ostream &operator<<(std::ostream &os, Sphere const &s)
 }
 
 // intersect-Methode
-bool Sphere::intersect(Ray const &r, float &t)
-{
-    // from the ray_origin to the intersectPosition
-    glm::vec3 v = glm::normalize(r.direction_); //convert to the unit vector with same direction
+bool Sphere::intersect(Ray const& r, float& t){
+     // from the ray_origin_ to the intersectPosition
+    glm::vec3 v = glm::normalize(r.direction_);   //convert to the unit vector with same direction_
     auto squaredRadius = std::pow(radius_, 2);
     bool result = glm::intersectRaySphere(r.origin_, v, mittel_, squaredRadius, t);
     return result;
 }
 
-Hit Sphere::intersectHit(Ray const &ray)
-{
-    float distance;
-    Ray transform_ray = transformRay(world_transformation_, ray);
-
-    glm::vec3 v = glm::normalize(transform_ray.direction_);
+Hit Sphere::intersectHit(Ray const& ray, float& t){
+    // float distance;
+    Ray transformedRay{transformRay(world_transformation_inv(), ray)};
+    glm::vec3 v = glm::normalize(transformedRay.direction_);
     auto squaredRadius = std::pow(radius_, 2);
-    bool result = intersect(transform_ray, distance);
-    if (result == true)
-    {
-
-        glm::vec3 raw_point = (transform_ray.origin_ + (distance * transform_ray.direction_));
-        glm::vec4 transformed_point = world_transformation_inv_ * glm::vec4{raw_point, 1.0f};
-        glm::vec3 schnittPunkt{transformed_point};
-
-        glm::vec3 raw_normal = glm::normalize(schnittPunkt - mittel_);
-        glm::vec4 transformed_normal = world_transformation_inv_ * glm::vec4{raw_normal, 1.0f};
-        glm::vec3 normalVector{transformed_normal};
-
-        return Hit{true, distance, this, glm::normalize(raw_normal), raw_point};
+    bool result = glm::intersectRaySphere(transformedRay.origin_, v, mittel_, squaredRadius, t);
+    if(result == true){
+        glm::vec3 schnittPunkt = transformedRay.origin_ + (t*transformedRay.direction_);
+        glm::vec3 normalVector = glm::normalize(schnittPunkt - mittel_);
+        schnittPunkt = glm::vec3(world_transformation_*glm::vec4(schnittPunkt, 1.0f));
+        normalVector = glm::vec3{glm::transpose((world_transformation_)) * glm::vec4{normalVector, 0.0f}};
+        glm::vec3 vector = schnittPunkt - transformedRay.origin_;
+        float d = std::sqrt(std::pow(vector.x, 2) + std::pow(vector.y, 2) + std::pow(vector.z, 2));
+        return Hit{true, d, this, normalVector, schnittPunkt};
     }
     return Hit{};
 }
