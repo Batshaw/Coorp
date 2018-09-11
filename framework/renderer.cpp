@@ -77,26 +77,28 @@ Color Renderer::trace(Scene const &scene, Ray const &ray, int depth)
   if (closetObjectIndex != -1)
   {
     // cout << "nicht intersection" << endl;
-    // return (scene.shape_vector[closetObjectIndex])->getMaterial()->ka_;
-    //Color cl = toneMapping(shade(scene, ray, closetObjectIndex, depth));  //Tone Mapping but ugly :((((
+    // return (scene.shape_vector_[closetObjectIndex])->get_material()->ka_;
+    // //Color cl = toneMapping(shade(scene, ray, closetObjectIndex, depth));  //Tone Mapping but ugly :((((
     Color cl = shade(scene, ray, closetObjectIndex, depth);
     // Ambiente Color
     Color ambColor = (scene.ambient_.color_) * (scene.shape_vector_[closetObjectIndex]->get_material()->ka_);
     Color end = toneMapping(cl + ambColor);
+    // Color end = cl + ambColor;
     return end;
   }
   else
     return Color{0.0f, 0.0f, 0.0f};
 }
 
-// Color Renderer::shade(Scene const& scene, Ray const& ray, Light const& light, int const closest){
+// Color Renderer::shade(Scene const& scene, Ray const& ray, int closest, int depth){
 //   // Difusse Refektion
-//   Hit h = scene.shape_vector[closest]->intersectHit(ray);
-//   glm::vec3 lightVec = glm::normalize(light._origin - h.schnittPunkt_);
+//   float t;
+//   Hit h = scene.shape_vector_[closest]->intersectHit(ray, t);
+//   glm::vec3 lightVec = glm::normalize(scene.light._origin - h.schnittPunkt_);
 //   float cosPhi = std::max(glm::dot(lightVec, h.normalVector_), 0.0f);
-//   Color lightIntensity{lig ht.color_.r*light.brightness_, light.color_.g*light.brightness_, light.color_.b*light.brightness_};
+//   Color lightIntensity{light.color_.r*light.brightness_, light.color_.g*light.brightness_, light.color_.b*light.brightness_};
 //   // Color lightIntensity = light.color_;
-//   Color diffuColor = (lightIntensity)*(scene.shape_vector[closest]->getMaterial()->kd_)*cosPhi;
+//   Color diffuColor = (lightIntensity)*(scene.shape_vector_[closest]->getMaterial()->kd_)*cosPhi;
 
 //   // Ambiente Color
 //   Color ambColor = (scene.ambient.color_)*(scene.shape_vector[closest]->getMaterial()->ka_);
@@ -106,7 +108,7 @@ Color Renderer::trace(Scene const &scene, Ray const &ray, int depth)
 //   float cosBeta = std::max(glm::dot(reflekLichtVektor, -ray.direction), 0.0f);
 //   Color spekColor = (scene.shape_vector[closest]->getMaterial()->ks_)*std::pow(cosBeta, scene.shape_vector[closest]->getMaterial()->m_);
 
-//   Color endColor = diffuColor + ambColor + spekColor;
+//   Color endColor = diffuColor + ambColor;// + spekColor;
 //   return endColor;
 // }
 
