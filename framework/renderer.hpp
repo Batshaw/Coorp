@@ -21,9 +21,11 @@
 #include "ppmwriter.hpp"
 #include <string>
 #include <cmath>
+#include <iostream>
+
+#define GLM_FORCE_RADIANS
 #include <glm/glm.hpp>
 #include <glm/vec3.hpp>
-#include <iostream>
 
 class Renderer
 {

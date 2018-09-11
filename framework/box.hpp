@@ -1,40 +1,37 @@
 #ifndef BOX_HPP
 #define BOX_HPP
 
+#include <memory>
 #include "shape.hpp"
 
+#define GLM_FORCE_RADIANS
 #include <glm/vec3.hpp>
-#include <memory>
 
 class Box : public Shape
 {
-  public:
-    // Konstruktor
-    Box();
-    Box(glm::vec3 const &min, glm::vec3 const &max);
-    /*Box(glm::vec3 const min, glm::vec3 const& max, std::string const& name);
-        Box(glm::vec3 const& min, glm::vec3 const& max, Color const& color);*/
-    Box(glm::vec3 const &min, glm::vec3 const &max, std::string const &name, std::shared_ptr<Material> const &material);
-    ~Box();
+public:
+  // Konstruktor
+  Box();
+  Box(glm::vec3 const &min, glm::vec3 const &max);
+  Box(glm::vec3 const &min, glm::vec3 const &max, std::string const &name, std::shared_ptr<Material> const &material);
+  ~Box();
 
-    // Methode
-    float area() const override;
-    float volumen() const override;
-    glm::vec3 getMax() const;
-    glm::vec3 getMin() const;
-    // std::string getName() const override;
-    // Color getColor() const override;
-    bool is_inBox(glm::vec3 const &punkt);
-    bool intersect(Ray const &r, float &t) override;
-    Hit intersectHit(Ray const &ray, float& t) override;
+  // Methode
+  float area() const override;
+  float volumen() const override;
+  glm::vec3 getMin() const;
+  glm::vec3 getMax() const;
+  bool onSurface(glm::vec3 const &punkt) const;
+  bool intersect(Ray const &r, float &t) const override;
+  Hit intersectHit(Ray const &ray, float &t) const override;
 
-    std::ostream &print(std::ostream &os) const override;
+  std::ostream &print(std::ostream &os) const override;
 
-  private:
-    glm::vec3 min_;
-    glm::vec3 max_;
-    glm::vec3 set_max(glm::vec3 const& coor1, glm::vec3 const& coor2) const;
-    glm::vec3 set_min(glm::vec3 const& coor1, glm::vec3 const& coor2) const;
+private:
+  glm::vec3 min_;
+  glm::vec3 max_;
+  glm::vec3 setMax(glm::vec3 const &coor1, glm::vec3 const &coor2) const;
+  glm::vec3 setMin(glm::vec3 const &coor1, glm::vec3 const &coor2) const;
 };
 
 std::ostream &operator<<(std::ostream &os, Box const &b);
