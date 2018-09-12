@@ -13,27 +13,7 @@
 
 Renderer::Renderer(unsigned w, unsigned h, std::string const &file)
     : width_(w), height_(h), color_buffer_(w * h, Color(0.0, 0.0, 0.0)), filename_(file), ppm_(width_, height_)
-{
-}
-
-// void Renderer::render()
-// {
-//   std::size_t const checker_pattern_size = 20;
-
-//   for (unsigned y = 0; y < height_; ++y) {
-//     for (unsigned x = 0; x < width_; ++x) {
-//       Pixel p(x,y);
-//       if ( ((x/checker_pattern_size)%2) != ((y/checker_pattern_size)%2)) {
-//         p.color = Color(0.0, 1.0, float(x)/height_);
-//       } else {
-//         p.color = Color(1.0, 0.0, float(y)/width_);
-//       }
-
-//       write(p);
-//     }
-//   }
-//   ppm_.save(filename_);
-// }
+{}
 
 void Renderer::render(Scene const &scene)
 {
@@ -42,8 +22,9 @@ void Renderer::render(Scene const &scene)
     for (unsigned x = 0; x < width_; ++x)
     {
       Pixel pixel(x, y);
-      Ray ray = scene.camera_.rayThroughPixel(x, y, width_, height_);
-      pixel.color = trace(scene, ray, 0);
+      Ray ray = rayThroughPixel(scene.camera_, x, y, width_, height_);
+      Ray trans_ray = transformRay(scene.camera_.world_transformation_, ray);
+      pixel.color = trace(scene, trans_ray, 0);
       write(pixel);
     }
   }
@@ -62,26 +43,25 @@ Color Renderer::trace(Scene const &scene, Ray const &ray, int depth)
 
   for (int i = 0; i < scene.shape_vector_.size(); ++i)
   {
-    is_intersect = (*scene.shape_vector_[i]).intersectHit(ray, distance).hit_;
+    Hit objHit = (*scene.shape_vector_[i]).intersectHit(ray, distance);
+    is_intersect = objHit.hit_;
+    //distance = objHit.distance_;
     if (is_intersect)
     {
       if (distance < dmin)
       {
         dmin = distance;
         closetObjectIndex = i;
-        // return (scene.shape_vector[closetObjectIndex])->getMaterial()->ka_;
       }
     }
-    // else return Color{0.0f, 0.0f, 0.0f};
   }
   if (closetObjectIndex != -1)
   {
-    // cout << "nicht intersection" << endl;
-    // return (scene.shape_vector_[closetObjectIndex])->get_material()->ka_;
-    // //Color cl = toneMapping(shade(scene, ray, closetObjectIndex, depth));  //Tone Mapping but ugly :((((
     Color cl = shade(scene, ray, closetObjectIndex, depth);
     // Ambiente Color
-    Color ambColor = (scene.ambient_.color_) * (scene.shape_vector_[closetObjectIndex]->get_material()->ka_);
+    Color ambColor = (scene.ambient_.color_) * (scene.shape_vector_[closetObjectIndex]->getMaterial()->ka_);
+    
+    //Tone mapping
     Color end = toneMapping(cl + ambColor);
     // Color end = cl + ambColor;
     return end;
@@ -89,28 +69,6 @@ Color Renderer::trace(Scene const &scene, Ray const &ray, int depth)
   else
     return Color{0.0f, 0.0f, 0.0f};
 }
-
-// Color Renderer::shade(Scene const& scene, Ray const& ray, int closest, int depth){
-//   // Difusse Refektion
-//   float t;
-//   Hit h = scene.shape_vector_[closest]->intersectHit(ray, t);
-//   glm::vec3 lightVec = glm::normalize(scene.light._origin - h.schnittPunkt_);
-//   float cosPhi = std::max(glm::dot(lightVec, h.normalVector_), 0.0f);
-//   Color lightIntensity{light.color_.r*light.brightness_, light.color_.g*light.brightness_, light.color_.b*light.brightness_};
-//   // Color lightIntensity = light.color_;
-//   Color diffuColor = (lightIntensity)*(scene.shape_vector_[closest]->getMaterial()->kd_)*cosPhi;
-
-//   // Ambiente Color
-//   Color ambColor = (scene.ambient.color_)*(scene.shape_vector[closest]->getMaterial()->ka_);
-
-//   // Spekulare Licht
-//   glm::vec3 reflekLichtVektor = glm::normalize(2*glm::dot(h.normalVector_, lightVec)*(h.normalVector_) - lightVec);
-//   float cosBeta = std::max(glm::dot(reflekLichtVektor, -ray.direction), 0.0f);
-//   Color spekColor = (scene.shape_vector[closest]->getMaterial()->ks_)*std::pow(cosBeta, scene.shape_vector[closest]->getMaterial()->m_);
-
-//   Color endColor = diffuColor + ambColor;// + spekColor;
-//   return endColor;
-// }
 
 Color Renderer::shade(Scene const &scene, Ray const &ray, int closest, int depth)
 {
@@ -140,11 +98,6 @@ Color Renderer::shade(Scene const &scene, Ray const &ray, int closest, int depth
           imSchatten = false;
         }
       }
-      // if(a != closest){
-      //   if(imSchatten != true){
-      //     imSchatten = scene.shape_vector[a]->intersect(lightHitRay, t);
-      //   }
-      // }
     }
 
     // When no intersect, put light :D
@@ -152,18 +105,17 @@ Color Renderer::shade(Scene const &scene, Ray const &ray, int closest, int depth
     {
       float cosPhi = std::max(glm::dot(h.normalVector_, lightVec), 0.0f);
       Color lightIntensity{scene.light_vector_[i]->color_.r * scene.light_vector_[i]->brightness_, scene.light_vector_[i]->color_.g * scene.light_vector_[i]->brightness_, scene.light_vector_[i]->color_.b * scene.light_vector_[i]->brightness_};
-      // Color lightIntensity = light.color_;
-      diffuColor += (lightIntensity) * (scene.shape_vector_[closest]->get_material()->kd_) * cosPhi;
+      diffuColor += (lightIntensity) * (scene.shape_vector_[closest]->getMaterial()->kd_) * cosPhi;
 
       // Spekulare Licht
       glm::vec3 reflekLichtVektor = glm::normalize(2 * glm::dot(h.normalVector_, lightVec) * (h.normalVector_) - lightVec);
       float cosBeta = std::max(glm::dot(reflekLichtVektor, -ray.direction_), 0.0f);
-      spekColor += (scene.shape_vector_[closest]->get_material()->ks_) * std::pow(cosBeta, scene.shape_vector_[closest]->get_material()->m_);
+      spekColor += (scene.shape_vector_[closest]->getMaterial()->ks_) * std::pow(cosBeta, scene.shape_vector_[closest]->getMaterial()->m_);
 
       // Spiegelung
       if (depth >= 0)
       {
-        if (scene.shape_vector_[closest]->get_material()->m_ > 0)
+        if (scene.shape_vector_[closest]->getMaterial()->m_ > 0)
         {
           glm::vec3 reflecVec = glm::normalize(2 * glm::dot(h.normalVector_, ray.direction_) * (h.normalVector_) - ray.direction_);
           Ray reflecRay{h.schnittPunkt_, reflecVec};

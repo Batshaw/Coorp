@@ -2,19 +2,18 @@
 #define SPHERE_HPP
 
 #include "shape.hpp"
-#include <glm/vec3.hpp>
 #include "ray.hpp"
+
+#define GLM_FORCE_RADIANS 
+#include <glm/vec3.hpp>
 
 class Sphere : public Shape{
     public:
         // Konstruktor
         Sphere();
-        Sphere(glm::vec3 const& m, float const& r);
-        /*Sphere(glm::vec3 const& m, float const& r, std::string const& name);
-        Sphere(glm::vec3 const& m, float const& r, Color const& color);*/
-        Sphere(glm::vec3 const& m, float const& r, std::string const& name, std::shared_ptr<Material> const& material);
-        Sphere(float _x, float _y, float _z, float _r = 1.0);
-        Sphere(glm::vec3 const &_p, float _r, std::shared_ptr<Material> const& material, std::string const &_n);
+        Sphere(glm::vec3 const& m, float r);
+        Sphere(float x, float y, float z, float r = 1.0);
+        Sphere(glm::vec3 const& m, float r, std::string const& name, std::shared_ptr<Material> const& material);
 
         //Destruktor (Aufgabe8):
         ~Sphere();        
@@ -22,16 +21,13 @@ class Sphere : public Shape{
         // Methode
         float area() const override;
         float volumen() const override;
-        glm::vec3 get_mittel() const;
-        float get_radius() const;
-        // std::string getName() const override;
-        // Color getColor() const override;
-
+        glm::vec3 getCenter() const;
+        float getRadius() const;
         std::ostream& print(std::ostream& os) const override;
 
         // intersect-Methode
-        bool intersect(Ray const& r, float& t) override;
-        Hit intersectHit(Ray const& ray, float& t) override;
+        bool intersect(Ray const& r, float& t) const override;
+        Hit intersectHit(Ray const& ray, float& t) const override;
 
     protected:
         glm::vec3 mittel_;

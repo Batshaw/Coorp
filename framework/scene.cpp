@@ -1,4 +1,39 @@
 #include "scene.hpp"
+#include <renderer.hpp>
+#include <window.hpp>
+#include <iomanip>
+#include <iostream>
+#include <unistd.h>   //for chdir
+
+//for linux mkdir
+//#include <sys/stat.h> 
+
+//for windows mkdir
+#if defined _MSC_VER
+#include <direct.h>
+#elif defined __GNUC__
+#include <sys/types.h>
+#include <sys/stat.h>
+#endif
+
+void transform_obj(Camera &cam, glm::mat4 const &matrix)
+{
+    cam.world_transformation_ = matrix * cam.world_transformation_;
+    cam.world_transformation_inv_ = glm::inverse(cam.world_transformation_);
+}
+
+void transform_obj(std::shared_ptr<Shape> &shape, glm::mat4 const &matrix)
+{
+    shape->transform(matrix);
+}
+
+Ray rayThroughPixel(Camera const &cam, float x, float y, float width, float height)
+{
+    glm::vec3 origin{cam.eye_};
+    glm::vec3 direction{x - width / 2, y - height / 2, (-width / 2) / tan(cam.fov_x_ / 2)}; //tan(Öffnungswinkel/2)=(width/2)/distance von Camera zum Bildebene.
+    Ray rayCamera{origin, direction};
+    return rayCamera;
+}
 
 std::shared_ptr<Material> findMaterialVector(std::string const &findName, vector<std::shared_ptr<Material>> const &material_vector)
 {
@@ -6,21 +41,18 @@ std::shared_ptr<Material> findMaterialVector(std::string const &findName, vector
     std::shared_ptr<Material> defaultMaterial(new Material);
 
     // find_if with a lambda that capture the needed name
-    auto iterLambda = find_if(material_vector.begin(), material_vector.end(), [findName](std::shared_ptr<Material> const &material) { //capture findName by reference
+    auto iterLambda = find_if(material_vector.begin(), material_vector.end(), [findName](std::shared_ptr<Material> const &material) {
+        //capture findName by reference
         return material->name_ == findName;
     });
 
     // scope to show the material that was founded
     if (iterLambda == material_vector.end())
     {
-        // std::cout << "Do not exist!!!!!!! Use default Material\n"; //Material nicht gefunden wird, wird DefaultKonstruktor genutzt!
-        std::cout << *defaultMaterial;
         return defaultMaterial;
     }
     else
     {
-        // std::cout << "Here's what u need from vector: \n";
-        std::cout << *(*iterLambda) << "\n"; // show the value of the value of the lambda that is the material.
         return *iterLambda;
     }
 }
@@ -29,24 +61,28 @@ void load_sdf(std::string const &filename, Scene &scene)
 {
     // Scene scene;
     std::ifstream ifs;
-    std::string dir = "../sdf/" + filename;
+    std::string dir = "./sdf/" + filename;
     ifs.open(dir);
 
     if (ifs)
     {
         std::cout << "Sdf file loaded from: " << dir << endl;
         std::string line_buffer;
+        glm::mat4 transform_anim{1.0f};
+        bool must_animate = false;
+        std::vector<string> animated_shapes;
 
         while (std::getline(ifs, line_buffer))
         {
 
             std::stringstream current_line_stream(line_buffer);
 
-            std::string first_symbol;
+            std::string sdf_keyword;
 
-            current_line_stream >> first_symbol;
+            current_line_stream >> sdf_keyword;
 
-            if ("define" == first_symbol)
+            //Define all item (Material, geometry, camera etc)
+            if ("define" == sdf_keyword)
             {
 
                 std::string variable_name;
@@ -71,8 +107,6 @@ void load_sdf(std::string const &filename, Scene &scene)
                                                                                         material_koof[9]);
 
                     scene.material_vector_.push_back(neu_material);
-                    // scene.material_map.insert(make_pair(neu_material->name_, neu_material));
-                    // scene.material_set.insert(neu_material);
                 }
 
                 else if ("shape" == variable_name)
@@ -121,8 +155,8 @@ void load_sdf(std::string const &filename, Scene &scene)
 
                         std::shared_ptr<Shape> neu_sphere = std::make_shared<Sphere>(glm::vec3(shape_points[0], shape_points[1], shape_points[2]),
                                                                                      shape_points[3],
-                                                                                     findMaterialVector(mat_name, scene.material_vector_),
-                                                                                     shape_name);
+                                                                                     shape_name,
+                                                                                     findMaterialVector(mat_name, scene.material_vector_));
 
                         scene.shape_vector_.push_back(neu_sphere);
                     }
@@ -171,46 +205,47 @@ void load_sdf(std::string const &filename, Scene &scene)
                     scene.ambient_ = temp;
                 }
             }
-            else if ("transform" == first_symbol)
+
+            //Tranform objects initial state
+            else if ("transform" == sdf_keyword)
             {
                 std::string obj_name;
+                float rotation_angle;
+                glm::vec3 transform_vector;
                 current_line_stream >> obj_name;
                 for (std::shared_ptr<Shape> shape : scene.shape_vector_)
                 {
 
-                    if (shape->get_name() == obj_name)
+                    if (shape->getName() == obj_name)
                     {
                         std::string transform;
+
                         current_line_stream >> transform;
-                        cout << "transforming " << shape->get_name() << std::endl;
+                        cout << "transforming " << shape->getName() << std::endl;
 
                         if ("scale" == transform)
                         {
-                            glm::vec3 scale;
-                            current_line_stream >> scale.x;
-                            current_line_stream >> scale.y;
-                            current_line_stream >> scale.z;
-                            shape->transform(glm::scale(scale));
+                            current_line_stream >> transform_vector.x;
+                            current_line_stream >> transform_vector.y;
+                            current_line_stream >> transform_vector.z;
+                            transform_obj(shape, glm::scale(transform_vector));
                         }
 
                         else if ("translate" == transform)
                         {
-                            glm::vec3 translate;
-                            current_line_stream >> translate.x;
-                            current_line_stream >> translate.y;
-                            current_line_stream >> translate.z;
-                            shape->transform(glm::translate(translate));
+                            current_line_stream >> transform_vector.x;
+                            current_line_stream >> transform_vector.y;
+                            current_line_stream >> transform_vector.z;
+                            transform_obj(shape, glm::translate(transform_vector));
                         }
 
                         else if ("rotate" == transform)
                         {
-                            float raw;
-                            glm::vec3 rotate;
-                            current_line_stream >> raw;
-                            current_line_stream >> rotate.x;
-                            current_line_stream >> rotate.y;
-                            current_line_stream >> rotate.z;
-                            shape->transform(glm::rotate(raw, rotate));
+                            current_line_stream >> rotation_angle;
+                            current_line_stream >> transform_vector.x;
+                            current_line_stream >> transform_vector.y;
+                            current_line_stream >> transform_vector.z;
+                            transform_obj(shape, glm::rotate(rotation_angle, transform_vector));
                         }
                     }
                 }
@@ -226,7 +261,7 @@ void load_sdf(std::string const &filename, Scene &scene)
                         current_line_stream >> translate.x;
                         current_line_stream >> translate.y;
                         current_line_stream >> translate.z;
-                        scene.camera_.transform(glm::translate(translate));
+                        transform_obj(scene.camera_, glm::translate(translate));
                     }
 
                     else if ("rotate" == transform)
@@ -237,12 +272,90 @@ void load_sdf(std::string const &filename, Scene &scene)
                         current_line_stream >> rotate.x;
                         current_line_stream >> rotate.y;
                         current_line_stream >> rotate.z;
-                        scene.camera_.transform(glm::rotate(raw, rotate));
+                        transform_obj(scene.camera_, glm::rotate(raw, rotate));
                     }
                 }
             }
 
-            else if ("render" == first_symbol)
+            //Animate the state of objects
+            else if ("animate" == sdf_keyword)
+            {
+                std::string obj_name;
+                float rotation_angle;
+                glm::vec3 transform_vector;
+                current_line_stream >> obj_name;
+
+                if (scene.camera_.name_ == obj_name)
+                {
+                    must_animate = true;
+                    std::string transform;
+                    current_line_stream >> transform;
+
+                    if ("translate" == transform)
+                    {
+                        glm::vec3 translate;
+                        current_line_stream >> translate.x;
+                        current_line_stream >> translate.y;
+                        current_line_stream >> translate.z;
+                        transform_anim = glm::translate(translate);
+                    }
+
+                    else if ("rotate" == transform)
+                    {
+                        float raw;
+                        glm::vec3 rotate;
+                        current_line_stream >> raw;
+                        current_line_stream >> rotate.x;
+                        current_line_stream >> rotate.y;
+                        current_line_stream >> rotate.z;
+                        transform_anim = glm::rotate(raw, rotate);
+                    }
+                }
+
+                else
+                {
+                    for (std::shared_ptr<Shape> shape : scene.shape_vector_)
+                    {
+
+                        if (shape->getName() == obj_name)
+                        {
+                            must_animate = true;
+                            std::string transform;
+                            current_line_stream >> transform;
+
+                            if ("scale" == transform)
+                            {
+                                current_line_stream >> transform_vector.x;
+                                current_line_stream >> transform_vector.y;
+                                current_line_stream >> transform_vector.z;
+                                shape->animation_matrix_ *= glm::scale(transform_vector);
+                            }
+
+                            else if ("translate" == transform)
+                            {
+                                current_line_stream >> transform_vector.x;
+                                current_line_stream >> transform_vector.y;
+                                current_line_stream >> transform_vector.z;
+                                shape->animation_matrix_ *= glm::translate(transform_vector);
+                            }
+
+                            else if ("rotate" == transform)
+                            {
+                                current_line_stream >> rotation_angle;
+                                current_line_stream >> transform_vector.x;
+                                current_line_stream >> transform_vector.y;
+                                current_line_stream >> transform_vector.z;
+                                shape->animation_matrix_ *= glm::rotate(rotation_angle, transform_vector);
+                            }
+
+                            animated_shapes.push_back(obj_name);
+                        }
+                    }
+                }
+            }
+
+            //Render process all animation steps in a scene for every frame
+            else if ("render" == sdf_keyword)
             {
                 std::string camera_name;
                 current_line_stream >> camera_name;
@@ -254,12 +367,68 @@ void load_sdf(std::string const &filename, Scene &scene)
                     current_line_stream >> type;
                     std::string extension;
                     current_line_stream >> extension;
-                    std::string string = filename.substr(0, filename.size() - file_ext.size());
+                    scene.name_ = filename.substr(0, filename.size() - file_ext.size());
 
-                    scene.name_ = string + "_" + type + extension;
-
+                    std::string dir = scene.name_;
                     current_line_stream >> scene.width_;
                     current_line_stream >> scene.height_;
+
+                    //Simple change direction command
+                    chdir("output");
+
+                    //Create a folder with corresponding scene's name before rendering all the ppm images
+                    // mkdir(dir.c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH); //for linux
+
+                    mkdir(dir.c_str()); //for windows
+                    
+                    
+                    //Then change the directory
+                    chdir(dir.c_str());
+
+                    if (must_animate)
+                    {
+                        for (int i = 1; i < 121; i++)
+                        {
+
+                            transform_obj(scene.camera_, transform_anim);
+                            for (std::shared_ptr<Shape> shape : scene.shape_vector_)
+                            {
+                                for (std::string name : animated_shapes)
+                                {
+                                    if (name == shape->getName())
+                                    {
+                                        transform_obj(shape, shape->animation_matrix_);
+                                    }
+                                }
+                            };
+
+                            std::stringstream ss;
+                            ss << type << std::setfill('0') << std::setw(3) << std::to_string(i) << extension;
+
+                            //Use the stringstream to name each rendered .ppm files
+                            Renderer renderer{scene.width_, scene.height_, ss.str()};
+                            renderer.render(scene);
+                        }
+
+                        system("ffmpeg -r 24 -i image%03d.ppm animation.mp4");
+                        system("vlc animation.mp4");
+                    }
+                    else
+                    {
+                        Renderer renderer{scene.width_, scene.height_, ("non-anim_" + scene.name_ + extension)};
+                        renderer.render(scene);
+
+                        Window window{{scene.width_, scene.height_}};
+
+                        while (!window.should_close())
+                        {
+                            if (window.get_key(GLFW_KEY_ESCAPE) == GLFW_PRESS)
+                            {
+                                window.close();
+                            }
+                            window.show(renderer.color_buffer());
+                        }
+                    }
                 }
             }
         }
@@ -269,10 +438,11 @@ void load_sdf(std::string const &filename, Scene &scene)
     {
         cout << "file not found" << endl;
     }
+
     ifs.close();
 
     // return scene;
-};
+}
 
 Ray transformRay(glm::mat4 const &mat, Ray const &ray)
 {
