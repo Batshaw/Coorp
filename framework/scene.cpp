@@ -387,7 +387,7 @@ void load_sdf(std::string const &filename, Scene &scene)
 
                     if (must_animate)
                     {
-                        for (int i = 1; i < 121; i++)
+                        for (int i = 1; i < 121; i++)    //121
                         {
 
                             transform_obj(scene.camera_, transform_anim);
@@ -410,7 +410,7 @@ void load_sdf(std::string const &filename, Scene &scene)
                             renderer.render(scene);
                         }
 
-                        system("ffmpeg -r 24 -i image%03d.ppm animation.mp4");
+                        system("ffmpeg -r 24 -i image%03d.ppm animation.mp4");  //24
                         system("vlc animation.mp4");
                     }
                     else

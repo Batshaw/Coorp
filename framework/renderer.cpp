@@ -110,7 +110,7 @@ Color Renderer::shade(Scene const &scene, Ray const &ray, int closest, int depth
       // Spekulare Licht
       glm::vec3 reflekLichtVektor = glm::normalize(2 * glm::dot(h.normalVector_, lightVec) * (h.normalVector_) - lightVec);
       float cosBeta = std::max(glm::dot(reflekLichtVektor, -ray.direction_), 0.0f);
-      spekColor += (scene.shape_vector_[closest]->getMaterial()->ks_) * std::pow(cosBeta, scene.shape_vector_[closest]->getMaterial()->m_);
+      spekColor += (lightIntensity) * (scene.shape_vector_[closest]->getMaterial()->ks_) * std::pow(cosBeta, scene.shape_vector_[closest]->getMaterial()->m_);
 
       // Spiegelung
       if (depth >= 0)
