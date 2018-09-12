@@ -371,11 +371,11 @@ void load_sdf(std::string const &filename, Scene &scene)
                     //Then change the directory
                     chdir(dir.c_str());
 
-                    for (int i = 1; i < 121; i++)
+                    if (must_animate)
                     {
-
-                        if (must_animate)
+                        for (int i = 1; i < 121; i++)
                         {
+
                             transform_obj(scene.camera_, transform_anim);
                             for (std::shared_ptr<Shape> shape : scene.shape_vector_)
                             {
@@ -387,16 +387,24 @@ void load_sdf(std::string const &filename, Scene &scene)
                                     }
                                 }
                             };
+
+                            std::stringstream ss;
+                            ss << type << std::setfill('0') << std::setw(3) << std::to_string(i) << extension;
+
+                            //Use the stringstream to name each rendered .ppm files
+                            Renderer renderer{scene.width_, scene.height_, ss.str()};
+                            renderer.render(scene);
                         }
 
-                        std::stringstream ss;
-                        ss << type << std::setfill('0') << std::setw(3) << std::to_string(i) << extension;
-
-                        //Use the stringstream to name each rendered .ppm files
-                        Renderer renderer{scene.width_, scene.height_, ss.str()};
+                        system("ffmpeg -r 24 -i image%03d.ppm animation.mp4");
+                        system("vlc animation.mp4");
+                    }
+                    else
+                    {
+                        Renderer renderer{scene.width_, scene.height_, ("non-anim_" + scene.name_ + extension)};
                         renderer.render(scene);
 
-                        /* Window window{{scene.width_, scene.height_}};
+                        Window window{{scene.width_, scene.height_}};
 
                         while (!window.should_close())
                         {
@@ -405,19 +413,19 @@ void load_sdf(std::string const &filename, Scene &scene)
                                 window.close();
                             }
                             window.show(renderer.color_buffer());
-                        } */
+                        }
                     }
                 }
             }
         }
     }
+
     else
     {
         cout << "file not found" << endl;
     }
-    ifs.close();
 
-    system("ffmpeg -r 24 -i image%03d.ppm animation.mp4");
+    ifs.close();
 
     // return scene;
 }
