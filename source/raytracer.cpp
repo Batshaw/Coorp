@@ -20,14 +20,14 @@ int main(int argc, char *argv[])
 
   unsigned const image_width{newScene.width_};
   unsigned const image_height{newScene.height_};
-
+/* 
   Renderer renderer{image_width, image_height, newScene.name_};
 
-  renderer.render(newScene);
+  renderer.render(newScene); */
 
   //create separate thread to see updates of pixels while rendering
 
-  Window window{{image_width, image_height}};
+/*   Window window{{image_width, image_height}};
 
   while (!window.should_close())
   {
@@ -36,7 +36,7 @@ int main(int argc, char *argv[])
       window.close();
     }
     window.show(renderer.color_buffer());
-  }
+  } */
 
   return 0;
 }

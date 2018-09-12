@@ -1,6 +1,5 @@
 #include "sphere.hpp"
 #include <cmath>
-
 #include <glm/glm.hpp>
 #include <glm/gtx/intersect.hpp>
 #include "scene.hpp"
@@ -68,7 +67,7 @@ Hit Sphere::intersectHit(Ray const &ray, float &t) const
     Ray transformedRay{transformRay(world_transformation_inv_, ray)};
     glm::vec3 v = glm::normalize(transformedRay.direction_);
     auto squaredRadius = std::pow(radius_, 2);
-    bool result = intersect(transformedRay,t);
+    bool result = intersect(transformedRay, t);
     if (result == true)
     {
         glm::vec3 schnittPunkt = transformedRay.origin_ + (t * transformedRay.direction_);

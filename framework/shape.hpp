@@ -36,7 +36,9 @@ public:
   virtual Hit intersectHit(Ray const &ray, float &t) const = 0;
   virtual std::ostream &print(std::ostream &os) const;
   void transform(glm::mat4 const &matrix);
-  
+
+  glm::mat4 animation_matrix_{1.0f};
+
   //Alle Membervariable ist protected. Nur erreichbar von sich selbst und abgeleiten Klassen
 protected:
   std::string name_;
